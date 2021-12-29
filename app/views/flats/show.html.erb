@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @flat.building_id %>
+</p>
+
+<p>
+  <strong>Floor no:</strong>
+  <%= @flat.floor_no %>
+</p>
+
+<p>
+  <strong>Surface:</strong>
+  <%= @flat.surface %>
+</p>
+
+<p>
+  <strong>Rooms amount:</strong>
+  <%= @flat.rooms_amount %>
+</p>
+
+<p>
+  <strong>Door number:</strong>
+  <%= @flat.door_number %>
+</p>
+
+<p>
+  <strong>Rent:</strong>
+  <%= @flat.rent %>
+</p>
+
+<p>
+  <strong>Taken:</strong>
+  <%= @flat.taken %>
+</p>
+
+<p>
+  <strong>Taken until:</strong>
+  <%= @flat.taken_until %>
+</p>
+
+<p>
+  <strong>Debt:</strong>
+  <%= @flat.debt %>
+</p>
+
+<%= link_to 'Edit', edit_flat_path(@flat) %> |
+<%= link_to 'Back', flats_path %>

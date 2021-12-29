@@ -1,0 +1,77 @@
+<%= form_with(model: tenant) do |form| %>
+  <% if tenant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tenant.errors.count, "error") %> prohibited this tenant from being saved:</h2>
+
+      <ul>
+        <% tenant.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :flat_id %>
+    <%= form.text_field :flat_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :building_id %>
+    <%= form.text_field :building_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.number_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_no %>
+    <%= form.number_field :account_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rent_from %>
+    <%= form.date_select :rent_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rent_to %>
+    <%= form.date_select :rent_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_due %>
+    <%= form.date_select :payment_due %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paid %>
+    <%= form.check_box :paid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :debt %>
+    <%= form.text_field :debt %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

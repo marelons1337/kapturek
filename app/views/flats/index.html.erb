@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Flats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Building</th>
+      <th>Floor no</th>
+      <th>Surface</th>
+      <th>Rooms amount</th>
+      <th>Door number</th>
+      <th>Rent</th>
+      <th>Taken</th>
+      <th>Taken until</th>
+      <th>Debt</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flats.each do |flat| %>
+      <tr>
+        <td><%= flat.building_id %></td>
+        <td><%= flat.floor_no %></td>
+        <td><%= flat.surface %></td>
+        <td><%= flat.rooms_amount %></td>
+        <td><%= flat.door_number %></td>
+        <td><%= flat.rent %></td>
+        <td><%= flat.taken %></td>
+        <td><%= flat.taken_until %></td>
+        <td><%= flat.debt %></td>
+        <td><%= link_to 'Show', flat %></td>
+        <td><%= link_to 'Edit', edit_flat_path(flat) %></td>
+        <td><%= link_to 'Destroy', flat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Flat', new_flat_path %>

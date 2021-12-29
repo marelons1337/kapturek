@@ -1,0 +1,24 @@
+one:
+  name: MyString
+  address: MyString
+  flats_amount: 
+  floors: 
+
+two:
+  name: MyString
+  address: MyString
+  flats_amount: 
+  floors:
+
+# == Schema Information
+#
+# Table name: buildings
+#
+#  id           :bigint           not null, primary key
+#  address      :string           not null
+#  flats_amount :integer          not null
+#  floors       :integer          not null
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#

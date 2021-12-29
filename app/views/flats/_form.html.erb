@@ -1,0 +1,62 @@
+<%= form_with(model: flat) do |form| %>
+  <% if flat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(flat.errors.count, "error") %> prohibited this flat from being saved:</h2>
+
+      <ul>
+        <% flat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :building_id %>
+    <%= form.text_field :building_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor_no %>
+    <%= form.number_field :floor_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surface %>
+    <%= form.text_field :surface %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rooms_amount %>
+    <%= form.number_field :rooms_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :door_number %>
+    <%= form.number_field :door_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rent %>
+    <%= form.text_field :rent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :taken %>
+    <%= form.check_box :taken %>
+  </div>
+
+  <div class="field">
+    <%= form.label :taken_until %>
+    <%= form.date_select :taken_until %>
+  </div>
+
+  <div class="field">
+    <%= form.label :debt %>
+    <%= form.text_field :debt %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

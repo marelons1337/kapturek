@@ -27,6 +27,7 @@
       <th scope="col">Address</th>
       <th scope="col">Flats amount</th>
       <th scope="col">Floors</th>
+      <th scope="col">Tenants Count</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -38,6 +39,7 @@
         <td><%= building.address %></td>
         <td><%= building.flats_amount %></td>
         <td><%= building.floors %></td>
+        <td><%= building.tenants_count %></td>
         <td><%= link_to 'Show', building %></td>
         <td><%= link_to 'Edit', edit_building_path(building) %></td>
         <td><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' } %></td>

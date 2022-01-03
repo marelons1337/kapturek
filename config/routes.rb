@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   resources :flats
   resources :buildings
 
-  get '/', to: 'buildings#index'
+  get '/', to: 'buildings#index', as: 'root'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,8 +1,0 @@
-
-// feather
-(function (){
-
-    feather.replace()
-
-
-})();

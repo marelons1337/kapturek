@@ -36,3 +36,8 @@ en:
   buildings:
     flats_taken: Flats occupied
     total_due: Total due this month
+  menu:
+    buildings: Buildings
+    flats: Flats
+    tenants: Tenants
+    kapturek: Kapturek

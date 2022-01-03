@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.text_field :building_id %>
+    <%= select_tag(:city_id, options_for_select(@buildings.map { |building| [building.name, building.id] })) %>
   </div>
 
   <div class="field">
@@ -39,11 +39,6 @@
   <div class="field">
     <%= form.label :rent %>
     <%= form.text_field :rent %>
-  </div>
-
-  <div class="field">
-    <%= form.label :taken %>
-    <%= form.check_box :taken %>
   </div>
 
   <div class="field">

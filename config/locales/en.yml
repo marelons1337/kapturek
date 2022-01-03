@@ -33,3 +33,6 @@ en:
   hello: "Hello world"
   forms:
     invalid_format: format is invalid
+  buildings:
+    flats_taken: Flats occupied
+    total_due: Total due this month

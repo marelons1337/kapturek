@@ -1,7 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Buildings</h1>
- 
+
+<!-- Card group -->
+ <div class="card-group">
+  <% @buildings.each do |building| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= building.name %></h5>
+        <p class="card-text"><%= building.address %></p>
+        <p class="card-text">
+        <%= "#{I18n.t('buildings.flats_taken')}: #{building.flats_taken_display}" %>
+        <%= "#{I18n.t('buildings.total_due')}: #{building.total_due} / #{building.total_revenue}"%>
+        </p>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -29,5 +47,6 @@
 </table>
 
 <br>
+
 
 <%= link_to 'New Building', new_building_path %>

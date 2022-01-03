@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Building:</strong>
+  <%= @payment.building_id %>
+</p>
+
+<p>
+  <strong>Flat:</strong>
+  <%= @payment.flat_id %>
+</p>
+
+<p>
+  <strong>Tenant:</strong>
+  <%= @payment.tenant_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @payment.amount %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @payment.type %>
+</p>
+
+<p>
+  <strong>Received:</strong>
+  <%= @payment.received %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @payment.comment %>
+</p>
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>

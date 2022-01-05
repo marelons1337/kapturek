@@ -3,3 +3,31 @@ class Payment < ApplicationRecord
   belongs_to :flat
   belongs_to :tenant
 end
+
+# == Schema Information
+#
+# Table name: payments
+#
+#  id          :bigint           not null, primary key
+#  amount      :float
+#  comment     :text
+#  received    :date
+#  type        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  building_id :bigint           not null
+#  flat_id     :bigint           not null
+#  tenant_id   :bigint           not null
+#
+# Indexes
+#
+#  index_payments_on_building_id  (building_id)
+#  index_payments_on_flat_id      (flat_id)
+#  index_payments_on_tenant_id    (tenant_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (building_id => buildings.id)
+#  fk_rails_...  (flat_id => flats.id)
+#  fk_rails_...  (tenant_id => tenants.id)
+#

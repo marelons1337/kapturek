@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_232045) do
+ActiveRecord::Schema.define(version: 2022_01_03_234618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 2022_01_03_232045) do
     t.index ["building_id"], name: "index_flats_on_building_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.bigint "building_id", null: false
+    t.bigint "flat_id", null: false
+    t.bigint "tenant_id", null: false
+    t.float "amount"
+    t.string "type"
+    t.date "received"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["building_id"], name: "index_payments_on_building_id"
+    t.index ["flat_id"], name: "index_payments_on_flat_id"
+    t.index ["tenant_id"], name: "index_payments_on_tenant_id"
+  end
+
   create_table "tenants", force: :cascade do |t|
     t.bigint "flat_id", null: false
     t.bigint "building_id", null: false
@@ -60,6 +75,9 @@ ActiveRecord::Schema.define(version: 2022_01_03_232045) do
   end
 
   add_foreign_key "flats", "buildings"
+  add_foreign_key "payments", "buildings"
+  add_foreign_key "payments", "flats"
+  add_foreign_key "payments", "tenants"
   add_foreign_key "tenants", "buildings"
   add_foreign_key "tenants", "flats"
 end

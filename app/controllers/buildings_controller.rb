@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: %i[ show edit update destroy ]
+  before_action :set_flats, only: %i[ show ]
 
   # GET /buildings or /buildings.json
   def index
@@ -58,6 +59,9 @@ class BuildingsController < ApplicationController
   end
 
   private
+    def set_flats
+      @flats = Flat.where(building_id: @building.id)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_building
       @building = Building.find(params[:id])

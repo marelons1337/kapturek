@@ -8,16 +8,16 @@ end
 #
 # Table name: payments
 #
-#  id          :bigint           not null, primary key
-#  amount      :float
-#  comment     :text
-#  received    :date
-#  type        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  building_id :bigint           not null
-#  flat_id     :bigint           not null
-#  tenant_id   :bigint           not null
+#  id           :bigint           not null, primary key
+#  amount       :float
+#  comment      :text
+#  payment_type :string
+#  received     :date
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  building_id  :bigint           not null
+#  flat_id      :bigint           not null
+#  tenant_id    :bigint           not null
 #
 # Indexes
 #

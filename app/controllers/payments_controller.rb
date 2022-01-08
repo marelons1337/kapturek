@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[ show edit update destroy ]
+  before_action :set_fields, only: %i[ edit new create ]
 
   # GET /payments or /payments.json
   def index
@@ -59,6 +60,12 @@ class PaymentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_fields
+      @buildings_array = Building.all.map { |building| [building.name, building.id] }
+      @flats_array = Flat.all.map { |flat| [flat.door_number, flat.id] }
+      @tenants_array = Tenant.all.map { |tenant| ["#{tenant.name} #{tenant.surname}", tenant.id] }
+    end
+
     def set_payment
       @payment = Payment.find(params[:id])
     end

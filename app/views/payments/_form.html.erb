@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.text_field :building_id %>
+    <%= form.select(:building_id, @buildings_array) %>
   </div>
 
   <div class="field">
     <%= form.label :flat_id %>
-    <%= form.text_field :flat_id %>
+    <%= form.select(:flat_id, @flats_array) %>
   </div>
 
   <div class="field">
     <%= form.label :tenant_id %>
-    <%= form.text_field :tenant_id %>
+    <%= form.select(:tenant_id, @tenants_array) %>
   </div>
 
   <div class="field">
@@ -32,8 +32,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
+    <%= form.label :payment_type %>
+    <%= select_tag(:payment_type, options_for_select(Payment::PAYMENT_TYPES.map.with_index(2))) %>
+
   </div>
 
   <div class="field">

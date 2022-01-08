@@ -1,6 +1,6 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: %i[ show edit update destroy ]
-  before_action :set_building, only: %i[ edit new ]
+  before_action :set_buildings
 
   # GET /flats or /flats.json
   def index
@@ -59,8 +59,8 @@ class FlatsController < ApplicationController
   end
 
   private
-    def set_building
-      @buildings = Building.all
+    def set_buildings
+      @buildings_array = Building.all.map { |building| [building.name, building.id] }
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_flat

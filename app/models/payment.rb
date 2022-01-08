@@ -2,6 +2,11 @@ class Payment < ApplicationRecord
   belongs_to :building
   belongs_to :flat
   belongs_to :tenant
+
+  PAYMENT_TYPES = {
+    "cash" => 1,
+    "bank transfer" => 2,
+  }
 end
 
 # == Schema Information

@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :flat_id %>
-    <%= form.text_field :flat_id %>
+    <%= form.select(:flat_id, @flats_array) %>
   </div>
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.text_field :building_id %>
+    <%= form.select(:building_id, @buildings_array) %>
   </div>
 
   <div class="field">

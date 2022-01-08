@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= select_tag(:city_id, options_for_select(@buildings.map { |building| [building.name, building.id] })) %>
+    <%= form.select(:building_id, @buildings_array) %>
   </div>
 
   <div class="field">

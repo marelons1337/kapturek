@@ -5,6 +5,14 @@ class Tenant < ApplicationRecord
   validates :email, format: { with: ApplicationHelper::EMAIL_REGEX, message: I18n.t('forms.invalid_format')}
   validates :phone, format: { with: ApplicationHelper::PHONE_REGEX, message: I18n.t('forms.invalid_format')}
   validates :rent_from, :name, :surname, presence: true
+  validate :flat_belonging_to_building
+
+  def flat_belonging_to_building
+    building = Building.find(building_id)
+    unless flat_id.in?(building.flat_ids)
+      errors.add(:flat_id, I18n.t('forms.flat_not_in_building'))
+    end
+  end
 end
 
 # == Schema Information
@@ -12,13 +20,13 @@ end
 # Table name: tenants
 #
 #  id          :bigint           not null, primary key
-#  account_no  :integer
+#  account_no  :string
 #  debt        :float
 #  email       :string
 #  name        :string           not null
 #  paid        :boolean          default(FALSE)
 #  payment_due :date
-#  phone       :integer          not null
+#  phone       :string           not null
 #  rent_from   :date             not null
 #  rent_to     :date
 #  surname     :string           not null

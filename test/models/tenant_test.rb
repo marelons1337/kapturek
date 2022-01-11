@@ -11,13 +11,13 @@ end
 # Table name: tenants
 #
 #  id          :bigint           not null, primary key
-#  account_no  :integer
+#  account_no  :string
 #  debt        :float
 #  email       :string
 #  name        :string           not null
 #  paid        :boolean          default(FALSE)
 #  payment_due :date
-#  phone       :integer          not null
+#  phone       :string           not null
 #  rent_from   :date             not null
 #  rent_to     :date
 #  surname     :string           not null

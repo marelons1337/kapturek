@@ -2,6 +2,7 @@ class BuildingsController < ApplicationController
   before_action :set_building, only: %i[ show edit update destroy ]
   before_action :set_flats, only: %i[ show ]
 
+
   # GET /buildings or /buildings.json
   def index
     @buildings = Building.all

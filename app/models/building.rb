@@ -1,6 +1,6 @@
 class Building < ApplicationRecord
   has_many :flats, dependent: :destroy
-  has_many :tenants, through: :flats
+  has_many :tenants, through: :flats #chyba niepotrzebne jak mamy building_id w tenancie
 
   def flats_amount
     flats_amount ||= Flat.where(building_id: self.id).count

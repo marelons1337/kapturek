@@ -1,6 +1,6 @@
 class TenantsController < ApplicationController
   before_action :set_tenant, only: %i[ show edit update destroy ]
-  before_action :set_fields, only: %i[ edit new create ]
+  before_action :set_fields, only: %i[ edit new create update ]
 
   # GET /tenants or /tenants.json
   def index

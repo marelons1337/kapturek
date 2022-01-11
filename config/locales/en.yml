@@ -33,6 +33,7 @@ en:
   hello: "Hello world"
   forms:
     invalid_format: format is invalid
+    flat_not_in_building: must belong to the building
   buildings:
     flats_taken: Flats occupied
     total_due: Total due this month

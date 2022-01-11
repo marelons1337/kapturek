@@ -4,6 +4,7 @@ class Flat < ApplicationRecord
 
   validates :door_number, :floor_no, presence: true
   validates :door_number, uniqueness: true
+
 end
 
 # == Schema Information

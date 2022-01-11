@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :door_number %>
-    <%= form.select(:door_number, @flats_array) %>
+    <%= form.label :building_id %>
+    <%= form.select(:building_id, @buildings_array) %>
   </div>
 
   <div class="field">
-    <%= form.label :building_id %>
-    <%= form.select(:building_id, @buildings_array) %>
+    <%= form.label :door_number %>
+    <%= form.select(:door_number, @flats_array) %>
   </div>
 
   <div class="field">
@@ -75,3 +75,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+    <%= javascript_pack_tag 'hello_react' %>

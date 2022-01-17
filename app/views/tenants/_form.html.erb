@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.select(:building_id, @buildings_array) %>
+    <%= form.select :building_id, @buildings_array, { include_blank: true }, onchange: 'fetchFlatNumbers(event)' %>
   </div>
 
   <div class="field">
     <%= form.label :door_number %>
-    <%= form.select(:door_number, @flats_array) %>
+    <%= form.select :door_number, @flats_array, { include_blank: I18n.t('forms.select_building_first') } %>
   </div>
 
   <div class="field">
@@ -75,4 +75,34 @@
     <%= form.submit %>
   </div>
 <% end %>
-    <%= javascript_pack_tag 'hello_react' %>
+
+<script>
+  const doorNumberSelect = document.getElementById('tenant_door_number')
+  const buildingSelect = document.getElementById('tenant_building_id')
+  var i = 0;
+  document.addEventListener('DOMContentLoaded', function () {
+    doorNumberSelect.options.length = 0;
+  })
+  function fetchFlatNumbers(event) {
+    if (i==0) {
+      buildingSelect.options[0].remove();
+    }
+    i++;
+
+    doorNumberSelect.options.length = 0;
+    let buildingId = event.target.value
+    let buildingPath = "<%=j(find_flats_path("placeholder"))%>"
+    buildingPath = buildingPath.replace("placeholder",buildingId)
+
+    fetch(buildingPath)
+    .then(response => response.json())
+    .then(data =>
+      data.forEach(element => {
+        let newOptionElement = document.createElement('option')
+        newOptionElement.value = element["id"];
+        newOptionElement.innerHTML = element["door_number"];
+        doorNumberSelect.appendChild(newOptionElement);
+      })
+    );
+  }
+</script>

@@ -59,6 +59,12 @@ class BuildingsController < ApplicationController
     end
   end
 
+  def find_belonging_flats
+    set_building
+    set_flats
+    return render json: @flats, only: [:id, :door_number]
+  end
+
   private
     def set_flats
       @flats = Flat.where(building_id: @building.id)

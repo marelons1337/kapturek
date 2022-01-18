@@ -10,6 +10,7 @@ import "channels"
 import "@popperjs/core"
 import "../stylesheets/application"
 import * as bootstrap from 'bootstrap'
+require('tenant/fetch_building_data')
 
 document.addEventListener("turbolinks:load", function(event) {
   var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))

@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.select :building_id, @buildings_array, { include_blank: true }, onchange: 'fetchFlatNumbers(event)' %>
+    <%= form.select :building_id, @buildings_array, { include_blank: true }%>
   </div>
 
   <div class="field">
     <%= form.label :door_number %>
-    <%= form.select :door_number, @flats_array, { include_blank: I18n.t('forms.select_building_first') } %>
+    <%= form.select :door_number, @flats_array%>
   </div>
 
   <div class="field">
@@ -61,48 +61,8 @@
     <%= form.date_select :payment_due %>
   </div>
 
-  <div class="field">
-    <%= form.label :paid %>
-    <%= form.check_box :paid %>
-  </div>
-
-  <div class="field">
-    <%= form.label :debt %>
-    <%= form.text_field :debt %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
 
-<script>
-  const doorNumberSelect = document.getElementById('tenant_door_number')
-  const buildingSelect = document.getElementById('tenant_building_id')
-  var i = 0;
-  document.addEventListener('DOMContentLoaded', function () {
-    doorNumberSelect.options.length = 0;
-  })
-  function fetchFlatNumbers(event) {
-    if (i==0) {
-      buildingSelect.options[0].remove();
-    }
-    i++;
-
-    doorNumberSelect.options.length = 0;
-    let buildingId = event.target.value
-    let buildingPath = "<%=j(find_flats_path("placeholder"))%>"
-    buildingPath = buildingPath.replace("placeholder",buildingId)
-
-    fetch(buildingPath)
-    .then(response => response.json())
-    .then(data =>
-      data.forEach(element => {
-        let newOptionElement = document.createElement('option')
-        newOptionElement.value = element["id"];
-        newOptionElement.innerHTML = element["door_number"];
-        doorNumberSelect.appendChild(newOptionElement);
-      })
-    );
-  }
-</script>

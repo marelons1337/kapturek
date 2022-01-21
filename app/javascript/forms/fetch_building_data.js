@@ -1,6 +1,6 @@
 window.addEventListener('turbolinks:load', function () {
-const buildingSelect = document.getElementById('tenant_building_id')
-const doorNumberSelect = document.getElementById('tenant_door_number')
+const buildingSelect = document.getElementById('tenant_building_id') || document.getElementById('payment_building_id')
+const doorNumberSelect = document.getElementById('tenant_door_number') || document.getElementById('payment_door_number')
 var i = 0;
 if (buildingSelect != null && doorNumberSelect != null) {
   doorNumberSelect.options.length = 0;
@@ -13,7 +13,6 @@ if (buildingSelect != null && doorNumberSelect != null) {
     doorNumberSelect.options.length = 0;
     let buildingId = event.target.value
     let buildingPath = `/buildings/${buildingId}/find_flats`
-    buildingPath = buildingPath.replace("placeholder",buildingId)
 
     fetch(buildingPath)
     .then(response => response.json())

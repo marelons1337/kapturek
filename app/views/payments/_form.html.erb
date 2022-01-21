@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.select(:building_id, @buildings_array) %>
+    <%= form.select(:building_id, @buildings_array, { include_blank: true } ) %>
   </div>
 
   <div class="field">
-    <%= form.label :flat_id %>
-    <%= form.select(:flat_id, @flats_array) %>
+    <%= form.label :door_number %>
+    <%= form.select :door_number, @flats_array %>
   </div>
 
   <div class="field">

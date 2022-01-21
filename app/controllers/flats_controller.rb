@@ -58,6 +58,12 @@ class FlatsController < ApplicationController
     end
   end
 
+  def get_tenant
+    set_flat
+    @tenant = @flat.tenant
+    return render json: @tenant
+  end
+
   private
     def set_buildings
       @buildings_array = Building.all.map { |building| [building.name, building.id] }

@@ -60,7 +60,7 @@ class FlatsController < ApplicationController
 
   def get_tenant
     set_flat
-    @tenant = @flat.tenant
+    @tenant = Tenant.where(flat_id: @flat.id)
     return render json: @tenant
   end
 

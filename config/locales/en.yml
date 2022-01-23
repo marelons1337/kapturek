@@ -34,6 +34,9 @@ en:
   forms:
     invalid_format: format is invalid
     flat_not_in_building: must belong to the building
+    select_building: --select--
+    select_building_first: --select building first--
+    select_flat_first: --select flat first--
   buildings:
     flats_taken: Flats occupied
     total_due: Total due this month

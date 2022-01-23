@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :building_id %>
-    <%= form.select :building_id, @buildings_array, { include_blank: true } %>
+    <%= form.select :building_id, @buildings_array, { include_blank: I18n.t('forms.select_building') } %>
   </div>
 
   <div class="field">
-    <%= form.label :door_number %>
-    <%= form.select :door_number, @flats_array %>
+    <%= form.label :flat_id %>
+    <%= form.select :flat_id, @flats_array, { include_blank: I18n.t('forms.select_building_first') } %>
   </div>
 
   <div class="field">

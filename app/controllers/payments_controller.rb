@@ -63,7 +63,7 @@ class PaymentsController < ApplicationController
     def set_fields
       @buildings_array = Building.all.map { |building| [building.name, building.id] }
       @flats_array = Flat.all.map { |flat| [flat.door_number, flat.id] }
-      @tenants_array = Tenant.all.map { |tenant| ["#{tenant.name} #{tenant.surname}", tenant.id] }
+      @tenants_array = Tenant.all.map { |tenant| [tenant.full_name, tenant.id] }
     end
 
     def set_payment

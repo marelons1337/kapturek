@@ -13,6 +13,10 @@ class Tenant < ApplicationRecord
       errors.add(:flat_id, I18n.t('forms.flat_not_in_building'))
     end
   end
+
+  def full_name
+    return "#{name} #{surname}"
+  end
 end
 
 # == Schema Information

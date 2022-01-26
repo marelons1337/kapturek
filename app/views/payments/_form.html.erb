@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :payment_type %>
-    <%= select_tag(:payment_type, options_for_select(Payment::PAYMENT_TYPES.map.with_index(2))) %>
+    <%= form.select :payment_type, options_for_select(Payment::PAYMENT_TYPES.map) %>
 
   </div>
 

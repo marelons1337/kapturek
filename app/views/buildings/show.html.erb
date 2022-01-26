@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <div class="card" style="width: 18rem;">
+  <div class="row top-row">
+    <div class="col-4">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title"><%= @building.name %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= @building.address %></h6>
@@ -15,7 +15,13 @@
           </p>
           <%= link_to 'Edit', edit_building_path(@building), class: 'card-link' %>
           <%= link_to 'Back', buildings_path, class: 'card-link' %>
-
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card scroll" >
+        <div class="">
+        <%= render 'payments_table'%>
         </div>
       </div>
     </div>

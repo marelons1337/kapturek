@@ -4,8 +4,8 @@ class Payment < ApplicationRecord
   belongs_to :tenant
 
   PAYMENT_TYPES = {
-    "cash" => 1,
-    "bank transfer" => 2,
+    "cash" => "cash",
+    "bank transfer" => "bank transfer" ,
   }
 end
 

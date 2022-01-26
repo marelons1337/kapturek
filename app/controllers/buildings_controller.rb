@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: %i[ show edit update destroy ]
   before_action :set_flats, only: %i[ show ]
+  before_action :set_payments, only: %i[ show index ]
 
 
   # GET /buildings or /buildings.json
@@ -72,6 +73,10 @@ class BuildingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_building
       @building = Building.find(params[:id])
+    end
+
+    def set_payments
+      @payments = Payment.where(building_id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

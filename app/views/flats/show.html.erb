@@ -1,49 +1,110 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Building:</strong>
-  <%= @flat.building_id %>
-</p>
+<div class="container">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <%= link_to 'Edit flat', edit_flat_path(@flat), class: "btn btn-primary" %>
+    <%= link_to 'Destroy flat', @flat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
-<p>
-  <strong>Floor no:</strong>
-  <%= @flat.floor_no %>
-</p>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Tenant
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <li><%= link_to 'Edit', edit_tenant_path(@tenant), class: "dropdown-item" %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row gx-5">
+    <div class="col-md-6">
+    <h2><%= I18n.t('flat.flat_summary') %></h2>
+      <table class="table table-striped">
+          <tr>
+            <th>Floor no</th>
+            <td><%= @flat.floor_no %></td>
+          </tr>
+          <tr>
+            <th>Surface</th>
+            <td><%= @flat.surface %></td>
+          </tr>
+          <tr>
+            <th>Rooms amount</th>
+            <td><%= @flat.rooms_amount %></td>
+          </tr>
+          <tr>
+            <th>Door number</th>
+            <td><%= @flat.door_number %></td>
+          </tr>
+          <tr>
+            <th>Rent</th>
+            <td><%= @flat.rent %></td>
+          </tr>
+          <tr>
+            <th>Taken</th>
+            <td><%= @flat.taken %></td>
+          </tr>
+          <tr>
+            <th>Taken until</th>
+            <td><%= @flat.taken_until %></td>
+          </tr>
+          <tr>
+            <th>Debt</th>
+            <td><%= @flat.debt %></td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h2><%= I18n.t('flat.tenant_summary') %></h2>
+      <div class="card">
+      <p>
+        <strong>Name:</strong>
+        <%= @tenant.name %>
+      </p>
 
-<p>
-  <strong>Surface:</strong>
-  <%= @flat.surface %>
-</p>
+      <p>
+        <strong>Surname:</strong>
+        <%= @tenant.surname %>
+      </p>
 
-<p>
-  <strong>Rooms amount:</strong>
-  <%= @flat.rooms_amount %>
-</p>
+      <p>
+        <strong>Phone:</strong>
+        <%= @tenant.phone %>
+      </p>
 
-<p>
-  <strong>Door number:</strong>
-  <%= @flat.door_number %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= @tenant.email %>
+      </p>
 
-<p>
-  <strong>Rent:</strong>
-  <%= @flat.rent %>
-</p>
+      <p>
+        <strong>Account no:</strong>
+        <%= @tenant.account_no %>
+      </p>
 
-<p>
-  <strong>Taken:</strong>
-  <%= @flat.taken %>
-</p>
+      <p>
+        <strong>Rent from:</strong>
+        <%= @tenant.rent_from %>
+      </p>
 
-<p>
-  <strong>Taken until:</strong>
-  <%= @flat.taken_until %>
-</p>
+      <p>
+        <strong>Rent to:</strong>
+        <%= @tenant.rent_to %>
+      </p>
 
-<p>
-  <strong>Debt:</strong>
-  <%= @flat.debt %>
-</p>
+      <p>
+        <strong>Payment due:</strong>
+        <%= @tenant.payment_due %>
+      </p>
 
-<%= link_to 'Edit', edit_flat_path(@flat) %> |
-<%= link_to 'Back', flats_path %>
+      <p>
+        <strong>Paid:</strong>
+        <%= @tenant.paid %>
+      </p>
+
+      <p>
+        <strong>Debt:</strong>
+        <%= @tenant.debt %>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>

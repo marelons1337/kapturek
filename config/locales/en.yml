@@ -37,9 +37,13 @@ en:
     select_building: --select--
     select_building_first: --select building first--
     select_flat_first: --select flat first--
-  buildings:
+  building:
+    building_summary: Building summary
     flats_taken: Flats occupied
     total_due: Total due this month
+  flat:
+    flat_summary: Flat summary
+    tenant_summary: Tenant summary
   menu:
     buildings: Buildings
     flats: Flats

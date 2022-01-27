@@ -1,6 +1,7 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: %i[ show edit update destroy ]
   before_action :set_buildings
+  before_action :set_tenant, only: %i[ show ]
 
   # GET /flats or /flats.json
   def index
@@ -71,6 +72,10 @@ class FlatsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_flat
       @flat = Flat.find(params[:id])
+    end
+
+    def set_tenant
+      @tenant = Tenant.find_by(flat_id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

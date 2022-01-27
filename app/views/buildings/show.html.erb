@@ -1,25 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid">
-  <div class="row top-row">
-    <div class="col-4">
-      <div class="card">
+<div class="container">
+  <div class="row top-row mb-4">
+    <h2><%= I18n.t('building.building_summary') %></h2>
+    <div class="col-md-4">
+      <div class="card summary">
         <div class="card-body">
           <h5 class="card-title"><%= @building.name %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= @building.address %></h6>
           <p class="card-text">
-            <%= "#{I18n.t('buildings.flats_taken')}: #{@building.flats_taken_display}" %>
+            <%= "#{I18n.t('building.flats_taken')}: #{@building.flats_taken_display}" %>
           </p>
           <p>
-            <%= "#{I18n.t('buildings.total_due')}: #{@building.total_due} / #{@building.total_revenue}"%>
+            <%= "#{I18n.t('building.total_due')}: #{@building.total_due} / #{@building.total_revenue}"%>
           </p>
           <%= link_to 'Edit', edit_building_path(@building), class: 'card-link' %>
           <%= link_to 'Back', buildings_path, class: 'card-link' %>
         </div>
       </div>
     </div>
-    <div class="col-8">
-      <div class="card scroll" >
+    <div class="col-md-8">
+      <div class="card scroll summary" >
         <div class="">
         <%= render 'payments_table'%>
         </div>
@@ -32,7 +33,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Building</th>
         <th>Floor no</th>
         <th>Surface</th>
         <th>Rooms amount</th>
@@ -48,7 +48,6 @@
     <tbody>
       <% @flats.each do |flat| %>
         <tr>
-          <td><%= flat.building_id %></td>
           <td><%= flat.floor_no %></td>
           <td><%= flat.surface %></td>
           <td><%= flat.rooms_amount %></td>
@@ -56,7 +55,7 @@
           <td><%= flat.rent %></td>
           <td><%= flat.taken %></td>
           <td><%= flat.taken_until %></td>
-          <td><%= flat.debt %></td>
+          <td><%= flat.debt ? flat.debt : 0%></td>
           <td><%= link_to 'Show', flat %></td>
           <td><%= link_to 'Edit', edit_flat_path(flat) %></td>
           <td><%= link_to 'Destroy', flat, method: :delete, data: { confirm: 'Are you sure?' } %></td>

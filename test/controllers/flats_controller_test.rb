@@ -45,4 +45,14 @@ class FlatsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to flats_url
   end
+
+  test "should get tenants" do
+    tenants_ids = @flat.tenants.ids
+    get get_tenants_url(@flat.id)
+
+    resp = JSON.parse(response.body)
+    resp_ids = resp.map {|r| r['id']}
+
+    assert_equal tenants_ids, resp_ids
+  end
 end

@@ -44,9 +44,12 @@ en:
   flat:
     flat_summary: Flat summary
     tenant_summary: Tenant summary
+    no_tenants: No tenants yet, try adding one
   menu:
     buildings: Buildings
     flats: Flats
     tenants: Tenants
     payments: Payments
     kapturek: Kapturek
+  headers:
+    all_flats: All flats

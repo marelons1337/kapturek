@@ -12,6 +12,7 @@ end
 #
 #  id          :bigint           not null, primary key
 #  account_no  :string
+#  active      :boolean
 #  debt        :float
 #  email       :string
 #  name        :string           not null

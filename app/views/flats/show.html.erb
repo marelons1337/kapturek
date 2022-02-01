@@ -5,14 +5,16 @@
     <%= link_to 'Edit flat', edit_flat_path(@flat), class: "btn btn-primary" %>
     <%= link_to 'Destroy flat', @flat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
-    <div class="btn-group" role="group">
-      <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Tenant
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <li><%= link_to 'Edit', edit_tenant_path(@tenant), class: "dropdown-item" %></li>
-      </ul>
-    </div>
+      <% if @tenant %>
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Tenant
+          </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><%= link_to 'Edit', edit_tenant_path(@tenant), class: "dropdown-item" %></li>
+            </ul>
+        </div>
+      <% end %>
   </div>
   <div class="row gx-5">
     <div class="col-md-6">
@@ -55,55 +57,59 @@
     <div class="col-md-6">
       <h2><%= I18n.t('flat.tenant_summary') %></h2>
       <div class="card">
-      <p>
-        <strong>Name:</strong>
-        <%= @tenant.name %>
-      </p>
+      <% if @tenant.present? %>
+        <p>
+          <strong>Name:</strong>
+          <%= @tenant.name %>
+        </p>
 
-      <p>
-        <strong>Surname:</strong>
-        <%= @tenant.surname %>
-      </p>
+        <p>
+          <strong>Surname:</strong>
+          <%= @tenant.surname %>
+        </p>
 
-      <p>
-        <strong>Phone:</strong>
-        <%= @tenant.phone %>
-      </p>
+        <p>
+          <strong>Phone:</strong>
+          <%= @tenant.phone %>
+        </p>
 
-      <p>
-        <strong>Email:</strong>
-        <%= @tenant.email %>
-      </p>
+        <p>
+          <strong>Email:</strong>
+          <%= @tenant.email %>
+        </p>
 
-      <p>
-        <strong>Account no:</strong>
-        <%= @tenant.account_no %>
-      </p>
+        <p>
+          <strong>Account no:</strong>
+          <%= @tenant.account_no %>
+        </p>
 
-      <p>
-        <strong>Rent from:</strong>
-        <%= @tenant.rent_from %>
-      </p>
+        <p>
+          <strong>Rent from:</strong>
+          <%= @tenant.rent_from %>
+        </p>
 
-      <p>
-        <strong>Rent to:</strong>
-        <%= @tenant.rent_to %>
-      </p>
+        <p>
+          <strong>Rent to:</strong>
+          <%= @tenant.rent_to %>
+        </p>
 
-      <p>
-        <strong>Payment due:</strong>
-        <%= @tenant.payment_due %>
-      </p>
+        <p>
+          <strong>Payment due:</strong>
+          <%= @tenant.payment_due %>
+        </p>
 
-      <p>
-        <strong>Paid:</strong>
-        <%= @tenant.paid %>
-      </p>
+        <p>
+          <strong>Paid:</strong>
+          <%= @tenant.paid %>
+        </p>
 
-      <p>
-        <strong>Debt:</strong>
-        <%= @tenant.debt %>
-      </p>
+        <p>
+          <strong>Debt:</strong>
+          <%= @tenant.debt %>
+        </p>
+      <% else %>
+        <p><%= I18n.t('flat.no_tenants') %></p>
+      <% end %>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ class BuildingsController < ApplicationController
   # GET /buildings or /buildings.json
   def index
     @buildings = Building.all
+    @flats = Flat.where.not(building_id: nil)
   end
 
   # GET /buildings/1 or /buildings/1.json

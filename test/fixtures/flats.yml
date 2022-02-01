@@ -1,24 +1,24 @@
 one:
   building: one
   floor_no: 1
-  surface: 1.5
+  surface: 15
   rooms_amount: 1
-  door_number: 1
-  rent: 1.5
-  taken: false
-  taken_until: 2021-12-22
-  debt: 1.5
+  door_number: 2
+  rent: 1500
+  taken: true
+  taken_until: <%= Time.now + 1.month %>
+  debt: 0
 
 two:
-  building: two
+  building: one
   floor_no: 1
-  surface: 1.5
+  surface: 20.5
   rooms_amount: 1
-  door_number: 1
-  rent: 1.5
+  door_number: 2
+  rent: 1200
   taken: false
   taken_until: 2021-12-22
-  debt: 1.5
+  debt: 500
 
 # == Schema Information
 #

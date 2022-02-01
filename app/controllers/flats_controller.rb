@@ -59,10 +59,10 @@ class FlatsController < ApplicationController
     end
   end
 
-  def get_tenant
+  def get_tenants
     set_flat
-    @tenant = Tenant.where(flat_id: @flat.id)
-    return render json: @tenant
+    @tenants = Tenant.where(flat_id: @flat.id)
+    return render json: @tenants
   end
 
   private

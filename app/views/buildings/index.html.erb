@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <h1>Buildings</h1>
@@ -19,36 +20,44 @@
   <% end %>
 </div>
 
+<br>
+
+<h2><%= I18n.t('headers.all_flats') %></h2>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Flats amount</th>
-      <th scope="col">Floors</th>
-      <th scope="col">Tenants Count</th>
+      <th>Building</th>
+      <th>Floor no</th>
+      <th>Surface</th>
+      <th>Rooms amount</th>
+      <th>Door number</th>
+      <th>Rent</th>
+      <th>Taken</th>
+      <th>Taken until</th>
+      <th>Debt</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @buildings.each do |building| %>
+    <% @flats.each do |flat| %>
       <tr>
-        <td><%= building.name %></td>
-        <td><%= building.address %></td>
-        <td><%= building.flats_amount %></td>
-        <td><%= building.floors %></td>
-        <td><%= building.tenants_count %></td>
-        <td><%= link_to 'Show', building %></td>
-        <td><%= link_to 'Edit', edit_building_path(building) %></td>
-        <td><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= flat.building.name %></td>
+        <td><%= flat.floor_no %></td>
+        <td><%= flat.surface %></td>
+        <td><%= flat.rooms_amount %></td>
+        <td><%= flat.door_number %></td>
+        <td><%= flat.rent %></td>
+        <td><%= flat.taken %></td>
+        <td><%= flat.taken_until %></td>
+        <td><%= flat.debt %></td>
+        <td><%= link_to 'Show', flat %></td>
+        <td><%= link_to 'Edit', edit_flat_path(flat) %></td>
+        <td><%= link_to 'Destroy', flat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
 
 <%= link_to 'New Building', new_building_path %>

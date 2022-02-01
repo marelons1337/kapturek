@@ -1,6 +1,6 @@
 class Flat < ApplicationRecord
   belongs_to :building
-  has_one :tenant, dependent: :destroy
+  has_many :tenants
 
   validates :door_number, :floor_no, presence: true
   validates :door_number, uniqueness: true

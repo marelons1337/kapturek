@@ -1,14 +1,14 @@
 one:
-  name: MyString
-  address: MyString
-  flats_amount: 
-  floors: 
+  name: First
+  address: Street one
+  flats_amount: 2
+  floors: 4
 
 two:
   name: MyString
   address: MyString
-  flats_amount: 
-  floors:
+  flats_amount: 0
+  floors: 4
 
 # == Schema Information
 #

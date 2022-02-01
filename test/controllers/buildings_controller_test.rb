@@ -45,4 +45,14 @@ class BuildingsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to buildings_url
   end
+
+  test "should find belonging flats" do
+    flats_ids = @building.flats.ids
+    get find_flats_url(id:@building.id)
+
+    resp = JSON.parse(response.body)
+    resp_ids = resp.map {|r| r['id']}
+
+    assert_equal flats_ids, resp_ids
+  end
 end

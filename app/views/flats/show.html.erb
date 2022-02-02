@@ -5,16 +5,17 @@
     <%= link_to 'Edit flat', edit_flat_path(@flat), class: "btn btn-primary" %>
     <%= link_to 'Destroy flat', @flat, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
-      <% if @tenant %>
         <div class="btn-group" role="group">
           <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Tenant
           </button>
             <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><%= link_to 'Add', new_tenant_path(building_id: @flat.building_id, flat_id: @flat.id), class: "dropdown-item" %></li>
+      <% if @tenant %>
               <li><%= link_to 'Edit', edit_tenant_path(@tenant), class: "dropdown-item" %></li>
+      <% end %>
             </ul>
         </div>
-      <% end %>
   </div>
   <div class="row gx-5">
     <div class="col-md-6">

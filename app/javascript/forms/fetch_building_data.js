@@ -4,12 +4,29 @@ window.addEventListener('turbolinks:load', function () {
   const tenantSelect = document.getElementById('payment_tenant_id')
 
   if (buildingSelect && doorNumberSelect) {
-    if (buildingSelect.value == '') {
+    if (document.location.search.includes("flat_id") && document.location.search.includes("building_id")) {
+      let strings = document.location.search.split('&')
+      var b_id = 0
+      var f_id = 0
+      strings.forEach(string => {
+        if (string.match(/(flat_id=)\d+$/)) {
+          f_id = string.match(/(flat_id=)\d+$/)[0].match(/\d+$/)[0]
+        }
+        if (string.match(/(building_id=)\d+$/)) {
+          b_id = string.match(/(building_id=)\d+$/)[0].match(/\d+$/)[0]
+        }
+      })
+      buildingSelect.value = b_id
+      doorNumberSelect.value = f_id
+    }
+    else {
+      if (buildingSelect.value == '') {
       doorNumberSelect.length = 1;
       if (tenantSelect) {
         tenantSelect.length = 1;
       }
-    }
+    }}
+
     buildingSelect.addEventListener('input', function (event) {
       doorNumberSelect.length = 1;
       if (tenantSelect) {
@@ -30,7 +47,7 @@ window.addEventListener('turbolinks:load', function () {
     doorNumberSelect.addEventListener('change', function (event) {
       tenantSelect.length = 1;
       let flatId = event.target.value
-      let flatPath = `/flats/${flatId}/get_tenant`
+      let flatPath = `/flats/${flatId}/get_tenants`
       if (flatId) {
         fetch(flatPath)
         .then(response => response.json())

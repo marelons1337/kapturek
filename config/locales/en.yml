@@ -37,7 +37,8 @@ en:
     select_building: --select--
     select_building_first: --select building first--
     select_flat_first: --select flat first--
-    wrong_range: must be later than rent from date.
+    wrong_range: must be later than rent from date and must be in the future.
+    too_many_active: is already occupied by another tenant.
   building:
     building_summary: Building summary
     flats_taken: Flats occupied

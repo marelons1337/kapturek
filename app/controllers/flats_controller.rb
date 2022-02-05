@@ -75,7 +75,7 @@ class FlatsController < ApplicationController
     end
 
     def set_tenant
-      @tenant = Tenant.find_by(flat_id: params[:id])
+      @tenant = Tenant.find_by(flat_id: params[:id], active: true)
     end
 
     # Only allow a list of trusted parameters through.

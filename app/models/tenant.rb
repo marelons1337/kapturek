@@ -7,7 +7,7 @@ class Tenant < ApplicationRecord
   validates :rent_from, :rent_to, :name, :surname, presence: true
   validate :flat_belonging_to_building, :date_range, :force_one_active
 
-  before_save :determine_active
+  before_save :determine_active, :occupy_flat
 
   # validations begin
   def flat_belonging_to_building
@@ -18,18 +18,20 @@ class Tenant < ApplicationRecord
   end
 
   def date_range
-    errors.add(:rent_to, I18n.t('forms.wrong_range')) if rent_from >= rent_to || rent_to < Date.today
+    errors.add(:rent_to, I18n.t('forms.wrong_range')) if rent_from >= rent_to
   end
 
   def force_one_active
     flat = Flat.find_by(id: flat_id)
-    other_tenants = Tenant.where(flat_id: flat_id, active: true)
-    unless other_tenants.empty?
+    determine_active
+    if self.active?
+      other_tenants = Tenant.where(flat_id: flat_id, active: true).where("rent_to >= ? ", Date.today)
+    end
+    if other_tenants.present? && flat.taken_until > Date.today
       errors.add(:flat_id, I18n.t('forms.too_many_active'))
     end
   end
   # validations end
-
 
   def full_name
     return "#{name} #{surname}"
@@ -37,15 +39,21 @@ class Tenant < ApplicationRecord
 
   def occupy_flat
     flat = Flat.find_by(id: flat_id)
-    flat.taken = true
-    flat.taken_until = self.rent_to
-    flat.save!
+    if self.active?
+      flat.taken = true
+      flat.taken_until = self.rent_to
+      flat.save!
+    else
+      flat.taken = false
+      flat.taken_until = self.rent_to
+      flat.save!
+    end
   end
 
   def determine_active
     if rent_from <= Date.today && rent_to >= Date.today
       self.active = true
-      occupy_flat # set flat's taken values
+      # occupy_flat # set flat's taken values
     else
       self.active = false
     end

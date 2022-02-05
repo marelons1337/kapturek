@@ -17,6 +17,7 @@
       <th>Payment due</th>
       <th>Paid</th>
       <th>Debt</th>
+      <th>Active</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -36,6 +37,7 @@
         <td><%= tenant.payment_due %></td>
         <td><%= tenant.paid %></td>
         <td><%= tenant.debt %></td>
+        <td><%= tenant.active %></td>
         <td><%= link_to 'Show', tenant %></td>
         <td><%= link_to 'Edit', edit_tenant_path(tenant) %></td>
         <td><%= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' } %></td>

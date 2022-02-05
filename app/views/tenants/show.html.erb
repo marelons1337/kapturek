@@ -2,7 +2,7 @@
 
 <p>
   <strong>Door Number:</strong>
-  <%= @tenant.flat.door_number %>
+  <%= @flats_array.filter_map{ |f| f[0] if f[1] == @tenant.flat_id}[0] %>
 </p>
 
 <p>
@@ -60,5 +60,9 @@
   <%= @tenant.debt %>
 </p>
 
+<p>
+  <strong>Active:</strong>
+  <%= @tenant.active %>
+</p>
 <%= link_to 'Edit', edit_tenant_path(@tenant) %> |
 <%= link_to 'Back', tenants_path %>

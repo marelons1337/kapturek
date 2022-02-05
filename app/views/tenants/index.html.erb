@@ -24,7 +24,7 @@
   <tbody>
     <% @tenants.each do |tenant| %>
       <tr>
-        <td><%= tenant.flat_id %></td>
+        <td><%= @flats_array.filter_map{ |f| f[0] if f[1] == tenant.flat_id}[0] %></td>
         <td><%= tenant.building_id %></td>
         <td><%= tenant.name %></td>
         <td><%= tenant.surname %></td>

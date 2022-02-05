@@ -1,6 +1,6 @@
 class TenantsController < ApplicationController
   before_action :set_tenant, only: %i[ show edit update destroy ]
-  before_action :set_fields, only: %i[ edit new create update ]
+  before_action :set_fields, only: %i[ edit new create update index show ]
 
   # GET /tenants or /tenants.json
   def index
@@ -61,9 +61,18 @@ class TenantsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_fields
-      @buildings_array = Building.all.map { |building| [building.name, building.id] }
+      set_flats
+      set_buildings
+    end
+
+    def set_flats
       @flats_array = Flat.all.map { |flat| [flat.door_number, flat.id] }
     end
+
+    def set_buildings
+      @buildings_array = Building.all.map { |building| [building.name, building.id] }
+    end
+
     def set_tenant
       @tenant = Tenant.find(params[:id])
     end

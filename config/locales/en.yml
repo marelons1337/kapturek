@@ -32,11 +32,12 @@
 en:
   hello: "Hello world"
   forms:
-    invalid_format: format is invalid
-    flat_not_in_building: must belong to the building
+    invalid_format: format is invalid.
+    flat_not_in_building: must belong to the building.
     select_building: --select--
     select_building_first: --select building first--
     select_flat_first: --select flat first--
+    wrong_range: must be later than rent from date.
   building:
     building_summary: Building summary
     flats_taken: Flats occupied

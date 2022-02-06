@@ -9,7 +9,7 @@ one:
   email: MyString
   account_no: 1
   rent_from: 2021-12-22
-  rent_to: 2021-12-22
+  rent_to: <%= Date.today + 1.month %>
   payment_due: 2021-12-22
   paid: false
   debt: 1.5

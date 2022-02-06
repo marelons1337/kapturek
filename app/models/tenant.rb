@@ -3,6 +3,7 @@
 class Tenant < ApplicationRecord
   belongs_to :flat
   belongs_to :building
+  has_many :payments, dependent: :destroy
 
   validates :email, format: { with: ApplicationHelper::EMAIL_REGEX, message: I18n.t('forms.invalid_format') }
   validates :phone, format: { with: ApplicationHelper::PHONE_REGEX, message: I18n.t('forms.invalid_format') }

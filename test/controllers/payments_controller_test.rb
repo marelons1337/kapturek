@@ -21,7 +21,7 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Payment.count') do
       post payments_url,
            params: { payment: { amount: @payment.amount, building_id: @payment.building_id, comment: @payment.comment,
-                                flat_id: @payment.flat_id, received: @payment.received, tenant_id: @payment.tenant_id, type: @payment.type } }
+                                flat_id: @payment.flat_id, received: @payment.received, tenant_id: @payment.tenant_id, payment_type: @payment.payment_type } }
     end
 
     assert_redirected_to payment_url(Payment.last)
@@ -40,7 +40,7 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
   test 'should update payment' do
     patch payment_url(@payment),
           params: { payment: { amount: @payment.amount, building_id: @payment.building_id, comment: @payment.comment,
-                               flat_id: @payment.flat_id, received: @payment.received, tenant_id: @payment.tenant_id, type: @payment.type } }
+                               flat_id: @payment.flat_id, received: @payment.received, tenant_id: @payment.tenant_id, payment_type: @payment.payment_type } }
     assert_redirected_to payment_url(@payment)
   end
 

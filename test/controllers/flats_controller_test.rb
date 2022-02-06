@@ -18,10 +18,13 @@ class FlatsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should create flat' do
+    building = buildings(:one)
+    flat = Flat.new(door_number: 4, building_id: building.id, debt: 0, floor_no: 2, rent: 1000,
+      rooms_amount: 1, surface: 20)
     assert_difference('Flat.count') do
       post flats_url,
-           params: { flat: { building_id: @flat.building_id, debt: @flat.debt, door_number: @flat.door_number,
-                             floor_no: @flat.floor_no, rent: @flat.rent, rooms_amount: @flat.rooms_amount, surface: @flat.surface, taken: @flat.taken, taken_until: @flat.taken_until } }
+           params: { flat: { building_id: flat.building_id, debt: flat.debt, door_number: flat.door_number,
+                             floor_no: flat.floor_no, rent: flat.rent, rooms_amount: flat.rooms_amount, surface: flat.surface} }
     end
 
     assert_redirected_to flat_url(Flat.last)
@@ -40,7 +43,7 @@ class FlatsControllerTest < ActionDispatch::IntegrationTest
   test 'should update flat' do
     patch flat_url(@flat),
           params: { flat: { building_id: @flat.building_id, debt: @flat.debt, door_number: @flat.door_number,
-                            floor_no: @flat.floor_no, rent: @flat.rent, rooms_amount: @flat.rooms_amount, surface: @flat.surface, taken: @flat.taken, taken_until: @flat.taken_until } }
+                            floor_no: @flat.floor_no, rent: @flat.rent, rooms_amount: @flat.rooms_amount, surface: @flat.surface} }
     assert_redirected_to flat_url(@flat)
   end
 

@@ -1,31 +1,32 @@
+# frozen_string_literal: true
+
 class Building < ApplicationRecord
   has_many :flats, dependent: :destroy
-  has_many :tenants, through: :flats #chyba niepotrzebne jak mamy building_id w tenancie
+  has_many :tenants, through: :flats # chyba niepotrzebne jak mamy building_id w tenancie
 
   def flats_amount
-    flats_amount ||= Flat.where(building_id: self.id).count
+    flats_amount ||= Flat.where(building_id: id).count
   end
 
   def tenants_count
-    tenants_amount ||= Tenant.where(building_id: self.id).count
+    tenants_amount ||= Tenant.where(building_id: id).count
   end
 
   def flats_taken_display
-    all = self.flats.count
-    taken = Flat.where(taken: true, building_id: self.id).count
+    all = flats.count
+    taken = Flat.where(taken: true, building_id: id).count
     ret = "#{taken}/#{all}"
   end
 
   def total_due
-    debt_array = Flat.where(building_id: self.id).pluck(:debt).compact
+    debt_array = Flat.where(building_id: id).pluck(:debt).compact
     debt = debt_array.reduce(:+)
   end
 
   def total_revenue
-    revenue_array = Flat.where(building_id: self.id).pluck(:rent).compact
+    revenue_array = Flat.where(building_id: id).pluck(:rent).compact
     revenue = revenue_array.reduce(:+)
   end
-
 end
 
 # == Schema Information

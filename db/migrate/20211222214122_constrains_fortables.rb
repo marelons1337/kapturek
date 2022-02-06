@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConstrainsFortables < ActiveRecord::Migration[6.1]
   def change
     change_column :flats, :door_number, :integer, null: false
@@ -15,6 +17,5 @@ class ConstrainsFortables < ActiveRecord::Migration[6.1]
     change_column :tenants, :phone, :integer, null: false
     change_column :tenants, :paid, :boolean, default: false
     change_column :tenants, :rent_from, :date, null: false
-    
   end
 end

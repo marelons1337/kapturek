@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeIntLimitsInTenants < ActiveRecord::Migration[6.1]
   def change
     change_column :tenants, :account_no, :string

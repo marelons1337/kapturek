@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class TenantsController < ApplicationController
-  before_action :set_tenant, only: %i[ show edit update destroy ]
-  before_action :set_fields, only: %i[ edit new create update index show ]
+  before_action :set_tenant, only: %i[show edit update destroy]
+  before_action :set_fields, only: %i[edit new create update index show]
 
   # GET /tenants or /tenants.json
   def index
@@ -8,8 +10,7 @@ class TenantsController < ApplicationController
   end
 
   # GET /tenants/1 or /tenants/1.json
-  def show
-  end
+  def show; end
 
   # GET /tenants/new
   def new
@@ -17,8 +18,7 @@ class TenantsController < ApplicationController
   end
 
   # GET /tenants/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tenants or /tenants.json
   def create
@@ -26,7 +26,7 @@ class TenantsController < ApplicationController
 
     respond_to do |format|
       if @tenant.save
-        format.html { redirect_to tenant_url(@tenant), notice: "Tenant was successfully created." }
+        format.html { redirect_to tenant_url(@tenant), notice: 'Tenant was successfully created.' }
         format.json { render :show, status: :created, location: @tenant }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class TenantsController < ApplicationController
   def update
     respond_to do |format|
       if @tenant.update(tenant_params)
-        format.html { redirect_to tenant_url(@tenant), notice: "Tenant was successfully updated." }
+        format.html { redirect_to tenant_url(@tenant), notice: 'Tenant was successfully updated.' }
         format.json { render :show, status: :ok, location: @tenant }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,32 +53,34 @@ class TenantsController < ApplicationController
     @tenant.destroy
 
     respond_to do |format|
-      format.html { redirect_to tenants_url, notice: "Tenant was successfully destroyed." }
+      format.html { redirect_to tenants_url, notice: 'Tenant was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fields
-      set_flats
-      set_buildings
-    end
 
-    def set_flats
-      @flats_array = Flat.all.map { |flat| [flat.door_number, flat.id] }
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fields
+    set_flats
+    set_buildings
+  end
 
-    def set_buildings
-      @buildings_array = Building.all.map { |building| [building.name, building.id] }
-    end
+  def set_flats
+    @flats_array = Flat.all.map { |flat| [flat.door_number, flat.id] }
+  end
 
-    def set_tenant
-      @tenant = Tenant.find(params[:id])
-    end
+  def set_buildings
+    @buildings_array = Building.all.map { |building| [building.name, building.id] }
+  end
 
-    # Only allow a list of trusted parameters through.
-    def tenant_params
-      params.require(:tenant).permit(:flat_id, :building_id, :name, :surname, :phone, :email, :account_no, :rent_from, :rent_to, :payment_due, :paid, :debt)
-    end
+  def set_tenant
+    @tenant = Tenant.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tenant_params
+    params.require(:tenant).permit(:flat_id, :building_id, :name, :surname, :phone, :email, :account_no, :rent_from,
+                                   :rent_to, :payment_due, :paid, :debt)
+  end
 end

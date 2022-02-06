@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class Payment < ApplicationRecord
   belongs_to :building
   belongs_to :flat
   belongs_to :tenant
 
   PAYMENT_TYPES = {
-    "cash" => "cash",
-    "bank transfer" => "bank transfer" ,
-  }
+    'cash' => 'cash',
+    'bank transfer' => 'bank transfer'
+  }.freeze
 end
 
 # == Schema Information

@@ -1,8 +1,9 @@
-class BuildingsController < ApplicationController
-  before_action :set_building, only: %i[ show edit update destroy ]
-  before_action :set_flats, only: %i[ show ]
-  before_action :set_payments, only: %i[ show index ]
+# frozen_string_literal: true
 
+class BuildingsController < ApplicationController
+  before_action :set_building, only: %i[show edit update destroy]
+  before_action :set_flats, only: %i[show]
+  before_action :set_payments, only: %i[show index]
 
   # GET /buildings or /buildings.json
   def index
@@ -11,8 +12,7 @@ class BuildingsController < ApplicationController
   end
 
   # GET /buildings/1 or /buildings/1.json
-  def show
-  end
+  def show; end
 
   # GET /buildings/new
   def new
@@ -20,8 +20,7 @@ class BuildingsController < ApplicationController
   end
 
   # GET /buildings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /buildings or /buildings.json
   def create
@@ -29,7 +28,7 @@ class BuildingsController < ApplicationController
 
     respond_to do |format|
       if @building.save
-        format.html { redirect_to building_url(@building), notice: "Building was successfully created." }
+        format.html { redirect_to building_url(@building), notice: 'Building was successfully created.' }
         format.json { render :show, status: :created, location: @building }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +41,7 @@ class BuildingsController < ApplicationController
   def update
     respond_to do |format|
       if @building.update(building_params)
-        format.html { redirect_to building_url(@building), notice: "Building was successfully updated." }
+        format.html { redirect_to building_url(@building), notice: 'Building was successfully updated.' }
         format.json { render :show, status: :ok, location: @building }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +55,7 @@ class BuildingsController < ApplicationController
     @building.destroy
 
     respond_to do |format|
-      format.html { redirect_to buildings_url, notice: "Building was successfully destroyed." }
+      format.html { redirect_to buildings_url, notice: 'Building was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,24 +63,26 @@ class BuildingsController < ApplicationController
   def find_belonging_flats
     set_building
     set_flats
-    return render json: @flats, only: [:id, :door_number]
+    render json: @flats, only: %i[id door_number]
   end
 
   private
-    def set_flats
-      @flats = Flat.where(building_id: @building.id)
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_building
-      @building = Building.find(params[:id])
-    end
 
-    def set_payments
-      @payments = Payment.where(building_id: params[:id])
-    end
+  def set_flats
+    @flats = Flat.where(building_id: @building.id)
+  end
 
-    # Only allow a list of trusted parameters through.
-    def building_params
-      params.require(:building).permit(:name, :address, :flats_amount, :floors)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_building
+    @building = Building.find(params[:id])
+  end
+
+  def set_payments
+    @payments = Payment.where(building_id: params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def building_params
+    params.require(:building).permit(:name, :address, :flats_amount, :floors)
+  end
 end

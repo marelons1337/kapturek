@@ -8,6 +8,12 @@ class Flat < ApplicationRecord
   validates :door_number, :floor_no, presence: true
   validates :door_number, uniqueness: true
 
+  def debt
+    debt_array = Tenant.where(flat_id: self.id).pluck(:debt).compact
+    full_debt = debt_array.reduce(:+)
+    self["debt"] = full_debt || 0
+  end
+
 end
 
 # == Schema Information

@@ -2,7 +2,7 @@
 
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[show edit update destroy]
-  before_action :set_fields, only: %i[edit new create]
+  before_action :set_fields
 
   # GET /payments or /payments.json
   def index

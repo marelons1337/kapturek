@@ -11,7 +11,6 @@ class Tenant < ApplicationRecord
   validate :date_range, :force_one_active
   validates_with FlatBelongingValidator
 
-
   before_save :occupy_flat
 
   # validations begin
@@ -45,7 +44,6 @@ class Tenant < ApplicationRecord
   def determine_active
     self.active = if rent_from <= Date.today && rent_to >= Date.today
                     true
-                  # occupy_flat # set flat's taken values
                   else
                     false
                   end

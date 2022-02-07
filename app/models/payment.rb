@@ -5,6 +5,8 @@ class Payment < ApplicationRecord
   belongs_to :flat
   belongs_to :tenant
 
+  validates_with FlatBelongingValidator
+
   PAYMENT_TYPES = {
     'cash' => 'cash',
     'bank transfer' => 'bank transfer'

@@ -8,16 +8,13 @@ class Tenant < ApplicationRecord
   validates :email, format: { with: ApplicationHelper::EMAIL_REGEX, message: I18n.t('forms.invalid_format') }
   validates :phone, format: { with: ApplicationHelper::PHONE_REGEX, message: I18n.t('forms.invalid_format') }
   validates :rent_from, :rent_to, :name, :surname, presence: true
-  validate :flat_belonging_to_building, :date_range, :force_one_active
+  validate :date_range, :force_one_active
+  validates_with FlatBelongingValidator
+
 
   before_save :occupy_flat
 
   # validations begin
-  def flat_belonging_to_building
-    building = Building.find_by(id: building_id)
-    errors.add(:flat_id, I18n.t('forms.flat_not_in_building')) unless flat_id.in?(building&.flat_ids)
-  end
-
   def date_range
     errors.add(:rent_to, I18n.t('forms.wrong_range')) if rent_from >= rent_to
   end

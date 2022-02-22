@@ -32,22 +32,24 @@ two:
 #
 # Table name: tenants
 #
-#  id          :bigint           not null, primary key
-#  account_no  :string
-#  active      :boolean
-#  debt        :float
-#  email       :string
-#  name        :string           not null
-#  paid        :boolean          default(FALSE)
-#  payment_due :date
-#  phone       :string           not null
-#  rent_from   :date             not null
-#  rent_to     :date
-#  surname     :string           not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  building_id :bigint           not null
-#  flat_id     :bigint           not null
+#  id                :bigint           not null, primary key
+#  account_no        :string
+#  active            :boolean
+#  debt              :float            default(0.0)
+#  email             :string
+#  name              :string           not null
+#  paid              :boolean          default(FALSE)
+#  paid_to           :date
+#  payment_due       :date
+#  payment_frequency :string
+#  phone             :string           not null
+#  rent_from         :date             not null
+#  rent_to           :date
+#  surname           :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  building_id       :bigint           not null
+#  flat_id           :bigint           not null
 #
 # Indexes
 #

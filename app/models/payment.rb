@@ -7,10 +7,43 @@ class Payment < ApplicationRecord
 
   validates_with FlatBelongingValidator
 
+  before_save :make_payment
+
   PAYMENT_TYPES = {
     'cash' => 'cash',
     'bank transfer' => 'bank transfer'
   }.freeze
+
+  def make_payment
+    begin
+      tenant = Tenant.find(self.tenant_id)
+      rent_paid = self.amount >= tenant.rent
+      today = Date.today
+      if rent_paid
+        rest_amount = self.amount - tenant.rent
+        tenant.debt = tenant.debt - rest_amount if rest_amount > 0
+        case tenant.payment_frequency
+        when 'biweekly'
+          tenant.paid_to = today + 2.weeks
+          tenant.payment_due = today + 2.weeks if tenant.debt <= 0
+        when 'monthly'
+          tenant.paid_to = today + 1.month
+          tenant.payment_due = today + 1.month if tenant.debt <= 0
+        when 'bimonthly'
+          tenant.paid_to = today + 2.months
+          tenant.payment_due = today + 2.months if tenant.debt <= 0
+        else
+          nil
+        end
+      else
+        tenant.debt -= self.amount
+      end
+      tenant.save!
+    rescue => exception
+      Rails.logger.info("Error when making payment #{exception}")
+    end
+  end
+
 end
 
 # == Schema Information

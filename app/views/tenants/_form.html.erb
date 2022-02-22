@@ -57,6 +57,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :payment_frequency %>
+    <%= form.select :payment_frequency, options_for_select(Tenant::PAYMENT_FREQUENCY.map) %>
+  </div>
+
+  <div class="field">
     <%= form.label :payment_due %>
     <%= form.date_select :payment_due %>
   </div>

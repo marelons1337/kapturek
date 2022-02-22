@@ -81,6 +81,6 @@ class TenantsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def tenant_params
     params.require(:tenant).permit(:flat_id, :building_id, :name, :surname, :phone, :email, :account_no, :rent_from,
-                                   :rent_to, :payment_due, :paid, :debt)
+                                   :rent_to, :payment_due, :paid, :debt, :payment_frequency, :śpaid_to)
   end
 end

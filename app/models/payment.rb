@@ -15,6 +15,7 @@ class Payment < ApplicationRecord
   }.freeze
 
   def make_payment
+    # byebug
     begin
       tenant = Tenant.find(self.tenant_id)
       rent_paid = self.amount >= tenant.rent

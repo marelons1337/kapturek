@@ -58,6 +58,20 @@ class TenantsController < ApplicationController
     end
   end
 
+  def set_debt
+    set_tenant
+    @tenant.set_debt
+    respond_to do |format|
+      if @tenant.save
+        format.html { redirect_to tenant_url(@tenant), notice: 'Debt was set.' }
+        format.json { render :show, status: :created, location: @tenant }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tenant.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -81,6 +95,6 @@ class TenantsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def tenant_params
     params.require(:tenant).permit(:flat_id, :building_id, :name, :surname, :phone, :email, :account_no, :rent_from,
-                                   :rent_to, :payment_due, :paid, :debt, :payment_frequency, :śpaid_to)
+                                   :rent_to, :payment_due, :paid, :debt, :payment_frequency, :paid_to)
   end
 end

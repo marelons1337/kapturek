@@ -61,6 +61,11 @@
 </p>
 
 <p>
+  <strong>Paid to:</strong>
+  <%= @tenant.paid_to %>
+</p>
+
+<p>
   <strong>Rent:</strong>
   <%= @tenant.rent %>
 </p>
@@ -74,5 +79,6 @@
   <strong>Active:</strong>
   <%= @tenant.active %>
 </p>
+<%= link_to 'set_debt', set_debt_tenant_path %>
 <%= link_to 'Edit', edit_tenant_path(@tenant) %> |
 <%= link_to 'Back', tenants_path %>

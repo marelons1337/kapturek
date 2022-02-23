@@ -11,7 +11,7 @@ class Tenant < ApplicationRecord
   validate :date_range, :force_one_active
   validates_with FlatBelongingValidator
 
-  before_save :occupy_flat, :set_debt
+  before_save :occupy_flat
   before_create :set_initial_paid
 
   attr_accessor :rent

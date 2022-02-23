@@ -1,32 +1,52 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+no_debt:
   flat: one
   building: one
   name: MyString
   surname: MyString
-  phone: 1
-  email: MyString
+  phone: 1123123123
+  email: email@user.pl
   account_no: 1
-  rent_from: 2021-12-22
-  rent_to: <%= Date.today + 1.month %>
-  payment_due: 2021-12-22
+  debt: 0
+  rent_from: <%= Date.today - 6.months %>
+  rent_to: <%= Date.today + 2.months %>
+  payment_due: <%= Date.today + 2.days %>
+  paid_to: <%= Date.today + 2.days %>
   paid: false
-  debt: 1.5
+  payment_frequency: 'monthly'
 
-two:
+debt_below_rent:
   flat: two
-  building: two
+  building: one
   name: MyString
   surname: MyString
-  phone: 1
-  email: MyString
+  phone: 1123123123
+  email: email1@user.pl
   account_no: 1
-  rent_from: 2021-12-22
-  rent_to: 2021-12-22
-  payment_due: 2021-12-22
+  debt: 500
+  rent_from: <%= Date.today - 6.months %>
+  rent_to: <%= Date.today + 2.months %>
+  payment_due: <%= Date.today - 2.days %>
+  paid_to: <%= Date.today - 2.days %>
   paid: false
-  debt: 1.5
+  payment_frequency: 'monthly'
+
+debt_above_rent:
+  flat: three
+  building: one
+  name: MyString
+  surname: MyString
+  phone: 11123123123
+  email: email2@user.pl
+  account_no: 1
+  debt: 1500
+  rent_from: <%= Date.today - 6.months %>
+  rent_to: <%= Date.today + 2.months %>
+  payment_due: <%= Date.today + 2.days %>
+  paid_to: <%= Date.today + 2.days %>
+  paid: false
+  payment_frequency: 'monthly'
 
 # == Schema Information
 #

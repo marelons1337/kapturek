@@ -4,7 +4,7 @@ require 'test_helper'
 
 class TenantsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @tenant = tenants(:one)
+    @tenant = tenants(:no_debt)
   end
 
   test 'should get index' do

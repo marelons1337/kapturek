@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  surface: MyString
+  rooms_amount: MyString
+  door_numer: MyString
+  country: MyString
+  city: MyString
+  street: MyString
+  street_no: MyString
+  floor_no: MyString
+  bought_at: 2022-11-25
+  sold_at: 2022-11-25
+  buy_price: MyString
+  sale_price: MyString
+
+two:
+  name: MyString
+  surface: MyString
+  rooms_amount: MyString
+  door_numer: MyString
+  country: MyString
+  city: MyString
+  street: MyString
+  street_no: MyString
+  floor_no: MyString
+  bought_at: 2022-11-25
+  sold_at: 2022-11-25
+  buy_price: MyString
+  sale_price: MyString

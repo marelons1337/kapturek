@@ -1,0 +1,82 @@
+<%= form_with(model: property_sale) do |form| %>
+  <% if property_sale.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(property_sale.errors.count, "error") %> prohibited this property_sale from being saved:</h2>
+
+      <ul>
+        <% property_sale.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :surface, style: "display: block" %>
+    <%= form.text_field :surface %>
+  </div>
+
+  <div>
+    <%= form.label :rooms_amount, style: "display: block" %>
+    <%= form.text_field :rooms_amount %>
+  </div>
+
+  <div>
+    <%= form.label :door_numer, style: "display: block" %>
+    <%= form.text_field :door_numer %>
+  </div>
+
+  <div>
+    <%= form.label :country, style: "display: block" %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :street, style: "display: block" %>
+    <%= form.text_field :street %>
+  </div>
+
+  <div>
+    <%= form.label :street_no, style: "display: block" %>
+    <%= form.text_field :street_no %>
+  </div>
+
+  <div>
+    <%= form.label :floor_no, style: "display: block" %>
+    <%= form.text_field :floor_no %>
+  </div>
+
+  <div>
+    <%= form.label :bought_at, style: "display: block" %>
+    <%= form.date_field :bought_at %>
+  </div>
+
+  <div>
+    <%= form.label :sold_at, style: "display: block" %>
+    <%= form.date_field :sold_at %>
+  </div>
+
+  <div>
+    <%= form.label :buy_price, style: "display: block" %>
+    <%= form.text_field :buy_price %>
+  </div>
+
+  <div>
+    <%= form.label :sale_price, style: "display: block" %>
+    <%= form.text_field :sale_price %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

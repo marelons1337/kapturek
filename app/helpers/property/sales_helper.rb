@@ -1,0 +1,2 @@
+module Property::SalesHelper
+end

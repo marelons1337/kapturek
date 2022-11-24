@@ -1,0 +1,1 @@
+erblint --lint-all --enable-all-linters --autocorrect

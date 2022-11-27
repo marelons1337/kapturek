@@ -4,6 +4,7 @@ class Property::SalesController < ApplicationController
   # GET /property/sales or /property/sales.json
   def index
     @property_sales = Property::Sale.all
+    @property_sales = @property_sales.where(status: params[:status]) if params[:status].present?
   end
 
   # GET /property/sales/1 or /property/sales/1.json
@@ -65,6 +66,7 @@ class Property::SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_sale_params
-      params.require(:property_sale).permit(:name, :surface, :rooms_amount, :door_numer, :country, :city, :street, :street_no, :floor_no, :bought_at, :sold_at, :buy_price, :sale_price)
+      params.require(:property_sale).permit(:name, :surface, :rooms_amount, :door_no, :country, :city, :street, :street_no,
+        :floor_no, :bought_at, :sold_at, :buy_price, :sale_price, :status, :zip)
     end
 end

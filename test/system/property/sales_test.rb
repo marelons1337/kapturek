@@ -18,7 +18,7 @@ class Property::SalesTest < ApplicationSystemTestCase
     fill_in "Buy price", with: @property_sale.buy_price
     fill_in "City", with: @property_sale.city
     fill_in "Country", with: @property_sale.country
-    fill_in "Door numer", with: @property_sale.door_numer
+    fill_in "Door numer", with: @property_sale.door_no
     fill_in "Floor no", with: @property_sale.floor_no
     fill_in "Name", with: @property_sale.name
     fill_in "Rooms amount", with: @property_sale.rooms_amount
@@ -41,7 +41,7 @@ class Property::SalesTest < ApplicationSystemTestCase
     fill_in "Buy price", with: @property_sale.buy_price
     fill_in "City", with: @property_sale.city
     fill_in "Country", with: @property_sale.country
-    fill_in "Door numer", with: @property_sale.door_numer
+    fill_in "Door numer", with: @property_sale.door_no
     fill_in "Floor no", with: @property_sale.floor_no
     fill_in "Name", with: @property_sale.name
     fill_in "Rooms amount", with: @property_sale.rooms_amount

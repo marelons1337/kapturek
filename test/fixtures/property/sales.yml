@@ -2,30 +2,30 @@
 
 one:
   name: MyString
-  surface: MyString
-  rooms_amount: MyString
-  door_numer: MyString
+  surface: 1.5
+  rooms_amount: 1
+  door_no: MyString
   country: MyString
   city: MyString
   street: MyString
   street_no: MyString
   floor_no: MyString
-  bought_at: 2022-11-25
-  sold_at: 2022-11-25
-  buy_price: MyString
-  sale_price: MyString
+  bought_at: 2022-11-26
+  sold_at: 2022-11-26
+  buy_price: 1.5
+  sale_price: 1.5
 
 two:
   name: MyString
-  surface: MyString
-  rooms_amount: MyString
-  door_numer: MyString
+  surface: 1.5
+  rooms_amount: 1
+  door_no: MyString
   country: MyString
   city: MyString
   street: MyString
   street_no: MyString
   floor_no: MyString
-  bought_at: 2022-11-25
-  sold_at: 2022-11-25
-  buy_price: MyString
-  sale_price: MyString
+  bought_at: 2022-11-26
+  sold_at: 2022-11-26
+  buy_price: 1.5
+  sale_price: 1.5

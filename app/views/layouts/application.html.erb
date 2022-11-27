@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/tailwind/navbar' %>
+    <div class="flex overflow-hidden bg-white pt-16">
+      <%= yield %>
+    </div>
   </body>
 </html>

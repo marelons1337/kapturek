@@ -1,4 +1,27 @@
 class Property::Sale < ApplicationRecord
+  belongs_to :account, optional: true
+
+  DEFAULT_STATUSES = ['bought', 'pending', 'sold'].freeze
+
+  def full_address(local: true)
+    "#{street} #{street_no}#{door_no.present? ? '/' + door_no : nil }, #{city}, #{local ? country : nil}"
+  end
+
+  def get_name
+    self.name.presence || full_address
+  end
+
+  def get_status
+    self.status
+  end
+
+  def get_price
+    if status === 'sold'
+      sale_price
+    else
+      buy_price
+    end
+  end
 end
 
 # == Schema Information
@@ -7,18 +30,25 @@ end
 #
 #  id           :integer          not null, primary key
 #  bought_at    :date
-#  buy_price    :string
+#  buy_price    :float
 #  city         :string
 #  country      :string
-#  door_numer   :string
+#  door_no      :string
 #  floor_no     :string
 #  name         :string
-#  rooms_amount :string
-#  sale_price   :string
+#  rooms_amount :integer
+#  sale_price   :float
 #  sold_at      :date
+#  status       :string
 #  street       :string
 #  street_no    :string
-#  surface      :string
+#  surface      :float
+#  zip          :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  account_id   :integer
+#
+# Indexes
+#
+#  index_property_sales_on_account_id  (account_id)
 #

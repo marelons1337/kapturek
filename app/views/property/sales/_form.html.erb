@@ -23,12 +23,12 @@
 
   <div>
     <%= form.label :rooms_amount, style: "display: block" %>
-    <%= form.text_field :rooms_amount %>
+    <%= form.number_field :rooms_amount %>
   </div>
 
   <div>
-    <%= form.label :door_numer, style: "display: block" %>
-    <%= form.text_field :door_numer %>
+    <%= form.label :door_no, style: "display: block" %>
+    <%= form.text_field :door_no %>
   </div>
 
   <div>
@@ -74,6 +74,16 @@
   <div>
     <%= form.label :sale_price, style: "display: block" %>
     <%= form.text_field :sale_price %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :zip, style: "display: block" %>
+    <%= form.text_field :zip %>
   </div>
 
   <div>

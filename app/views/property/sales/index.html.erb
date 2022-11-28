@@ -2,19 +2,23 @@
 top_tabs = [:sold, :pending, :all]
 active_tab = "py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
 inactive_tab = "py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full"
+status_colors = {
+  sold: "text-green-700 bg-green-100",
+  pending: "text-yellow-700 bg-yellow-100",
+  bought: "text-blue-700 bg-blue-100"
+}
 %>
-<p style="color: green"><%= notice %></p>
-
 <div id="property_sales" class="sm:px-6 w-full">
+  <p style="color: green"><%= notice %></p>
     <div class="px-4 md:px-10 py-4 md:py-7">
       <div class="flex items-center justify-between">
         <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Tasks</p>
         <div class="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
           <p>Sort By:</p>
-          <select aria-label="select" class="focus:text-indigo-600 focus:outline-none bg-transparent ml-1">
-            <option class="text-sm text-indigo-800">Latest</option>
-            <option class="text-sm text-indigo-800">Oldest</option>
-            <option class="text-sm text-indigo-800">Latest</option>
+          <select data-controller="select" aria-label="select" class="focus:text-indigo-600 focus:outline-none bg-transparent ml-1">
+            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :desc) %>">Latest</option>
+            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :asc) %>">Oldest</option>
+            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :name) %>"">Alphabetical</option>
           </select>
         </div>
       </div>
@@ -128,15 +132,17 @@ inactive_tab = "py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-10
                   </div>
                 </td>
                 <td class="pl-5">
-                  <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Due today at 18:00</button>
+                  <button class="py-3 px-3 text-sm focus:outline-none leading-none rounded<%= status_colors[property_sale.status.to_sym]%>">
+                    <%= property_sale.status.capitalize %>
+                  </button>
                 </td>
                 <td class="pl-4">
-                  <button class="focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none">View</button>
+                  <%= link_to "View", property_sale, class:"focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"%>
                 </td>
                 <td>
                   <div class="relative px-5 pt-2">
-                    <button class="focus:ring-2 rounded-md focus:outline-none" onclick="dropdownFunction(this)" role="button" aria-label="option">
-                        <svg class="dropbtn" onclick="dropdownFunction(this)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <button class="focus:ring-2 rounded-md focus:outline-none" role="button" aria-label="option">
+                        <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M4.16667 10.8332C4.62691 10.8332 5 10.4601 5 9.99984C5 9.5396 4.62691 9.1665 4.16667 9.1665C3.70643 9.1665 3.33334 9.5396 3.33334 9.99984C3.33334 10.4601 3.70643 10.8332 4.16667 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M10 10.8332C10.4602 10.8332 10.8333 10.4601 10.8333 9.99984C10.8333 9.5396 10.4602 9.1665 10 9.1665C9.53976 9.1665 9.16666 9.5396 9.16666 9.99984C9.16666 10.4601 9.53976 10.8332 10 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M15.8333 10.8332C16.2936 10.8332 16.6667 10.4601 16.6667 9.99984C16.6667 9.5396 16.2936 9.1665 15.8333 9.1665C15.3731 9.1665 15 9.5396 15 9.99984C15 10.4601 15.3731 10.8332 15.8333 10.8332Z" stroke="#9CA3AF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>

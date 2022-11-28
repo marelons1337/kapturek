@@ -1,0 +1,2 @@
+module Property::RentalsHelper
+end

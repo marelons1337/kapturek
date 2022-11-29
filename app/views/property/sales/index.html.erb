@@ -16,9 +16,10 @@ status_colors = {
         <div class="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
           <p>Sort By:</p>
           <select data-controller="select" aria-label="select" class="focus:text-indigo-600 focus:outline-none bg-transparent ml-1">
-            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :desc) %>">Latest</option>
-            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :asc) %>">Oldest</option>
-            <option class="text-sm text-indigo-800" value="<%= property_sales_path(sort: :name) %>"">Alphabetical</option>
+            <option class="text-sm text-indigo-800" value="id desc">Latest</option>
+            <option class="text-sm text-indigo-800" value="id asc">Oldest</option>
+            <option class="text-sm text-indigo-800" value="name asc">A-Z</option>
+            <option class="text-sm text-indigo-800" value="name desc">Z-A</option>
           </select>
         </div>
       </div>

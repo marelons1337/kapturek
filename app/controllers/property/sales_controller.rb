@@ -1,10 +1,12 @@
 class Property::SalesController < ApplicationController
   before_action :set_property_sale, only: %i[ show edit update destroy ]
+  SORT_METHODS = ['id asc', 'id desc', 'name asc', 'name desc']
 
   # GET /property/sales or /property/sales.json
   def index
     @property_sales = Property::Sale.all
     @property_sales = @property_sales.where(status: params[:status]) if params[:status].present?
+    @property_sales = @property_sales.order(params[:sort]) if params[:sort].presence.in? SORT_METHODS
   end
 
   # GET /property/sales/1 or /property/sales/1.json

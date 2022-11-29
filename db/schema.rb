@@ -43,11 +43,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_162836) do
     t.string "street"
     t.string "street_no"
     t.string "floor_no"
+    t.text "description"
     t.date "bought_at"
     t.date "sold_at"
     t.float "buy_price"
     t.float "sale_price"
-    t.string "status"
+    t.integer "status", default: 0
     t.string "zip"
     t.integer "account_id"
     t.datetime "created_at", null: false

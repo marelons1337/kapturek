@@ -10,11 +10,12 @@ class CreatePropertySales < ActiveRecord::Migration[7.0]
       t.string :street
       t.string :street_no
       t.string :floor_no
+      t.text :description
       t.date :bought_at
       t.date :sold_at
       t.float :buy_price
       t.float :sale_price
-      t.string :status
+      t.integer :status, default: 0
       t.string :zip
 
       t.references :account

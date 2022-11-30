@@ -2,6 +2,7 @@
 label_class = "block text-xs font-semibold text-gray-600 uppercase mt-2"
 input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
 %>
+<div class="grid w-full place-items-center">
   <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
     <%= form_with(model: property_sale, class: 'mt-6') do |form| %>
       <% if property_sale.errors.any? %>
@@ -20,7 +21,7 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
       <%= form.text_field :name, class: input_class %>
 
       <%= form.label :status, class: label_class %>
-      <%= form.select :status, Property::Sale.statuses, class: input_class %>
+      <%= form.select :status, Property::Sale.statuses.keys, class: input_class %>
 
       <%# half width input %>
       <div class="flex justify-between gap-3">
@@ -43,12 +44,6 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
           <%= form.text_field :city, class: input_class %>
         </span>
       </div>
-
-      <%= form.label :country, class: label_class %>
-      <%= form.text_field :country, class: input_class %>
-
-      <%= form.label :city, class: label_class %>
-      <%= form.text_field :city, class: input_class %>
 
       <%= form.label :street, class: label_class %>
       <%= form.text_field :street, class: input_class %>
@@ -97,7 +92,8 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
         </span>
       </div>
 
-      <%= form.submit class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
+      <%= form.submit class: "w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-indigo-700 hover:bg-indigo-600 focus:outline-none" %>
+font-medium text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded
       <p class="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black">Already registered?</p>
     <% end %>
   </div>

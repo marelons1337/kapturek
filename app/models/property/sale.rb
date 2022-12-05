@@ -15,16 +15,20 @@ class Property::Sale < ApplicationRecord
     self.name.presence || full_address
   end
 
-  def get_status
-    self.status
-  end
-
   def get_price
     if status === 'sold'
       sale_price
     else
       buy_price
     end
+  end
+
+  def get_status
+    self.status
+  end
+
+  def get_surface
+    "#{self.surface} m2"
   end
 end
 

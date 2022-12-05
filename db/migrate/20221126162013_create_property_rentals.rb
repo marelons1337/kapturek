@@ -16,6 +16,9 @@ class CreatePropertyRentals < ActiveRecord::Migration[7.0]
       t.float :sale_price
       t.date :taken_from
       t.date :taken_until
+      t.text :description
+      t.integer :status, default: 0
+      t.string :zip
 
       t.references :account
 

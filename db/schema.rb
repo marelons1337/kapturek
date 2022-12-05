@@ -27,6 +27,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_162836) do
     t.float "sale_price"
     t.date "taken_from"
     t.date "taken_until"
+    t.text "description"
+    t.integer "status", default: 0
+    t.string "zip"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

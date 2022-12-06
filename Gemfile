@@ -60,7 +60,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
-group :development do
+group :development, :test do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'annotate'
   gem 'byebug'
@@ -74,11 +74,13 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-end
-
-group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem "rspec", "~> 3.12"
+  gem "rspec-rails", "~> 6.0"
+  gem "factory_bot_rails"
+
 end
+

@@ -1,5 +1,6 @@
 class Property::Rental < ApplicationRecord
-  belongs_to :account, optional: true
+  # belongs_to :account, optional: true
+  validates :bought_at, :buy_price, :surface, :country, :city, :street, :street_no, :rent, presence: true
 
   enum status: {
     empty: 0,

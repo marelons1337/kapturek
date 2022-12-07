@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :property_sale, class: 'Property::Sale' do
     bought_at { Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month) }
-    buy_price { Random.new.rand(1000000) }
+    buy_price { 150000 }
     city { Faker::Address.city }
     country { Faker::Address.country }
     street { Faker::Address.street_name }
@@ -11,7 +11,7 @@ FactoryBot.define do
 
   factory :property_rental, class: 'Property::Rental' do
     bought_at { Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month) }
-    buy_price { Random.new.rand(1000000) }
+    buy_price { 150000 }
     city { Faker::Address.city }
     country { Faker::Address.country }
     rent { Random.new.rand(1000) }

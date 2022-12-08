@@ -9,12 +9,12 @@ class CreateCustomerClients < ActiveRecord::Migration[7.0]
       t.date :rent_to
       t.float :paid
       t.float :debt
-      t.references :account, null: false, foreign_key: true
-      t.references :rental, null: false, foreign_key: true
-      t.references :sale, null: false, foreign_key: true
-      t.boolean :company
-      t.integer :status
+      t.boolean :company, default: false
       t.text :note
+
+      t.references :account
+      t.references :rental
+      t.references :sale
 
       t.timestamps
     end

@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_26_162836) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_07_235051) do
+  create_table "customer_clients", force: :cascade do |t|
+    t.string "name"
+    t.string "surname"
+    t.string "phone"
+    t.string "email"
+    t.date "rent_from"
+    t.date "rent_to"
+    t.float "paid"
+    t.float "debt"
+    t.boolean "company", default: false
+    t.text "note"
+    t.integer "account_id"
+    t.integer "rental_id"
+    t.integer "sale_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_customer_clients_on_account_id"
+    t.index ["rental_id"], name: "index_customer_clients_on_rental_id"
+    t.index ["sale_id"], name: "index_customer_clients_on_sale_id"
+  end
+
   create_table "property_rentals", force: :cascade do |t|
     t.string "name"
     t.float "surface"

@@ -20,8 +20,8 @@ FactoryBot.define do
     surface { Random.new.rand(100) }
   end
 
-#   factory(:user) do
-#     email { Faker::Internet.email }
-#     password { Faker::Internet.password }
-#   end
+  factory :customer_client, class: 'Customer::Client' do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+  end
 end

@@ -43,3 +43,17 @@ end
     zip: Faker::Address.zip,
   )
 end
+
+10.times do
+  Customer::Client.create!(
+    company: [true, false].sample,
+    debt: [0, 500, 1000].sample,
+    email: Faker::Internet.email,
+    name: Faker::Games::Witcher.witcher,
+    paid: Random.new.rand(10000),
+    phone: Faker::PhoneNumber.phone_number_with_country_code,
+    rent_from: Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month),
+    rent_to: Faker::Date.between(from: Date.today + 2.months, to: Date.today + 3.months),
+    surname: Faker::Games::Witcher.sign,
+  )
+end

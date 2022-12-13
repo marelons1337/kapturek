@@ -1,8 +1,8 @@
 FactoryBot.define do
-  factory :customer_client_property, class: 'Customer::ClientProperty' do
+  factory :property_client_property, class: 'Property::ClientProperty' do
     client { nil }
-    property_sale { nil }
-    property_rental { nil }
+    property { nil }
+    account { nil }
   end
 
   factory :property_sale, class: 'Property::Sale' do

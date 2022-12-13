@@ -10,20 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_104657) do
-  create_table "customer_client_properties", force: :cascade do |t|
-    t.integer "client_id"
-    t.integer "property_sale_id"
-    t.integer "property_rental_id"
-    t.integer "account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_customer_client_properties_on_account_id"
-    t.index ["client_id"], name: "index_customer_client_properties_on_client_id"
-    t.index ["property_rental_id"], name: "index_customer_client_properties_on_property_rental_id"
-    t.index ["property_sale_id"], name: "index_customer_client_properties_on_property_sale_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_172444) do
   create_table "customer_clients", force: :cascade do |t|
     t.string "name"
     t.string "surname"
@@ -36,13 +23,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_104657) do
     t.boolean "company", default: false
     t.text "note"
     t.integer "account_id"
-    t.integer "rental_id"
-    t.integer "sale_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_customer_clients_on_account_id"
-    t.index ["rental_id"], name: "index_customer_clients_on_rental_id"
-    t.index ["sale_id"], name: "index_customer_clients_on_sale_id"
+  end
+
+  create_table "property_client_properties", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "property_id"
+    t.string "property_type"
+    t.integer "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_property_client_properties_on_account_id"
+    t.index ["client_id"], name: "index_property_client_properties_on_client_id"
   end
 
   create_table "property_rentals", force: :cascade do |t|

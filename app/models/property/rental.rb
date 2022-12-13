@@ -1,7 +1,10 @@
 class Property::Rental < ApplicationRecord
   # belongs_to :account, optional: true
   validates :bought_at, :buy_price, :surface, :country, :city, :street, :street_no, :rent, presence: true
-  has_many :client_rentals, class_name: "Customer::ClientProperty", foreign_key: "property_rental_id"
+  validate :taken_from_before_taken_until, :bought_at_before_taken_from
+
+  has_many :client_properties, as: :property
+  has_many :clients, through: :client_properties
 
   enum status: {
     empty: 0,
@@ -27,6 +30,19 @@ class Property::Rental < ApplicationRecord
 
   def get_surface
     "#{self.surface} m2"
+  end
+
+  private
+  def taken_from_before_taken_until
+    return unless taken_from.present? && taken_until.present?
+
+    errors.add(:taken_from, 'must be before taken until') if taken_from > taken_until
+  end
+
+  def bought_at_before_taken_from
+    return unless bought_at.present? && taken_from.present?
+
+    errors.add(:bought_at, 'must be before taken from') if bought_at > taken_from
   end
 end
 

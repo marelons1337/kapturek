@@ -13,8 +13,6 @@ class CreateCustomerClients < ActiveRecord::Migration[7.0]
       t.text :note
 
       t.references :account
-      t.references :rental
-      t.references :sale
 
       t.timestamps
     end

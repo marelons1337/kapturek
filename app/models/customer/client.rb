@@ -1,10 +1,11 @@
 class Customer::Client < ApplicationRecord
   belongs_to :account, optional: true
-  has_many :sales, through: :client_sales, class_name: "Customer::ClientProperty", foreign_key: "property_sale_id"
-  has_many :rentals, through: :client_rentals, class_name: "Customer::ClientProperty", foreign_key: "property_rental_id"
+  has_many :client_properties, class_name: 'Property::ClientProperty', dependent: :destroy
+  has_many :sales, through: :client_properties, source: :property, source_type: 'Property::Sale', class_name: 'Property::Sale', as: :sale
+  has_many :rentals, through: :client_properties, source: :property, source_type: 'Property::Rental', class_name: 'Property::Rental', as: :rental
 
   validates :email, :rent_from, :name, presence: true
-  validate :rental_or_sale, :rent_from_before_rent_to, :rental_or_sale_not_both
+  validate :rent_from_before_rent_to
 
   def get_name
     if company
@@ -19,17 +20,6 @@ class Customer::Client < ApplicationRecord
   end
 
   private
-  def rental_or_sale
-    if rental_id.nil? && sale_id.nil?
-      errors.add(:rental_id, "or sale_id must be present")
-    end
-  end
-
-  def rental_or_sale_not_both
-    if rental_id.present? && sale_id.present?
-      errors.add(:rental_id, "and sale_id cannot be both present")
-    end
-  end
 
   def rent_from_before_rent_to
     if rent_from.present? && rent_to.present? && rent_from > rent_to
@@ -56,12 +46,8 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  account_id :integer
-#  rental_id  :integer
-#  sale_id    :integer
 #
 # Indexes
 #
 #  index_customer_clients_on_account_id  (account_id)
-#  index_customer_clients_on_rental_id   (rental_id)
-#  index_customer_clients_on_sale_id     (sale_id)
 #

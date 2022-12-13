@@ -24,7 +24,7 @@ end
 
 10.times do
   Property::Rental.create!(
-    bought_at: Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month),
+    bought_at: Faker::Date.between(from: 30.days.ago, to: 10.days.ago),
     buy_price: Random.new.rand(1000000),
     city: Faker::Address.city,
     country: Faker::Address.country,
@@ -38,7 +38,7 @@ end
     street: Faker::Address.street_name,
     street_no: Random.new.rand(100),
     surface: Random.new.rand(100),
-    taken_from: Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month),
+    taken_from: Faker::Date.between(from: 9.days.ago, to: 1.day.ago),
     taken_until: Faker::Date.between(from: Date.today + 2.months, to: Date.today + 3.months),
     zip: Faker::Address.zip,
   )
@@ -55,5 +55,21 @@ end
     rent_from: Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month),
     rent_to: Faker::Date.between(from: Date.today + 2.months, to: Date.today + 3.months),
     surname: Faker::Games::Witcher.sign,
+  )
+end
+
+5.times do
+  Property::ClientProperty.create!(
+    client_id: Customer::Client.all.sample.id,
+    property_id: Property::Sale.all.sample.id,
+    property_type: 'Property::Sale',
+  )
+end
+
+5.times do
+  Property::ClientProperty.create!(
+    client_id: Customer::Client.all.sample.id,
+    property_id: Property::Rental.all.sample.id,
+    property_type: 'Property::Rental',
   )
 end

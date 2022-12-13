@@ -1,7 +1,9 @@
 class Property::Sale < ApplicationRecord
   # belongs_to :account, optional: true
   validates :bought_at, :buy_price, :surface, :country, :city, :street, :street_no, presence: true
-  has_many :client_sales, class_name: "Customer::ClientProperty", foreign_key: "property_sale_id"
+  has_many :client_properties, as: :property
+  has_many :clients, through: :client_properties
+  validate :bought_at_before_sold_at
 
   enum status: {
     bought: 0,
@@ -31,6 +33,13 @@ class Property::Sale < ApplicationRecord
 
   def get_surface
     "#{self.surface} m2"
+  end
+
+  private
+  def bought_at_before_sold_at
+    return unless bought_at.present? && sold_at.present?
+
+    errors.add(:bought_at, 'must be before sold at') if bought_at > sold_at
   end
 end
 

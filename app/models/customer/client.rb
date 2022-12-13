@@ -1,9 +1,41 @@
 class Customer::Client < ApplicationRecord
   belongs_to :account, optional: true
-  belongs_to :rental, optional: true
-  belongs_to :sale, optional: true
+  has_many :sales, through: :client_sales, class_name: "Customer::ClientProperty", foreign_key: "property_sale_id"
+  has_many :rentals, through: :client_rentals, class_name: "Customer::ClientProperty", foreign_key: "property_rental_id"
 
-  validates :email, :rent_from, presence: true
+  validates :email, :rent_from, :name, presence: true
+  validate :rental_or_sale, :rent_from_before_rent_to, :rental_or_sale_not_both
+
+  def get_name
+    if company
+      name
+    else
+      "#{name} #{surname}"
+    end
+  end
+
+  def get_email
+    "#{get_name} <#{email}>"
+  end
+
+  private
+  def rental_or_sale
+    if rental_id.nil? && sale_id.nil?
+      errors.add(:rental_id, "or sale_id must be present")
+    end
+  end
+
+  def rental_or_sale_not_both
+    if rental_id.present? && sale_id.present?
+      errors.add(:rental_id, "and sale_id cannot be both present")
+    end
+  end
+
+  def rent_from_before_rent_to
+    if rent_from.present? && rent_to.present? && rent_from > rent_to
+      errors.add(:rent_from, "must be before rent_to")
+    end
+  end
 end
 
 # == Schema Information

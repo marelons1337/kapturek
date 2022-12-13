@@ -13,16 +13,16 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/customer/clients", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Customer::Client. As you add validations to Customer::Client, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:customer_client)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: 1, rent_from: 'invalid date', rent_to: 'invalid date'}
   }
 
   describe "GET /index" do
@@ -77,26 +77,26 @@ RSpec.describe "/customer/clients", type: :request do
         }.to change(Customer::Client, :count).by(0)
       end
 
-    
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post customer_clients_url, params: { customer_client: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: 'new name' }
       }
 
       it "updates the requested customer_client" do
         client = Customer::Client.create! valid_attributes
         patch customer_client_url(client), params: { customer_client: new_attributes }
         client.reload
-        skip("Add assertions for updated state")
+        expect(client.name).to eq 'new name'
       end
 
       it "redirects to the customer_client" do
@@ -108,13 +108,13 @@ RSpec.describe "/customer/clients", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         client = Customer::Client.create! valid_attributes
         patch customer_client_url(client), params: { customer_client: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

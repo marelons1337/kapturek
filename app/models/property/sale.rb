@@ -1,6 +1,7 @@
 class Property::Sale < ApplicationRecord
   # belongs_to :account, optional: true
   validates :bought_at, :buy_price, :surface, :country, :city, :street, :street_no, presence: true
+  has_many :client_sales, class_name: "Customer::ClientProperty", foreign_key: "property_sale_id"
 
   enum status: {
     bought: 0,

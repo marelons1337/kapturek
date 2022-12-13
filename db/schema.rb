@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_07_235051) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_104657) do
+  create_table "customer_client_properties", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "property_sale_id"
+    t.integer "property_rental_id"
+    t.integer "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_customer_client_properties_on_account_id"
+    t.index ["client_id"], name: "index_customer_client_properties_on_client_id"
+    t.index ["property_rental_id"], name: "index_customer_client_properties_on_property_rental_id"
+    t.index ["property_sale_id"], name: "index_customer_client_properties_on_property_sale_id"
+  end
+
   create_table "customer_clients", force: :cascade do |t|
     t.string "name"
     t.string "surname"

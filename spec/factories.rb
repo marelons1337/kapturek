@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :customer_client_property, class: 'Customer::ClientProperty' do
+    client { nil }
+    property_sale { nil }
+    property_rental { nil }
+  end
+
   factory :property_sale, class: 'Property::Sale' do
     bought_at { Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month) }
     buy_price { 150000 }
@@ -22,6 +28,7 @@ FactoryBot.define do
 
   factory :customer_client, class: 'Customer::Client' do
     email { Faker::Internet.email }
-    password { Faker::Internet.password }
+    name { Faker::Games::Witcher.witcher }
+    rent_from { Faker::Date.between(from: 2.days.ago, to: Date.today + 1.month) }
   end
 end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "application#dashboard"
 
   namespace :property do
+    resources :properties
     resources :sales
     resources :rentals
   end

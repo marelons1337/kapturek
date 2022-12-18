@@ -20,56 +20,13 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
       <%= form.label :name, class: label_class %>
       <%= form.text_field :name, class: input_class %>
 
+      <%= form.label :description, class: label_class %>
+      <%= form.text_area :description, class: input_class %>
+
       <%= form.label :status, class: label_class %>
       <%= form.select :status, Property::Sale.statuses.keys, class: input_class %>
 
       <%# half width input %>
-      <div class="flex justify-between gap-3">
-        <span class="w-1/2">
-          <%= form.label :rooms_amount, class: label_class %>
-          <%= form.text_field :rooms_amount, class: input_class %>
-        </span>
-        <span class="w-1/2">
-          <%= form.label :surface, class: label_class %>
-          <%= form.text_field :surface, class: input_class %>
-        </span>
-      </div>
-      <div class="flex justify-between gap-3">
-        <span class="w-1/2">
-          <%= form.label :country, class: label_class %>
-          <%= form.text_field :country, class: input_class %>
-        </span>
-        <span class="w-1/2">
-          <%= form.label :city, class: label_class %>
-          <%= form.text_field :city, class: input_class %>
-        </span>
-      </div>
-
-      <%= form.label :street, class: label_class %>
-      <%= form.text_field :street, class: input_class %>
-
-      <div class="flex justify-between gap-3">
-        <span class="w-1/2">
-          <%= form.label :street_no, class: label_class %>
-          <%= form.text_field :street_no, class: input_class %>
-        </span>
-        <span class="w-1/2">
-          <%= form.label :door_no, class: label_class %>
-          <%= form.text_field :door_no, class: input_class %>
-        </span>
-      </div>
-
-      <div class="flex justify-between gap-3">
-        <span class="w-1/2">
-          <%= form.label :zip, class: label_class %>
-          <%= form.text_field :zip, class: input_class %>
-        </span>
-        <span class="w-1/2">
-          <%= form.label :floor_no, class: label_class %>
-          <%= form.text_field :floor_no, class: input_class %>
-        </span>
-      </div>
-
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
           <%= form.label :bought_at, class: label_class %>
@@ -89,6 +46,17 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
         <span class="w-1/2">
           <%= form.label :sale_price, class: label_class %>
           <%= form.text_field :sale_price, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :client_id, class: label_class %>
+          <%= form.select :client_id, Customer::Client.all.map { |c| [c.name, c.id] }, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :property_id, class: label_class %>
+          <%= form.select :property_id, Property::Property.all.map { |prop| [prop.name, prop.id] }, class: input_class %>
         </span>
       </div>
 

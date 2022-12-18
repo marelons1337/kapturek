@@ -5,7 +5,7 @@ RSpec.describe Property::Sale, type: :model do
 
   context 'after creation before changing status to pending or sold' do
     it 'should get default status' do
-      expect(sale.get_status).to eq "bought"
+      expect(sale.get_status).to eq "pending"
     end
 
     it 'should get price with default status' do

@@ -1,12 +1,11 @@
 class Property::RentalsController < ApplicationController
   before_action :set_property_rental, only: %i[ show edit update destroy ]
-  SORT_METHODS = ['id asc', 'id desc', 'name asc', 'name desc']
 
   # GET /property/rentals or /property/rentals.json
   def index
     @property_rentals = Property::Rental.all
     @property_rentals = @property_rentals.where(status: params[:status]) if params[:status].present?
-    @property_rentals = @property_rentals.order(params[:sort]) if params[:sort].presence.in? SORT_METHODS
+    @property_rentals = @property_rentals.order(params[:sort]) if params[:sort].presence.in? VIEW_SORT_METHODS
   end
 
   # GET /property/rentals/1 or /property/rentals/1.json
@@ -68,6 +67,7 @@ class Property::RentalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_rental_params
-      params.require(:property_rental).permit(:name, :surface, :rooms_amount, :door_no, :rent, :country, :city, :street, :street_no, :floor_no, :bought_at, :buy_price, :sale_price, :taken_from, :taken_until, :account_id, :building_id)
+      params.require(:property_rental).permit(:name, :description, :status, :taken_from, :taken_until, :rent,
+        :property_id, :client_id)
     end
 end

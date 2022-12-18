@@ -1,12 +1,11 @@
 class Property::SalesController < ApplicationController
   before_action :set_property_sale, only: %i[ show edit update destroy ]
-  SORT_METHODS = ['id asc', 'id desc', 'name asc', 'name desc']
 
   # GET /property/sales or /property/sales.json
   def index
     @property_sales = Property::Sale.all
     @property_sales = @property_sales.where(status: params[:status]) if params[:status].present?
-    @property_sales = @property_sales.order(params[:sort]) if params[:sort].presence.in? SORT_METHODS
+    @property_sales = @property_sales.order(params[:sort]) if params[:sort].presence.in? VIEW_SORT_METHODS
   end
 
   # GET /property/sales/1 or /property/sales/1.json
@@ -68,7 +67,7 @@ class Property::SalesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_sale_params
-      params.require(:property_sale).permit(:name, :surface, :rooms_amount, :door_no, :country, :city, :street, :street_no,
-        :floor_no, :bought_at, :sold_at, :buy_price, :sale_price, :status, :zip)
+      params.require(:property_sale).permit(:name, :bought_at, :sold_at, :buy_price, :sale_price, :status,
+        :description, :property_id, :client_id, :account_id)
     end
 end

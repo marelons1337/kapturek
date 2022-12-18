@@ -1,8 +1,10 @@
+# each month based on day in rent_from we'll add debt to client, debt will have to be paid
+# upon payment, we'll add paid to client, debt and paid will have to balance each other
 class Customer::Client < ApplicationRecord
   belongs_to :account, optional: true
-  has_many :client_properties, class_name: 'Property::ClientProperty', dependent: :destroy
-  has_many :sales, through: :client_properties, source: :property, source_type: 'Property::Sale', class_name: 'Property::Sale', as: :sale
-  has_many :rentals, through: :client_properties, source: :property, source_type: 'Property::Rental', class_name: 'Property::Rental', as: :rental
+
+  has_many :rentals, class_name: 'Property::Rental'
+  has_many :sales, class_name: 'Property::Sale'
 
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
@@ -17,6 +19,18 @@ class Customer::Client < ApplicationRecord
 
   def get_email
     "#{get_name} <#{email}>"
+  end
+
+  def total_paid
+    paid
+  end
+
+  # what if client rents more than once?
+  def total_rent
+    rentals.each do |rental|
+      DateService.months_between_dates(rent_from, rent_to) * rental.rent
+      rental.rent
+    end
   end
 
   private

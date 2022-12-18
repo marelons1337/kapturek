@@ -9,7 +9,7 @@ RSpec.describe Property::Rental, type: :model do
     end
 
     it 'should get price with default status' do
-      expect(rental.get_price).to eq 150000
+      expect(rental.get_price).to eq 1500
     end
   end
 end

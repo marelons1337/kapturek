@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_13_172444) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_18_131958) do
   create_table "customer_clients", force: :cascade do |t|
     t.string "name"
     t.string "surname"
@@ -28,63 +28,60 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_13_172444) do
     t.index ["account_id"], name: "index_customer_clients_on_account_id"
   end
 
-  create_table "property_client_properties", force: :cascade do |t|
-    t.integer "client_id"
-    t.integer "property_id"
-    t.string "property_type"
-    t.integer "account_id"
+  create_table "property_properties", force: :cascade do |t|
+    t.string "name"
+    t.float "surface"
+    t.integer "rooms_amount"
+    t.string "door_no"
+    t.string "country"
+    t.string "city"
+    t.string "street"
+    t.string "street_no"
+    t.string "floor_no"
+    t.float "buy_price"
+    t.float "sale_price"
+    t.date "bought_at"
+    t.date "sold_at"
+    t.text "description"
+    t.integer "status", default: 0
+    t.string "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_property_client_properties_on_account_id"
-    t.index ["client_id"], name: "index_property_client_properties_on_client_id"
   end
 
   create_table "property_rentals", force: :cascade do |t|
     t.string "name"
-    t.float "surface"
-    t.integer "rooms_amount"
-    t.string "door_no"
     t.float "rent"
-    t.string "country"
-    t.string "city"
-    t.string "street"
-    t.string "street_no"
-    t.string "floor_no"
-    t.date "bought_at"
-    t.float "buy_price"
-    t.float "sale_price"
     t.date "taken_from"
     t.date "taken_until"
     t.text "description"
     t.integer "status", default: 0
-    t.string "zip"
+    t.integer "property_id"
+    t.integer "client_id"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_property_rentals_on_account_id"
+    t.index ["client_id"], name: "index_property_rentals_on_client_id"
+    t.index ["property_id"], name: "index_property_rentals_on_property_id"
   end
 
   create_table "property_sales", force: :cascade do |t|
     t.string "name"
-    t.float "surface"
-    t.integer "rooms_amount"
-    t.string "door_no"
-    t.string "country"
-    t.string "city"
-    t.string "street"
-    t.string "street_no"
-    t.string "floor_no"
     t.text "description"
     t.date "bought_at"
     t.date "sold_at"
     t.float "buy_price"
     t.float "sale_price"
     t.integer "status", default: 0
-    t.string "zip"
+    t.integer "property_id"
+    t.integer "client_id"
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_property_sales_on_account_id"
+    t.index ["client_id"], name: "index_property_sales_on_client_id"
+    t.index ["property_id"], name: "index_property_sales_on_property_id"
   end
 
 end

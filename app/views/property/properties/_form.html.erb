@@ -1,0 +1,98 @@
+<%
+label_class = "block text-xs font-semibold text-gray-600 uppercase mt-2"
+input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+%>
+<div class="grid w-full place-items-center mt-6r">
+  <div class="w-11/12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+    <%= form_with(model: property_property) do |form| %>
+      <% if property_property.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(property_property.errors.count, "error") %> prohibited this property_property from being saved:</h2>
+
+          <ul>
+            <% property_property.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form.label :name, class: label_class %>
+      <%= form.text_field :name, class: input_class %>
+
+      <%= form.label :status, class: label_class %>
+      <%= form.select :status, Property::Property.statuses.keys, class: input_class %>
+
+      <%# half width input %>
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :rooms_amount, class: label_class %>
+          <%= form.text_field :rooms_amount, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :surface, class: label_class %>
+          <%= form.text_field :surface, class: input_class %>
+        </span>
+      </div>
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :country, class: label_class %>
+          <%= form.text_field :country, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :city, class: label_class %>
+          <%= form.text_field :city, class: input_class %>
+        </span>
+      </div>
+
+      <%= form.label :street, class: label_class %>
+      <%= form.text_field :street, class: input_class %>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :street_no, class: label_class %>
+          <%= form.text_field :street_no, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :door_no, class: label_class %>
+          <%= form.text_field :door_no, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :zip, class: label_class %>
+          <%= form.text_field :zip, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :floor_no, class: label_class %>
+          <%= form.text_field :floor_no, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :bought_at, class: label_class %>
+          <%= form.date_field :bought_at, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :sold_at, class: label_class %>
+          <%= form.date_field :sold_at, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :buy_price, class: label_class %>
+          <%= form.text_field :buy_price, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :sale_price, class: label_class %>
+          <%= form.text_field :sale_price, class: input_class %>
+        </span>
+      </div>
+
+      <%= form.submit class: "w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 rounded cursor-pointer" %>
+    <% end %>
+  </div>
+</div>

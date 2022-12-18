@@ -1,102 +1,66 @@
-<%= form_with(model: property_rental) do |form| %>
-  <% if property_rental.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(property_rental.errors.count, "error") %> prohibited this property_rental from being saved:</h2>
+<%
+label_class = "block text-xs font-semibold text-gray-600 uppercase mt-2"
+input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
+%>
+<div class="grid w-full place-items-center mt-6r">
+  <div class="w-11/12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+    <%= form_with(model: property_rental) do |form| %>
+      <% if property_rental.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(property_rental.errors.count, "error") %> prohibited this property_rental from being saved:</h2>
 
-      <ul>
-        <% property_rental.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% property_rental.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+      <%= form.label :name, class: label_class %>
+      <%= form.text_field :name, class: input_class %>
+
+      <%= form.label :description, class: label_class %>
+      <%= form.text_area :description, class: input_class %>
+
+      <%= form.label :status, class: label_class %>
+      <%= form.select :status, Property::Rental.statuses.keys, class: input_class %>
+
+      <%# half width input %>
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :taken_from, class: label_class %>
+          <%= form.date_field :taken_from, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :taken_until, class: label_class %>
+          <%= form.date_field :taken_until, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :rent, class: label_class %>
+          <%= form.text_field :rent, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :client_id, class: label_class %>
+          <%= form.select :client_id, Customer::Client.all.map { |c| [c.name, c.id] }, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%#= form.label :rent, class: label_class %>
+          <%#= form.text_field :rent, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :property_id, class: label_class %>
+          <%= form.select :property_id, Property::Property.all.map { |prop| [prop.name, prop.id] }, class: input_class %>
+        </span>
+      </div>
+
+      <%= form.submit class: "w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 rounded cursor-pointer" %>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :surface, style: "display: block" %>
-    <%= form.text_field :surface %>
-  </div>
-
-  <div>
-    <%= form.label :rooms_amount, style: "display: block" %>
-    <%= form.number_field :rooms_amount %>
-  </div>
-
-  <div>
-    <%= form.label :door_no, style: "display: block" %>
-    <%= form.text_field :door_no %>
-  </div>
-
-  <div>
-    <%= form.label :rent, style: "display: block" %>
-    <%= form.text_field :rent %>
-  </div>
-
-  <div>
-    <%= form.label :country, style: "display: block" %>
-    <%= form.text_field :country %>
-  </div>
-
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div>
-    <%= form.label :street, style: "display: block" %>
-    <%= form.text_field :street %>
-  </div>
-
-  <div>
-    <%= form.label :street_no, style: "display: block" %>
-    <%= form.text_field :street_no %>
-  </div>
-
-  <div>
-    <%= form.label :floor_no, style: "display: block" %>
-    <%= form.text_field :floor_no %>
-  </div>
-
-  <div>
-    <%= form.label :bought_at, style: "display: block" %>
-    <%= form.date_field :bought_at %>
-  </div>
-
-  <div>
-    <%= form.label :buy_price, style: "display: block" %>
-    <%= form.text_field :buy_price %>
-  </div>
-
-  <div>
-    <%= form.label :sale_price, style: "display: block" %>
-    <%= form.text_field :sale_price %>
-  </div>
-
-  <div>
-    <%= form.label :taken_from, style: "display: block" %>
-    <%= form.date_field :taken_from %>
-  </div>
-
-  <div>
-    <%= form.label :taken_until, style: "display: block" %>
-    <%= form.date_field :taken_until %>
-  </div>
-
-  <div>
-    <%= form.label :account_id, style: "display: block" %>
-    <%= form.text_field :account_id %>
-  </div>
-
-  <div>
-    <%= form.label :building_id, style: "display: block" %>
-    <%= form.text_field :building_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

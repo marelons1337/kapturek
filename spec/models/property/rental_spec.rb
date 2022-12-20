@@ -1,15 +1,17 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe Property::Rental, type: :model do
+require "rails_helper"
+
+RSpec.describe(Property::Rental, type: :model) do
   let(:rental) { create(:property_rental) }
 
-  context 'after creation before changing status to pending or sold' do
-    it 'should get default status' do
-      expect(rental.get_status).to eq "empty"
+  context "when created" do
+    it "gets default status" do
+      expect(rental.status).to(eq("empty"))
     end
 
-    it 'should get price with default status' do
-      expect(rental.get_price).to eq 1500
+    it "gets price with default status" do
+      expect(rental.price).to(eq(1500))
     end
   end
 end

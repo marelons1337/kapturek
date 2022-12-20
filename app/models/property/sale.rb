@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Property::Sale < ApplicationRecord
   # belongs_to :account, optional: true
   validates :bought_at, :sold_at, :buy_price, :sale_price, presence: true
   validate :bought_at_before_sold_at
 
-  belongs_to :client, class_name: 'Customer::Client'
-  belongs_to :property, class_name: 'Property::Property'
+  belongs_to :client, class_name: "Customer::Client"
+  belongs_to :property, class_name: "Property::Property"
 
   before_save :update_property_status
 
@@ -14,39 +16,36 @@ class Property::Sale < ApplicationRecord
   }
 
   def full_address(local: true)
-    self.property.full_address(local: local)
+    property.full_address(local: local)
   end
 
-  def get_name
-    self.name.presence || self.property.name.presence || full_address
+  def name
+    name.presence || property.name.presence || full_address
   end
 
-  def get_price
-    self.property.get_price
+  delegate :price, to: :property
+
+  def status
+    status
   end
 
-  def get_status
-    self.status
-  end
-
-  def get_surface
-    self.property.get_surface
-  end
+  delegate :surface, to: :property
 
   private
+
   def bought_at_before_sold_at
     return unless bought_at.present? && sold_at.present?
 
-    errors.add(:bought_at, 'must be before sold at') if bought_at > sold_at
+    errors.add(:bought_at, "must be before sold at") if bought_at > sold_at
   end
 
   def update_property_status
-    if self.status === 'sold'
-      self.property.status = 'sold'
+    property.status = if status == "sold"
+      "sold"
     else
-      self.property.status = 'empty'
+      "empty"
     end
-    self.property.save!
+    property.save!
   end
 end
 

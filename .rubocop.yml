@@ -2,3 +2,10 @@ inherit_gem:
   rubocop-shopify: rubocop.yml
 require:
 - rubocop-rails
+- rubocop-rspec
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ClassMethodsDefinitions:
+  Enabled: false

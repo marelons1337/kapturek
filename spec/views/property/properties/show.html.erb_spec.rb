@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "property/properties/show", type: :view do
-  before(:each) do
-    assign(:property_property, Property::Property.create!())
+require "rails_helper"
+
+RSpec.describe("property/properties/show", type: :view) do
+  before do
+    assign(:property_property, Property::Property.create!)
   end
 
   it "renders attributes in <p>" do

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Property::Property < ApplicationRecord
-  has_one :sale
-  has_many :rentals
+  has_one :sale, dependent: :nullify
+  has_many :rentals, dependent: :nullify
 
   validates :name, :street, :street_no, :zip, :city, :country, :surface, presence: true
   validates :rooms_amount, numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
@@ -28,23 +30,23 @@ class Property::Property < ApplicationRecord
   # end
 
   def full_address(local: true)
-    "#{street} #{street_no}#{door_no.present? ? '/' + door_no : nil }, #{city}, #{local ? country : nil}"
+    "#{street} #{street_no}#{door_no.present? ? "/" + door_no : nil}, #{city}, #{local ? country : nil}"
   end
 
-  def get_name
-    self.name.presence || full_address
+  def name
+    name.presence || full_address
   end
 
-  def get_price
-    if status === 'sold'
+  def price
+    if status == "sold"
       sale_price
     else
       buy_price
     end
   end
 
-  def get_surface
-    "#{self.surface} m2"
+  def surface
+    "#{surface} m2"
   end
 
   private
@@ -52,7 +54,7 @@ class Property::Property < ApplicationRecord
   def bought_at_before_sold_at
     return unless bought_at.present? && sold_at.present?
 
-    errors.add(:bought_at, 'must be before taken from') if bought_at > sold_at
+    errors.add(:bought_at, "must be before taken from") if bought_at > sold_at
   end
 end
 

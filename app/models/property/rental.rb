@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Property::Rental < ApplicationRecord
   # belongs_to :account, optional: true
-  belongs_to :client, class_name: 'Customer::Client'
-  belongs_to :property, class_name: 'Property::Property'
+  belongs_to :client, class_name: "Customer::Client"
+  belongs_to :property, class_name: "Property::Property"
 
   validates :taken_from, :taken_until, :rent, presence: true
   validate :taken_from_before_taken_until
@@ -15,39 +17,38 @@ class Property::Rental < ApplicationRecord
   }
 
   def full_address(local: true)
-    self.property.full_address(local: local)
+    property.full_address(local: local)
   end
 
-  def get_name
-    self.name.presence || self.property.name.presence || full_address
+  def name
+    name.presence || property.name.presence || full_address
   end
 
-  def get_price
+  def price
     rent
   end
 
-  def get_status
-    self.status
+  def status
+    status
   end
 
-  def get_surface
-    self.property.get_surface
-  end
+  delegate :surface, to: :property
 
   private
+
   def taken_from_before_taken_until
     return unless taken_from.present? && taken_until.present?
 
-    errors.add(:taken_from, 'must be before taken until') if taken_from > taken_until
+    errors.add(:taken_from, "must be before taken until") if taken_from > taken_until
   end
 
   def update_property_status
-    if self.status === 'rented'
-      self.property.status = 'rented'
+    property.status = if status == "rented"
+      "rented"
     else
-      self.property.status = 'empty'
+      "empty"
     end
-    self.property.save!
+    property.save!
   end
 end
 

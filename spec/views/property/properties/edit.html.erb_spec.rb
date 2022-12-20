@@ -1,11 +1,13 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe "property/properties/edit", type: :view do
-  let(:property_property) {
-    Property::Property.create!()
-  }
+require "rails_helper"
 
-  before(:each) do
+RSpec.describe("property/properties/edit", type: :view) do
+  let(:property_property) do
+    Property::Property.create!
+  end
+
+  before do
     assign(:property_property, property_property)
   end
 

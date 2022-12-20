@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 # each month based on day in rent_from we'll add debt to client, debt will have to be paid
 # upon payment, we'll add paid to client, debt and paid will have to balance each other
 class Customer::Client < ApplicationRecord
   belongs_to :account, optional: true
 
-  has_many :rentals, class_name: 'Property::Rental'
-  has_many :sales, class_name: 'Property::Sale'
+  has_many :rentals, class_name: "Property::Rental", dependent: :nullify
+  has_many :sales, class_name: "Property::Sale", dependent: :nullify
 
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
 
-  def get_name
+  def name
     if company
       name
     else
@@ -17,8 +19,8 @@ class Customer::Client < ApplicationRecord
     end
   end
 
-  def get_email
-    "#{get_name} <#{email}>"
+  def full_email
+    "#{name} <#{email}>"
   end
 
   def total_paid
@@ -27,10 +29,10 @@ class Customer::Client < ApplicationRecord
 
   # what if client rents more than once?
   def total_rent
-    rentals.each do |rental|
-      DateService.months_between_dates(rent_from, rent_to) * rental.rent
-      rental.rent
-    end
+    # rentals.each do |rental|
+    #   DateService.months_between_dates(rent_from, rent_to) * rental.rent
+    #   rental.rent
+    # end
   end
 
   private

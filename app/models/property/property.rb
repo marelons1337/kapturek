@@ -1,17 +1,31 @@
 class Property::Property < ApplicationRecord
+  has_one :sale
+  has_many :rentals
 
   validates :name, :street, :street_no, :zip, :city, :country, :surface, presence: true
   validates :rooms_amount, numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
   validates :buy_price, :sale_price, numericality: { greater_than: 0 }, allow_blank: true
   validates :door_no, :floor_no, :zip, length: { maximum: 10 }
   validates :surface, numericality: { greater_than: 0 }
-  validate :bought_at_before_sold_at
+  validate :bought_at_before_sold_at, if: -> { bought_at.present? && sold_at.present? }
+
+  # before_save :set_status
 
   enum status: {
     empty: 0,
     rented: 1,
     sold: 2,
   }
+
+  # def set_status
+  #   if rentals.present? && rentals.any? { |r| r.status === 'rented' }
+  #     self.status = 'rented'
+  #   elsif sale.present? && sale.status === 'sold'
+  #     self.status = 'sold'
+  #   else
+  #     self.status = 'empty'
+  #   end
+  # end
 
   def full_address(local: true)
     "#{street} #{street_no}#{door_no.present? ? '/' + door_no : nil }, #{city}, #{local ? country : nil}"

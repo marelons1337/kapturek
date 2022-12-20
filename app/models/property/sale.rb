@@ -6,6 +6,8 @@ class Property::Sale < ApplicationRecord
   belongs_to :client, class_name: 'Customer::Client'
   belongs_to :property, class_name: 'Property::Property'
 
+  before_save :update_property_status
+
   enum status: {
     pending: 0,
     sold: 1,
@@ -36,6 +38,15 @@ class Property::Sale < ApplicationRecord
     return unless bought_at.present? && sold_at.present?
 
     errors.add(:bought_at, 'must be before sold at') if bought_at > sold_at
+  end
+
+  def update_property_status
+    if self.status === 'sold'
+      self.property.status = 'sold'
+    else
+      self.property.status = 'empty'
+    end
+    self.property.save!
   end
 end
 

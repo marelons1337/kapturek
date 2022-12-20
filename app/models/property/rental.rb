@@ -1,10 +1,12 @@
 class Property::Rental < ApplicationRecord
   # belongs_to :account, optional: true
+  belongs_to :client, class_name: 'Customer::Client'
+  belongs_to :property, class_name: 'Property::Property'
+
   validates :taken_from, :taken_until, :rent, presence: true
   validate :taken_from_before_taken_until
 
-  belongs_to :client, class_name: 'Customer::Client'
-  belongs_to :property, class_name: 'Property::Property'
+  before_save :update_property_status
 
   enum status: {
     empty: 0,
@@ -38,6 +40,15 @@ class Property::Rental < ApplicationRecord
 
     errors.add(:taken_from, 'must be before taken until') if taken_from > taken_until
   end
+
+  def update_property_status
+    if self.status === 'rented'
+      self.property.status = 'rented'
+    else
+      self.property.status = 'empty'
+    end
+    self.property.save!
+  end
 end
 
 # == Schema Information
@@ -48,7 +59,7 @@ end
 #  description :text
 #  name        :string
 #  rent        :float
-#  status      :integer          default("pending")
+#  status      :integer          default("empty")
 #  taken_from  :date
 #  taken_until :date
 #  created_at  :datetime         not null

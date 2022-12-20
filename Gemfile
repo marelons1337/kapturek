@@ -67,6 +67,8 @@ group :development do
   gem 'erb_lint', require: false
   gem 'rubocop', require: false
   gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+  gem "rubocop-shopify", require: false
   gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

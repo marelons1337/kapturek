@@ -7,11 +7,11 @@ RSpec.describe(Property::Rental, type: :model) do
 
   context "when created" do
     it "gets default status" do
-      expect(rental.status).to(eq("empty"))
+      expect(rental.get_status).to(eq("empty"))
     end
 
     it "gets price with default status" do
-      expect(rental.price).to(eq(1500))
+      expect(rental.get_price).to(eq(1500))
     end
   end
 end

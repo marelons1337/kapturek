@@ -25,27 +25,8 @@ status_colors = {
       </div>
     </div>
     <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
-      <div class="sm:flex items-center justify-between">
-          <div class="flex items-center">
-            <%= link_to customer_clients_path, class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= top_tabs.any? { |t| params[:status] } ? inactive_tab : active_tab %> ">
-                  <p>All</p>
-              </div>
-            <% end %>
-
-            <%= link_to customer_clients_path(status: :current), class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= params[:status]&.include?('current') ? active_tab : inactive_tab %>">
-                <p>Sold</p>
-              </div>
-            <% end %>
-
-            <%= link_to customer_clients_path(status: :past), class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= params[:status]&.include?('past') ? active_tab : inactive_tab %>">
-                <p>Pending</p>
-              </div>
-            <% end %>
-          </div>
-          <%= link_to "Add sale", new_customer_client_path, class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
+      <div class="sm:flex items-center justify-end">
+          <%= link_to "Add client", new_customer_client_path, class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
       </div>
       <div class="mt-7 overflow-x-auto">
         <table class="w-full whitespace-nowrap">
@@ -68,7 +49,7 @@ status_colors = {
                 <td class="">
                   <div data-controller="copy" class="flex items-center pl-5">
                     <p class="text-base font-medium leading-none text-gray-700 mr-2">
-                      <%= link_to customer_client.name, customer_client, data: { "copy-target":"source"} %>
+                      <%= link_to customer_client.get_name, customer_client, data: { "copy-target":"source"} %>
                     </p>
                     <div data-copy-target="icon" class="cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -84,10 +65,10 @@ status_colors = {
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
 
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.price %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.total_paid %></p>
                   </div>
                 </td>
-                <%# bought_at %>
+                <%# rent_from %>
                 <td class="pl-5">
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -98,10 +79,10 @@ status_colors = {
                       <path d="M4.16669 10V10.0067" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M4.16669 15V15.0067" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.bought_at %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.rent_from %></p>
                   </div>
                 </td>
-                <%# sold_at %>
+                <%# rent_to %>
                 <td class="pl-5">
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -112,7 +93,7 @@ status_colors = {
                       <path d="M4.16669 10V10.0067" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                       <path d="M4.16669 15V15.0067" stroke="#52525B" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.sold_at %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.rent_to %></p>
                   </div>
                 </td>
                 <td class="pl-5">
@@ -120,7 +101,7 @@ status_colors = {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
                     </svg>
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.surface %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= customer_client.total_debt %></p>
                   </div>
                 </td>
                 <td class="pl-5">
@@ -137,8 +118,8 @@ status_colors = {
                   </div>
                 </td>
                 <td class="pl-5">
-                  <button class="py-3 px-3 text-sm focus:outline-none leading-none rounded<%= status_colors[customer_client.status.to_sym] %>">
-                    <%= customer_client.status.capitalize %>
+                  <button class="py-3 px-3 text-sm focus:outline-none leading-none rounded<%= status_colors[customer_client.get_status.to_sym] %>">
+                    <%= customer_client.get_status.capitalize %>
                   </button>
                 </td>
                 <td class="pl-4">

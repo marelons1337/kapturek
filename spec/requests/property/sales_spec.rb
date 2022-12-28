@@ -95,7 +95,7 @@ RSpec.describe("/property/sales", type: :request) do
         sale = Property::Sale.create!(valid_attributes)
         patch property_sale_url(sale), params: { property_sale: new_attributes }
         sale.reload
-        expect(sale.name).to(eq("new name"))
+        expect(sale.get_name).to(eq("new name"))
       end
 
       it "redirects to the property_sale" do

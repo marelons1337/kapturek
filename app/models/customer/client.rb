@@ -11,11 +11,21 @@ class Customer::Client < ApplicationRecord
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
 
-  def name
+  def get_name
     if company
       name
     else
       "#{name} #{surname}"
+    end
+  end
+
+  def get_status
+    if paid > debt
+      "paid"
+    elsif paid == debt
+      "balanced"
+    else
+      "in debt"
     end
   end
 
@@ -25,6 +35,10 @@ class Customer::Client < ApplicationRecord
 
   def total_paid
     paid
+  end
+
+  def total_debt
+    debt
   end
 
   # what if client rents more than once?

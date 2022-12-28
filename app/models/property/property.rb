@@ -33,11 +33,11 @@ class Property::Property < ApplicationRecord
     "#{street} #{street_no}#{door_no.present? ? "/" + door_no : nil}, #{city}, #{local ? country : nil}"
   end
 
-  def name
+  def get_name
     name.presence || full_address
   end
 
-  def price
+  def get_price
     if status == "sold"
       sale_price
     else
@@ -45,7 +45,7 @@ class Property::Property < ApplicationRecord
     end
   end
 
-  def surface
+  def get_surface
     "#{surface} m2"
   end
 

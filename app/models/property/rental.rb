@@ -20,15 +20,15 @@ class Property::Rental < ApplicationRecord
     property.full_address(local: local)
   end
 
-  def name
+  def get_name
     name.presence || property.name.presence || full_address
   end
 
-  def price
+  def get_price
     rent
   end
 
-  def status
+  def get_status
     status
   end
 

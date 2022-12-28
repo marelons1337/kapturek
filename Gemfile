@@ -49,6 +49,8 @@ gem "bootsnap", require: false
 
 gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "main"
 
+gem "pagy"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

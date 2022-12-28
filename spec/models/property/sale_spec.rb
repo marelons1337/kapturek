@@ -7,11 +7,11 @@ RSpec.describe(Property::Sale, type: :model) do
 
   context "when created" do
     it "gets default status" do
-      expect(sale.get_status).to(eq("pending"))
+      expect(sale.status).to(eq("pending"))
     end
 
     it "gets price with default status" do
-      expect(sale.get_price).to(eq(150000))
+      expect(sale.current_price).to(eq(150000))
     end
   end
 end

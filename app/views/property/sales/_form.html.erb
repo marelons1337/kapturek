@@ -24,7 +24,7 @@ input_class = "block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none f
       <%= form.text_area :description, class: input_class %>
 
       <%= form.label :status, class: label_class %>
-      <%= form.select :status, Property::Sale.get_statuses.keys, class: input_class %>
+      <%= form.select :status, Property::Sale.statuses.keys, class: input_class %>
 
       <%# half width input %>
       <div class="flex justify-between gap-3">

@@ -16,23 +16,19 @@ class Property::Rental < ApplicationRecord
     rented: 2,
   }
 
+  delegate :surface, to: :property
+
   def full_address(local: true)
     property.full_address(local: local)
   end
 
-  def get_name
+  def get_name(full: true)
     name.presence || property.name.presence || full_address
   end
 
-  def get_price
+  def current_price
     rent
   end
-
-  def get_status
-    status
-  end
-
-  delegate :surface, to: :property
 
   private
 

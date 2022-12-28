@@ -11,7 +11,7 @@ class Customer::Client < ApplicationRecord
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
 
-  def get_name
+  def get_name(full: true)
     if company
       name
     else
@@ -19,7 +19,7 @@ class Customer::Client < ApplicationRecord
     end
   end
 
-  def get_status
+  def status
     if paid > debt
       "paid"
     elsif paid == debt

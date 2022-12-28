@@ -15,21 +15,16 @@ class Property::Sale < ApplicationRecord
     sold: 1,
   }
 
-  delegate :get_price, to: :property
-  delegate :get_surface, to: :property
+  delegate :current_price, to: :property
+  delegate :surface, to: :property
 
   def full_address(local: true)
     property.full_address(local: local)
   end
 
-  def get_name
+  def get_name(full: true)
     name.presence || property.name.presence || full_address
   end
-
-  def get_status
-    status
-  end
-
 
   private
 

@@ -20,7 +20,7 @@ class Customer::Client < ApplicationRecord
   end
 
   def status
-    if paid > debt
+    if paid.present? && debt.present? && paid > debt
       "paid"
     elsif paid == debt
       "balanced"

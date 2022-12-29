@@ -95,7 +95,7 @@ RSpec.describe("/customer/clients", type: :request) do
         client = Customer::Client.create!(valid_attributes)
         patch customer_client_url(client), params: { customer_client: new_attributes }
         client.reload
-        expect(client.get_name).to(eq("new name"))
+        expect(client.get_name).to(eq("new name "))
       end
 
       it "redirects to the customer_client" do

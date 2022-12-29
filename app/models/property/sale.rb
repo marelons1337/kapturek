@@ -35,12 +35,12 @@ class Property::Sale < ApplicationRecord
   end
 
   def update_property_status
-    property.status = if status == "sold"
+    new_status = if status == "sold"
       "sold"
     else
       "empty"
     end
-    property.save!
+    property.update(status: new_status)
   end
 end
 

@@ -65,7 +65,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "annotate"
-  gem "byebug"
   gem "erb_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-rails"
@@ -91,4 +90,5 @@ group :test, :development do
   gem "rspec", "~> 3.12"
   gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails"
+  gem "byebug"
 end

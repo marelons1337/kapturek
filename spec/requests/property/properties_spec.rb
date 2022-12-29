@@ -19,11 +19,11 @@ RSpec.describe("/property/properties", type: :request) do
   # Property::Property. As you add validations to Property::Property, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:property_property)
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    { name: 1, surface: "a" }
   end
 
   describe "GET /index" do
@@ -93,14 +93,14 @@ RSpec.describe("/property/properties", type: :request) do
 
       it "updates the requested property_property" do
         property = Property::Property.create!(valid_attributes)
-        patch property_property_url(property), params: { property_property: new_attributes }
+        patch property_property_url(property), params: { property_property: { name: "newest name" } }
         property.reload
-        skip("Add assertions for updated state")
+        expect(property.name).to(eq("newest name"))
       end
 
       it "redirects to the property_property" do
         property = Property::Property.create!(valid_attributes)
-        patch property_property_url(property), params: { property_property: new_attributes }
+        patch property_property_url(property), params: { property_property: { name: "yes new name" } }
         property.reload
         expect(response).to(redirect_to(property_property_url(property)))
       end

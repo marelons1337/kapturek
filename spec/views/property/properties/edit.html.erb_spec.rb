@@ -4,7 +4,7 @@ require "rails_helper"
 
 RSpec.describe("property/properties/edit", type: :view) do
   let(:property_property) do
-    Property::Property.create!
+    create(:property_property)
   end
 
   before do

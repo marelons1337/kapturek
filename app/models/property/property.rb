@@ -4,7 +4,7 @@ class Property::Property < ApplicationRecord
   has_one :sale, dependent: :nullify
   has_many :rentals, dependent: :nullify
 
-  validates :name, :street, :street_no, :zip, :city, :country, :surface, presence: true
+  validates :street, :street_no, :zip, :city, :country, :surface, presence: true
   validates :rooms_amount, numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
   validates :buy_price, :sale_price, numericality: { greater_than: 0 }, allow_blank: true
   validates :door_no, :floor_no, :zip, length: { maximum: 10 }
@@ -30,7 +30,7 @@ class Property::Property < ApplicationRecord
   # end
 
   def full_address(local: true)
-    "#{street} #{street_no}#{door_no.present? ? "/" + door_no : nil}, #{city}, #{local ? country : nil}"
+    "#{street} #{street_no}#{door_no.present? ? "/" + door_no : nil}, #{city}#{local ? ", " + country : nil}".strip
   end
 
   def get_name(full: true)

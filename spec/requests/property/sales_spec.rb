@@ -19,7 +19,10 @@ RSpec.describe("/property/sales", type: :request) do
   # Property::Sale. As you add validations to Property::Sale, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    attributes_for(:property_sale)
+    sale = create(:property_sale)
+    attributes = sale.attributes.except("id", "created_at", "updated_at")
+    sale.destroy!
+    attributes
   end
 
   let(:invalid_attributes) do

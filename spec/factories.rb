@@ -9,7 +9,7 @@ FactoryBot.define do
     country { Faker::Address.country }
     street { Faker::Address.street_name }
     street_no { Random.new.rand(100) }
-    surface { Random.new.rand(100) }
+    surface { Random.new.rand(100) + 1 }
     zip { Faker::Address.zip }
   end
 
@@ -19,8 +19,8 @@ FactoryBot.define do
     sold_at { Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 12.months) }
     buy_price { 150000 }
     sale_price { 150000 }
-    association :property, factory: :property_property
-    association :client, factory: :customer_client
+    property factory: :property_property
+    client factory: :customer_client
   end
 
   factory :property_rental, class: "Property::Rental" do
@@ -28,13 +28,14 @@ FactoryBot.define do
     taken_from { Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month) }
     taken_until { Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 12.months) }
     rent { 1500 }
-    association :property, factory: :property_property
-    association :client, factory: :customer_client
+    property factory: :property_property
+    client factory: :customer_client
   end
 
   factory :customer_client, class: "Customer::Client" do
     email { Faker::Internet.email }
     name { Faker::Games::Witcher.witcher }
-    rent_from { Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month) }
+    rent_from { Time.zone.today }
+    rent_to { Time.zone.today + 1.year }
   end
 end

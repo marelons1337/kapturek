@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe("property/properties/index", type: :view) do
   before do
     assign(:property_properties, [
-      Property::Property.create!,
-      Property::Property.create!,
+      create(:property_property),
+      create(:property_property),
     ])
   end
 

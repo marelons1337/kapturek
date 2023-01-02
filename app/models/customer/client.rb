@@ -11,6 +11,10 @@ class Customer::Client < ApplicationRecord
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
 
+  before_save :set_status
+
+  enum status: { balanced: 0, paid: 1, debt: 2 }
+
   def get_name(full: true)
     if company
       name
@@ -19,14 +23,15 @@ class Customer::Client < ApplicationRecord
     end
   end
 
-  def status
-    if paid.present? && debt.present? && paid > debt
+  def set_status
+    self.status = if paid.present? && debt.present? && paid > debt
       "paid"
     elsif paid == debt
       "balanced"
     else
-      "in debt"
+      "debt"
     end
+    true
   end
 
   def full_email
@@ -72,6 +77,7 @@ end
 #  phone      :string
 #  rent_from  :date
 #  rent_to    :date
+#  status     :integer          default("balanced")
 #  surname    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

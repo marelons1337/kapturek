@@ -6,6 +6,10 @@ class Customer::ClientsController < ApplicationController
   # GET /customer/clients or /customer/clients.json
   def index
     @customer_clients = Customer::Client.all
+    @customer_clients = @customer_clients.where(status: params[:status]) if params[:status].present?
+    @customer_clients = @customer_clients.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
+
+    @pagy, @customer_clients = pagy(@customer_clients)
   end
 
   # GET /customer/clients/1 or /customer/clients/1.json

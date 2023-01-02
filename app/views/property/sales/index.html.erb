@@ -1,7 +1,5 @@
 <%
 top_tabs = [:sold, :pending, :all]
-active_tab = "py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
-inactive_tab = "py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full"
 status_colors = {
   sold: "text-green-700 bg-green-100",
   pending: "text-yellow-700 bg-yellow-100",
@@ -28,19 +26,19 @@ status_colors = {
       <div class="sm:flex items-center justify-between">
           <div class="flex items-center">
             <%= link_to property_sales_path, class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= top_tabs.any? { |t| params[:status] } ? inactive_tab : active_tab %> ">
+              <div class="<%= top_tabs.any? { |t| params[:status] } ? index_inactive_tab_class : index_active_tab_class %> ">
                   <p>All</p>
               </div>
             <% end %>
 
             <%= link_to property_sales_path(status: :sold), class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= params[:status]&.include?('sold') ? active_tab : inactive_tab %>">
+              <div class="<%= params[:status]&.include?('sold') ? index_active_tab_class : index_inactive_tab_class %>">
                 <p>Sold</p>
               </div>
             <% end %>
 
             <%= link_to property_sales_path(status: :pending), class: "rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8" do %>
-              <div class="<%= params[:status]&.include?('pending') ? active_tab : inactive_tab %>">
+              <div class="<%= params[:status]&.include?('pending') ? index_active_tab_class : index_inactive_tab_class %>">
                 <p>Pending</p>
               </div>
             <% end %>
@@ -169,6 +167,7 @@ status_colors = {
           </tbody>
         </table>
       </div>
+      <%== pagy_nav(@pagy) %>
     </div>
   </div>
 </div>

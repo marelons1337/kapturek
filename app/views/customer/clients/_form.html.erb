@@ -1,87 +1,57 @@
-<%= form_with(model: customer_client) do |form| %>
-  <% if customer_client.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(customer_client.errors.count, "error") %> prohibited this customer_client from being saved:</h2>
+<div class="grid w-full place-items-center mt-6r">
+  <div class="w-11/12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+    <%= form_with(model: customer_client) do |form| %>
+      <% if customer_client.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(customer_client.errors.count, "error") %> prohibited this customer_client from being saved:</h2>
 
-      <ul>
-        <% customer_client.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% customer_client.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+      <%# half width input %>
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :name, class: label_class %>
+          <%= form.text_field :name, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :surname, class: label_class %>
+          <%= form.text_field :surname, class: input_class %>
+        </span>
+      </div>
+
+      <%= form.label :note, class: label_class %>
+      <%= form.text_area :note, class: input_class %>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :email, class: label_class %>
+          <%= form.text_field :email, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :phone, class: label_class %>
+          <%= form.text_field :phone, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :rent_from, class: label_class %>
+          <%= form.date_field :rent_from, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :rent_to, class: label_class %>
+          <%= form.date_field :rent_to, class: input_class %>
+        </span>
+      </div>
+
+
+      <%= form.submit class: large_form_button_class %>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :surname, style: "display: block" %>
-    <%= form.text_field :surname %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :rent_from, style: "display: block" %>
-    <%= form.date_field :rent_from %>
-  </div>
-
-  <div>
-    <%= form.label :rent_to, style: "display: block" %>
-    <%= form.date_field :rent_to %>
-  </div>
-
-  <div>
-    <%= form.label :paid, style: "display: block" %>
-    <%= form.text_field :paid %>
-  </div>
-
-  <div>
-    <%= form.label :debt, style: "display: block" %>
-    <%= form.text_field :debt %>
-  </div>
-
-  <div>
-    <%= form.label :account_id, style: "display: block" %>
-    <%= form.text_field :account_id %>
-  </div>
-
-  <div>
-    <%= form.label :rental_id, style: "display: block" %>
-    <%= form.text_field :rental_id %>
-  </div>
-
-  <div>
-    <%= form.label :sale_id, style: "display: block" %>
-    <%= form.text_field :sale_id %>
-  </div>
-
-  <div>
-    <%= form.label :company, style: "display: block" %>
-    <%= form.check_box :company %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :note, style: "display: block" %>
-    <%= form.text_area :note %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

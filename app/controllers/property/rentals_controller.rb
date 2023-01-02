@@ -8,6 +8,8 @@ class Property::RentalsController < ApplicationController
     @property_rentals = Property::Rental.all
     @property_rentals = @property_rentals.where(status: params[:status]) if params[:status].present?
     @property_rentals = @property_rentals.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
+
+    @pagy, @property_rentals = pagy(@property_rentals)
   end
 
   # GET /property/rentals/1 or /property/rentals/1.json

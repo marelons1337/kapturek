@@ -8,6 +8,8 @@ class Property::PropertiesController < ApplicationController
     @property_properties = Property::Property.all
     @property_properties = @property_properties.where(status: params[:status]) if params[:status].present?
     @property_properties = @property_properties.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
+
+    @pagy, @property_properties = pagy(@property_properties)
   end
 
   # GET /property/properties/1 or /property/properties/1.json

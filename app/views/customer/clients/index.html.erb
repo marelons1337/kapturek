@@ -1,18 +1,16 @@
 <%
 top_tabs = [:current, :past, :all]
-active_tab = "py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full"
-inactive_tab = "py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full"
 status_colors = {
-  sold: "text-green-700 bg-green-100",
-  pending: "text-yellow-700 bg-yellow-100",
-  bought: "text-blue-700 bg-blue-100"
+  paid: "text-green-700 bg-green-100",
+  balanced: "text-yellow-700 bg-yellow-100",
+  debt: "text-red-700 bg-red-100"
 }
 %>
 <div id="customer_clients" class="sm:px-6 w-full">
   <p style="color: green"><%= notice %></p>
     <div class="px-4 md:px-10 py-4 md:py-7">
       <div class="flex items-center justify-between">
-        <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Sales</p>
+        <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Clients</p>
         <div class="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
           <p>Sort By:</p>
           <select data-controller="select" aria-label="select" class="focus:text-indigo-600 focus:outline-none bg-transparent ml-1">
@@ -150,6 +148,7 @@ status_colors = {
           </tbody>
         </table>
       </div>
+      <%== pagy_nav(@pagy) %>
     </div>
   </div>
 </div>

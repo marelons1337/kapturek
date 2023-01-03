@@ -2,11 +2,13 @@
 
 class Property::Rental < ApplicationRecord
   # belongs_to :account, optional: true
+  validates :taken_from, :taken_until, :rent, presence: true
+  validate :taken_from_before_taken_until
+
   belongs_to :client, class_name: "Customer::Client"
   belongs_to :property, class_name: "Property::Property"
 
-  validates :taken_from, :taken_until, :rent, presence: true
-  validate :taken_from_before_taken_until
+  has_many :expenses, class_name: "Property::Expense", as: :expensable, dependent: :nullify
 
   before_save :update_property_status
 

@@ -6,7 +6,7 @@ require_relative "./db_helpers"
 
 10.times do
   property, client = DbHelpers.create_client_and_property_with_associations
-  Property::Sale.find_or_create_by!(
+  sale = Property::Sale.find_or_create_by!(
     bought_at: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     buy_price: Random.new.rand(1000000),
     description: Faker::Lorem.paragraph(sentence_count: 10),
@@ -19,7 +19,7 @@ require_relative "./db_helpers"
   )
 
   property1, client1 = DbHelpers.create_client_and_property_with_associations
-  Property::Rental.find_or_create_by!(
+  rental = Property::Rental.find_or_create_by!(
     description: Faker::Lorem.paragraph(sentence_count: 10),
     name: Faker::Games::Witcher.location,
     rent: Random.new.rand(1000),
@@ -28,5 +28,25 @@ require_relative "./db_helpers"
     taken_until: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
     property_id: property1.id,
     client_id: client1.id,
+  )
+
+  Property::Expense.find_or_create_by!(
+    amount: Random.new.rand(1000),
+    due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
+    kind: rand(3),
+    name: Faker::Games::Witcher.monster,
+    received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    expensable_id: sale.id,
+    expensable_type: "Property::Sale",
+  )
+
+  Property::Expense.find_or_create_by!(
+    amount: Random.new.rand(1000),
+    due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
+    kind: rand(3),
+    name: Faker::Games::Witcher.monster,
+    received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    expensable_id: rental.id,
+    expensable_type: "Property::Rental",
   )
 end

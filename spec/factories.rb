@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :property_expense, class: 'Property::Expense' do
+    name { "MyString" }
+    kind { "MyString" }
+    amount { "MyString" }
+    received_date { "2023-01-03" }
+    due_date { "2023-01-03" }
+    property { nil }
+  end
+
   factory :property_property, class: "Property::Property" do
     name { Faker::Games::Witcher.location }
     bought_at { Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month) }

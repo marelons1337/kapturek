@@ -8,6 +8,8 @@ class Property::Sale < ApplicationRecord
   belongs_to :client, class_name: "Customer::Client"
   belongs_to :property, class_name: "Property::Property"
 
+  has_many :expenses, class_name: "Property::Expense", as: :expensable, dependent: :nullify
+
   before_save :update_property_status
 
   enum status: {

@@ -4,6 +4,7 @@ class CreatePropertyExpenses < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :kind
       t.string :amount
+      t.string :description
       t.date :received_date
       t.date :due_date
 

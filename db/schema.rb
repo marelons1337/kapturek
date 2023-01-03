@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_03_060927) do
     t.string "name"
     t.string "kind"
     t.string "amount"
+    t.string "description"
     t.date "received_date"
     t.date "due_date"
     t.integer "expensable_id"

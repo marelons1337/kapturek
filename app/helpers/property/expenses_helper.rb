@@ -1,0 +1,2 @@
+module Property::ExpensesHelper
+end

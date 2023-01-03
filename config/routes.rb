@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :properties
     resources :sales
     resources :rentals
+    resources :expenses
   end
 end

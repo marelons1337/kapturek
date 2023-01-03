@@ -1,0 +1,63 @@
+<div class="grid w-full place-items-center mt-6r">
+  <div class="w-11/12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
+    <%= form_with(model: property_expense) do |form| %>
+      <% if property_expense.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(property_expense.errors.count, "error") %> prohibited this property_expense from being saved:</h2>
+
+          <ul>
+            <% property_expense.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form.label :name, class: label_class %>
+      <%= form.text_field :name, class: input_class %>
+
+      <%= form.label :description, class: label_class %>
+      <%= form.text_area :description, class: input_class %>
+
+      <%= form.label :amount, class: label_class %>
+      <%= form.text_field :amount, class: input_class %>
+
+      <%# half width input %>
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :received_date, class: label_class %>
+          <%= form.date_field :received_date, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%= form.label :due_date, class: label_class %>
+          <%= form.date_field :due_date, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :expenseable_type, class: label_class %>
+          <%= form.select :expenseable_type, Property::Expense.expenseable_types, class: input_class %>
+        </span>
+
+        <span class="w-1/2">
+          <%= form.label :expenseable_id, class: label_class %>
+          <%= form.select :expenseable_id, Customer::Client.all.map { |c| [c.get_name, c.id] }, class: input_class %>
+        </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :kind, class: label_class %>
+          <%= form.text_field :kind, class: input_class %>
+        </span>
+        <span class="w-1/2">
+          <%#= form.label :property_id, class: label_class %>
+          <%#= form.select :property_id, Property::Property.all.map { |prop| [prop.get_name, prop.id] }, class: input_class %>
+        </span>
+      </div>
+
+      <%= form.submit class: "w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 rounded cursor-pointer" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Expenses</h1>
+
+<div id="property_expenses">
+  <% @property_expenses.each do |property_expense| %>
+    <%= render property_expense %>
+    <p>
+      <%= link_to "Show this expense", property_expense %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New expense", new_property_expense_path %>

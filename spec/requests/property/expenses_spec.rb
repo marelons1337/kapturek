@@ -19,7 +19,10 @@ RSpec.describe("/property/expenses", type: :request) do
   # Property::Expense. As you add validations to Property::Expense, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    attributes_for(:property_expense)
+    valid_attributes = attributes_for(:property_expense)
+    valid_attributes[:expensable_type] = "Property::Sale"
+    valid_attributes[:expensable_id] = create(:property_sale).id
+    valid_attributes
   end
 
   let(:invalid_attributes) do
@@ -88,14 +91,14 @@ RSpec.describe("/property/expenses", type: :request) do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        { name: "new name" }
       end
 
       it "updates the requested property_expense" do
         expense = create(:property_expense)
         patch property_expense_url(expense), params: { property_expense: new_attributes }
         expense.reload
-        skip("Add assertions for updated state")
+        expect(expense.name).to(eq("new name"))
       end
 
       it "redirects to the property_expense" do

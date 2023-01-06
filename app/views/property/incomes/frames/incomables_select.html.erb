@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "incomable_ids" do %>
+  <% if incomables.present? %>
+    <span id="incomable_ids" class="w-1/2">
+      <%= label_tag 'property_income[incomable_id]', nil, class: label_class %>
+      <%= select_tag 'property_income[incomable_id]', options_for_select(incomables), class: input_class %>
+    </span>
+  <% end %>
+<% end %>

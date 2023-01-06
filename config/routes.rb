@@ -16,5 +16,10 @@ Rails.application.routes.draw do
         get :fetch_expensables
       end
     end
+    resources :incomes do
+      collection do
+        get :fetch_incomables
+      end
+    end
   end
 end

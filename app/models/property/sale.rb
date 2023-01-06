@@ -8,7 +8,8 @@ class Property::Sale < ApplicationRecord
   belongs_to :client, class_name: "Customer::Client"
   belongs_to :property, class_name: "Property::Property"
 
-  has_many :expenses, class_name: "Property::Expense", as: :expensable, dependent: :nullify
+  has_many :expenses, class_name: "Property::Expense", as: :expensable, dependent: :destroy
+  has_many :incomes, class_name: "Property::Income", as: :incomable, dependent: :destroy
 
   before_save :update_property_status
 

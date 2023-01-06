@@ -33,7 +33,7 @@ require_relative "./db_helpers"
   Property::Expense.find_or_create_by!(
     amount: Random.new.rand(1000),
     due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
-    kind: rand(3),
+    kind: ["tax", "insurance", "utilities"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     expensable_id: sale.id,
@@ -43,10 +43,30 @@ require_relative "./db_helpers"
   Property::Expense.find_or_create_by!(
     amount: Random.new.rand(1000),
     due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
-    kind: rand(3),
+    kind: ["tax", "insurance", "utilities"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     expensable_id: rental.id,
     expensable_type: "Property::Rental",
+  )
+
+  Property::Income.find_or_create_by!(
+    amount: Random.new.rand(1000),
+    due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
+    kind: ["rent", "sale", "utilities", "debt"].sample,
+    name: Faker::Games::Witcher.monster,
+    received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    incomable_id: sale.id,
+    incomable_type: "Property::Sale",
+  )
+
+  Property::Income.find_or_create_by!(
+    amount: Random.new.rand(1000),
+    due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
+    kind: ["rent", "sale", "utilities", "debt"].sample,
+    name: Faker::Games::Witcher.monster,
+    received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    incomable_id: rental.id,
+    incomable_type: "Property::Rental",
   )
 end

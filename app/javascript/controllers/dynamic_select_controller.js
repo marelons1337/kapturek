@@ -1,6 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import { Turbo } from "@hotwired/turbo-rails"
-
 // Connects to data-controller="dynamic-select"
 export default class extends Controller {
   connect() {
@@ -14,9 +12,10 @@ export default class extends Controller {
     const url = this.element.dataset.url
     // fetch turbo-type from the select
     const turboType = this.element.dataset.turboType
-    // fetch the url with turbostream
+    // create new url with the value
     this.url = (`${url}?type=${value}`)
 
+    // replace the turbo-frame with the new url
     let frame = document.querySelector(`turbo-frame#${turboType}`)
     frame.src = this.url
     frame.reload()

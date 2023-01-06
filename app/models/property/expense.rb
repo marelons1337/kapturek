@@ -18,6 +18,10 @@ class Property::Expense < ApplicationRecord
     EXPENSABLE_TYPES.map { |type| [type.constantize.model_name.human, type] }
   end
 
+  def expensable_values_array
+    expensable_type.constantize.send("name_and_id_array_for_select")
+  end
+
   def received_date_before_due_date
     return unless received_date.present? && due_date.present?
 

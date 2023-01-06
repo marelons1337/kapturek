@@ -67,7 +67,11 @@ class Property::ExpensesController < ApplicationController
   end
 
   def fetch_expensables
-    expensables = params[:type] ? params[:type].constantize.all.map { |exp| [exp.get_name, exp.id] } : []
+    expensables = if params[:type].present?
+      params[:type].constantize.all.map { |exp| [exp.get_name, exp.id] }
+    else
+      []
+    end
     respond_to do |format|
       format.html { render("property/expenses/frames/expensables_select", locals: { expensables: expensables }) }
     end

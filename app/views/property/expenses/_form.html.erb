@@ -46,7 +46,7 @@
         <% if @property_expense.expensable_type.present? %>
           <span id="expensable_ids" class="w-1/2">
             <%= form.label :expensable_id, class: label_class %>
-            <%= form.select :expensable_id, @property_expense.expensable_type.constantize.send('name_and_id_array_for_select'), {}, class: input_class %>
+            <%= form.select :expensable_id, @property_expense.expensable_values_array, {}, class: input_class %>
           </span>
         <% end %>
       <% end %>

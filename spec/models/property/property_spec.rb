@@ -55,8 +55,14 @@ RSpec.describe(Property::Property, type: :model) do
 
   context "when requested a name without name" do
     let(:property) do
-      create(:property_property, name: nil, street: "Ratke Haven", street_no: "63", city: "South Alphatown",
-        country: "Costa Rica")
+      create(
+        :property_property,
+        name: nil,
+        street: "Ratke Haven",
+        street_no: "63",
+        city: "South Alphatown",
+        country: "Costa Rica",
+      )
     end
 
     it "returns full address" do

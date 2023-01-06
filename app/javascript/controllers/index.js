@@ -7,6 +7,9 @@ import { application } from "./application"
 import CopyController from "./copy_controller"
 application.register("copy", CopyController)
 
+import DynamicSelectController from "./dynamic_select_controller"
+application.register("dynamic-select", DynamicSelectController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 

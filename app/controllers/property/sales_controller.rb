@@ -72,7 +72,17 @@ class Property::SalesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def property_sale_params
-    params.require(:property_sale).permit(:name, :bought_at, :sold_at, :buy_price, :sale_price, :status,
-      :description, :property_id, :client_id, :account_id)
+    params.require(:property_sale).permit(
+      :name,
+      :bought_at,
+      :sold_at,
+      :buy_price,
+      :sale_price,
+      :status,
+      :description,
+      :property_id,
+      :client_id,
+      :account_id,
+    )
   end
 end

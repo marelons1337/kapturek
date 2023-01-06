@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "expensable_ids" do %>
+  <% if expensables.present? %>
+    <span id="expensable_ids" class="w-1/2">
+      <%= label_tag 'property_expense[expensable_id]', nil, class: label_class %>
+      <%= select_tag 'property_expense[expensable_id]', options_for_select(expensables), class: input_class %>
+    </span>
+  <% end %>
+<% end %>

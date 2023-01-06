@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 class Property::Expense < ApplicationRecord
   belongs_to :expensable, polymorphic: true
 
   validates :name, :amount, :due_date, presence: true
   validates :amount, numericality: { greater_than: 0 }
-  validates :kind, inclusion: { in: %w[tax insurance utilities] }
+  validates :kind, inclusion: { in: ["tax", "insurance", "utilities"] }
   validate :received_date_before_due_date
 
-  def self.expenseable_types
-    %w[Property::Rental Property::Sale]
+  EXPENSABLE_TYPES = ["Property::Rental", "Property::Sale"]
+
+  def get_name(full: true)
+    name
+  end
+
+  def self.expensable_types
+    EXPENSABLE_TYPES.map { |type| [type.constantize.model_name.human, type] }
   end
 
   def received_date_before_due_date

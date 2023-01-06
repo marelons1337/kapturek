@@ -36,14 +36,18 @@
 
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
-          <%= form.label :expenseable_type, class: label_class %>
-          <%= form.select :expenseable_type, Property::Expense.expenseable_types, class: input_class %>
+          <%= form.label :expensable_type, class: label_class %>
+          <%= form.select :expensable_type, Property::Expense.expensable_types, { include_blank: true },
+            class: input_class, data: { controller: 'dynamic-select',
+            'turbo-type': 'expensable_ids', url: fetch_expensables_property_expenses_path } %>
         </span>
 
-        <span class="w-1/2">
-          <%= form.label :expenseable_id, class: label_class %>
-          <%= form.select :expenseable_id, Customer::Client.all.map { |c| [c.get_name, c.id] }, class: input_class %>
+      <%= turbo_frame_tag "expensable_ids", class:"w-1/2" do %>
+        <span id="expensable_ids" class="w-1/2">
+          <%= form.label :expensable_id, class: label_class %>
+          <%= form.select :expensable_id, @property_expense.expensable_type.constantize.send('name_and_id_array_for_select'), {}, class: input_class %>
         </span>
+      <% end %>
       </div>
 
       <div class="flex justify-between gap-3">

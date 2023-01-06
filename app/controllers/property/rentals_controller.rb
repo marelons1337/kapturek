@@ -72,7 +72,15 @@ class Property::RentalsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def property_rental_params
-    params.require(:property_rental).permit(:name, :description, :status, :taken_from, :taken_until, :rent,
-      :property_id, :client_id)
+    params.require(:property_rental).permit(
+      :name,
+      :description,
+      :status,
+      :taken_from,
+      :taken_until,
+      :rent,
+      :property_id,
+      :client_id,
+    )
   end
 end

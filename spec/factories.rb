@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :property_expense, class: 'Property::Expense' do
+  factory :property_expense, class: "Property::Expense" do
     name { "MyString" }
-    kind { "MyString" }
-    amount { "MyString" }
-    received_date { "2023-01-03" }
+    amount { 1 }
     due_date { "2023-01-03" }
-    property { nil }
+    kind { "tax" }
+    expensable factory: :property_rental
   end
 
   factory :property_property, class: "Property::Property" do

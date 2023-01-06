@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Property::Income < ApplicationRecord
+  INCOMABLE_TYPES = ["Property::Rental", "Property::Sale"]
+
   belongs_to :incomable, polymorphic: true
 
   validates :name, :amount, :due_date, presence: true
   validates :amount, numericality: { greater_than: 0 }
-  validates :kind, inclusion: { in: ["rent", "sale", "utilities", "debt"] }
   validate :received_date_before_due_date
+  validates :incomable_type, inclusion: { in: INCOMABLE_TYPES }
 
-  INCOMABLE_TYPES = ["Property::Rental", "Property::Sale"]
 
   def get_name(full: true)
     name

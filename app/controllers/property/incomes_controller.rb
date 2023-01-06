@@ -83,6 +83,7 @@ class Property::IncomesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def property_income_params
     params.require(:property_income).permit(
+      :name,
       :amount,
       :description,
       :due_date,

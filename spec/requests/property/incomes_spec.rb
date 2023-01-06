@@ -19,11 +19,14 @@ RSpec.describe("/property/incomes", type: :request) do
   # Property::Income. As you add validations to Property::Income, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    valid_attributes = attributes_for(:property_income)
+    valid_attributes[:incomable_type] = "Property::Sale"
+    valid_attributes[:incomable_id] = create(:property_sale).id
+    valid_attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    { name: "new without required parameters", amount: "" }
   end
 
   describe "GET /index" do
@@ -88,14 +91,14 @@ RSpec.describe("/property/incomes", type: :request) do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        { name: "new name" }
       end
 
       it "updates the requested property_income" do
         income = Property::Income.create!(valid_attributes)
         patch property_income_url(income), params: { property_income: new_attributes }
         income.reload
-        skip("Add assertions for updated state")
+        expect(income.name).to(eq("new name"))
       end
 
       it "redirects to the property_income" do

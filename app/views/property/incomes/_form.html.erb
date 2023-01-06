@@ -37,7 +37,7 @@
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
           <%= form.label :incomable_type, class: label_class %>
-          <%= form.select :incomable_type, Property::Expense.incomable_types, { include_blank: true },
+          <%= form.select :incomable_type, Property::Income.incomable_types, { include_blank: true },
             class: input_class, data: { controller: 'dynamic-select',
             'turbo-type': 'incomable_ids', url: fetch_incomables_property_incomes_path } %>
         </span>

@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Property::Expense < ApplicationRecord
+  EXPENSABLE_TYPES = ["Property::Rental", "Property::Sale"]
+
   belongs_to :expensable, polymorphic: true
 
   validates :name, :amount, :due_date, presence: true
   validates :amount, numericality: { greater_than: 0 }
-  validates :kind, inclusion: { in: ["tax", "insurance", "utilities"] }
   validate :received_date_before_due_date
+  validates :expensable_type, inclusion: { in: EXPENSABLE_TYPES }
 
-  EXPENSABLE_TYPES = ["Property::Rental", "Property::Sale"]
 
   def get_name(full: true)
     name

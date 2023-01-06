@@ -27,10 +27,6 @@ RSpec.describe(Property::Expense, type: :model) do
     it "is not valid with an amount less than 0" do
       expect(build(:property_expense, amount: -1)).not_to(be_valid)
     end
-
-    it "is not valid with an invalid kind" do
-      expect(build(:property_expense, kind: "invalid")).not_to(be_valid)
-    end
   end
 
   describe "methods" do

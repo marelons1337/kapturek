@@ -44,24 +44,6 @@
 
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
-          <%= form.label :payable_type, class: label_class %>
-          <%= form.select :payable_type, Property::Payment.payable_types, { include_blank: true },
-            class: input_class, data: { controller: 'dynamic-select',
-            'turbo-type': 'payable_ids', url: fetch_payables_property_payments_path } %>
-        </span>
-
-      <%= turbo_frame_tag "payable_ids", class:"w-1/2" do %>
-        <% if @property_payment.payable_type.present? %>
-          <span id="payable_ids" class="w-1/2">
-            <%= form.label :payable_id, class: label_class %>
-            <%= form.select :payable_id, @property_payment.payable_values_array, {}, class: input_class %>
-          </span>
-        <% end %>
-      <% end %>
-      </div>
-
-      <div class="flex justify-between gap-3">
-        <span class="w-1/2">
           <%= form.label :kind, class: label_class %>
           <%= form.select :kind, Property::Payment.kinds.keys, { include_blank: true },
             class: input_class, data: { controller: 'dynamic-select',

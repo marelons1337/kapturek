@@ -6,14 +6,15 @@ class Property::Payment < ApplicationRecord
   belongs_to :income, class_name: "Property::Income", optional: true
   belongs_to :expense, class_name: "Property::Expense", optional: true
   belongs_to :client, class_name: "Customer::Client", optional: true
-  belongs_to :payable, polymorphic: true
+  belongs_to :payable, polymorphic: true, optional: true
 
   validates :date, :kind, :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
+  validate :income_or_expense_presence
 
   enum kind: { income: 0, expense: 1 }
 
-  validate :income_or_expense_presence
+  before_save :find_or_create_expense_or_income
 
   class << self
     def kind_model_values(kind)
@@ -48,6 +49,14 @@ class Property::Payment < ApplicationRecord
     return if income.present? || expense.present?
 
     errors.add(:base, "Income or expense must be present")
+  end
+
+  def find_or_create_expense_or_income
+    if kind == "income"
+      self.payable = income.incomable
+    elsif kind == "expense"
+      self.payable = expense.expensable
+    end
   end
 end
 

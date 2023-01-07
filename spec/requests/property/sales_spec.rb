@@ -91,14 +91,14 @@ RSpec.describe("/property/sales", type: :request) do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) do
-        { name: "new name" }
+        { sale_price: 23 }
       end
 
       it "updates the requested property_sale" do
         sale = Property::Sale.create!(valid_attributes)
         patch property_sale_url(sale), params: { property_sale: new_attributes }
         sale.reload
-        expect(sale.get_name).to(eq("new name"))
+        expect(sale.sale_price).to(eq(23))
       end
 
       it "redirects to the property_sale" do

@@ -69,4 +69,29 @@ RSpec.describe(Property::Property, type: :model) do
       expect(property.get_name).to(eq("Ratke Haven 63, South Alphatown, Costa Rica"))
     end
   end
+
+  context "when requested payments" do
+    let(:property) { create(:property_property) }
+    let(:sale) { create(:property_sale, property: property) }
+    let(:income) { create(:property_income, incomable: sale) }
+    let(:expense) { create(:property_expense, expensable: sale) }
+
+    it "returns payments" do
+      create(:property_payment, kind: "income", income: income)
+      create(:property_payment, kind: "expense", expense: expense)
+      expect(property.payments.count).to(eq(2))
+    end
+  end
+
+  context "when requested clients" do
+    let(:property) { create(:property_property) }
+    let(:sale) { create(:property_sale, property: property) }
+    let(:rental) { create(:property_rental, property: property) }
+
+    it "returns clients" do
+      create(:customer_client, sales: [sale])
+      create(:customer_client, rentals: [rental])
+      expect(property.clients.count).to(eq(2))
+    end
+  end
 end

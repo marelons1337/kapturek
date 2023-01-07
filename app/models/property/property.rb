@@ -37,8 +37,13 @@ class Property::Property < ApplicationRecord
     Property::Payment.where(payable_id: all_child_ids)
   end
 
+  def clients
+    ids = rentals.map(&:client_id) + [sale.client_id]
+    Customer::Client.where(id: ids)
+  end
+
   def all_child_ids
-    self.rental_ids + [self.sale.id]
+    self.rental_ids + [self&.sale&.id]
   end
 
   private

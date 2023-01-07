@@ -8,7 +8,7 @@ FactoryBot.define do
     amount { 1 }
     currency { "MyString" }
     description { "MyString" }
-    property factory: :property_property
+    payable factory: :property_rental
   end
 
   factory :property_income, class: "Property::Income" do

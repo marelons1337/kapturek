@@ -81,7 +81,7 @@ require_relative "./db_helpers"
     description: Faker::Lorem.paragraph(sentence_count: 10),
     kind: rand(2),
     name: Faker::Games::Witcher.quote,
-    property_id: property.id,
+    payable: rental,
     client_id: client.id,
     expense_id: expense.id,
   )
@@ -93,7 +93,7 @@ require_relative "./db_helpers"
     description: Faker::Lorem.paragraph(sentence_count: 10),
     kind: rand(2),
     name: Faker::Games::Witcher.quote,
-    property_id: property.id,
+    payable: sale,
     client_id: client.id,
     income_id: income.id,
   )
@@ -105,7 +105,7 @@ require_relative "./db_helpers"
     description: Faker::Lorem.paragraph(sentence_count: 10),
     kind: rand(2),
     name: Faker::Games::Witcher.quote,
-    property_id: property1.id,
+    payable: rental,
     client_id: client1.id,
     expense_id: expense.id,
   )
@@ -117,7 +117,7 @@ require_relative "./db_helpers"
     description: Faker::Lorem.paragraph(sentence_count: 10),
     kind: rand(2),
     name: Faker::Games::Witcher.quote,
-    property_id: property1.id,
+    payable: sale,
     client_id: client1.id,
     income_id: income.id,
   )

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Property::Payment < ApplicationRecord
+  PAYABLE_TYPES = ["Property::Rental", "Property::Sale"]
+
   belongs_to :income, class_name: "Property::Income", optional: true
   belongs_to :expense, class_name: "Property::Expense", optional: true
   belongs_to :client, class_name: "Customer::Client", optional: true
-  belongs_to :property, class_name: "Property::Property"
+  belongs_to :payable, polymorphic: true
 
   validates :date, :kind, :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
@@ -21,6 +23,10 @@ class Property::Payment < ApplicationRecord
         Property::Expense.all.map { |e| [e.name, e.id] }
       end
     end
+
+    def payable_types
+      PAYABLE_TYPES.map { |type| [type.constantize.model_name.human, type] }
+    end
   end
 
   def get_name(full: true)
@@ -34,6 +40,10 @@ class Property::Payment < ApplicationRecord
     end
   end
 
+  def payable_values_array
+    payable_type.constantize.send("name_and_id_array_for_select")
+  end
+
   def income_or_expense_presence
     return if income.present? || expense.present?
 
@@ -45,24 +55,24 @@ end
 #
 # Table name: property_payments
 #
-#  id          :integer          not null, primary key
-#  amount      :string
-#  currency    :string
-#  date        :date
-#  description :string
-#  kind        :integer
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  client_id   :integer
-#  expense_id  :integer
-#  income_id   :integer
-#  property_id :integer
+#  id           :integer          not null, primary key
+#  amount       :string
+#  currency     :string
+#  date         :date
+#  description  :string
+#  kind         :integer
+#  name         :string
+#  payable_type :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  client_id    :integer
+#  expense_id   :integer
+#  income_id    :integer
+#  payable_id   :integer
 #
 # Indexes
 #
-#  index_property_payments_on_client_id    (client_id)
-#  index_property_payments_on_expense_id   (expense_id)
-#  index_property_payments_on_income_id    (income_id)
-#  index_property_payments_on_property_id  (property_id)
+#  index_property_payments_on_client_id   (client_id)
+#  index_property_payments_on_expense_id  (expense_id)
+#  index_property_payments_on_income_id   (income_id)
 #

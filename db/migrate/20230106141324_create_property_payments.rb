@@ -13,7 +13,9 @@ class CreatePropertyPayments < ActiveRecord::Migration[7.0]
       t.references(:income)
       t.references(:expense)
       t.references(:client)
-      t.references(:property)
+
+      t.integer(:payable_id)
+      t.string(:payable_type)
 
       t.timestamps
     end

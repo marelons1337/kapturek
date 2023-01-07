@@ -78,6 +78,17 @@ class Property::PaymentsController < ApplicationController
     end
   end
 
+  def fetch_payables
+    payables = if params[:type].present?
+      params[:type].constantize.all.map { |exp| [exp.get_name, exp.id] }
+    else
+      []
+    end
+    respond_to do |format|
+      format.html { render("property/payments/frames/payables_select", locals: { payables: payables }) }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -97,7 +108,8 @@ class Property::PaymentsController < ApplicationController
       :income_id,
       :expense_id,
       :client_id,
-      :property_id,
+      :payable_id,
+      :payable_type,
     )
   end
 end

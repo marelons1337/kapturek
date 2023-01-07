@@ -10,12 +10,14 @@ class Property::Expense < ApplicationRecord
   validate :received_date_before_due_date
   validates :expensable_type, inclusion: { in: EXPENSABLE_TYPES }
 
-  def get_name(full: true)
-    name
+  class << self
+    def expensable_types
+      EXPENSABLE_TYPES.map { |type| [type.constantize.model_name.human, type] }
+    end
   end
 
-  def self.expensable_types
-    EXPENSABLE_TYPES.map { |type| [type.constantize.model_name.human, type] }
+  def get_name(full: true)
+    name
   end
 
   def expensable_values_array

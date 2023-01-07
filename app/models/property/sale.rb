@@ -10,6 +10,7 @@ class Property::Sale < ApplicationRecord
 
   has_many :expenses, class_name: "Property::Expense", as: :expensable, dependent: :destroy
   has_many :incomes, class_name: "Property::Income", as: :incomable, dependent: :destroy
+  has_many :payments, class_name: "Property::Payment", as: :payable, dependent: :destroy
 
   before_save :update_property_status
 
@@ -26,7 +27,7 @@ class Property::Sale < ApplicationRecord
   end
 
   def get_name(full: true)
-    name.presence || property.name.presence || full_address
+    property.name.presence || property.full_address
   end
 
   private

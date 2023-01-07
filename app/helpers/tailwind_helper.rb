@@ -22,4 +22,12 @@ module TailwindHelper
   def index_inactive_tab_class
     "py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full"
   end
+
+  def success_text_color
+    "text-green-600"
+  end
+
+  def error_text_color
+    "text-red-600"
+  end
 end

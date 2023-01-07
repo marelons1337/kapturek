@@ -19,9 +19,6 @@
       <%= form.label :description, class: label_class %>
       <%= form.text_area :description, class: input_class %>
 
-      <%= form.label :date, class: label_class %>
-      <%= form.date_field :date, class: input_class %>
-
       <%# half width input %>
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
@@ -40,9 +37,27 @@
           <%= form.select :client_id, Customer::Client.all.map { |c| [c.get_name, c.id] }, {}, class: input_class %>
         </span>
         <span class="w-1/2">
-          <%= form.label :property_id, class: label_class %>
-          <%= form.select :property_id, Property::Property.all.map { |prop| [prop.get_name, prop.id] }, {}, class: input_class %>
+          <%= form.label :date, class: label_class %>
+          <%= form.date_field :date, class: input_class %>
         </span>
+      </div>
+
+      <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+          <%= form.label :payable_type, class: label_class %>
+          <%= form.select :payable_type, Property::Payment.payable_types, { include_blank: true },
+            class: input_class, data: { controller: 'dynamic-select',
+            'turbo-type': 'payable_ids', url: fetch_payables_property_payments_path } %>
+        </span>
+
+      <%= turbo_frame_tag "payable_ids", class:"w-1/2" do %>
+        <% if @property_payment.payable_type.present? %>
+          <span id="payable_ids" class="w-1/2">
+            <%= form.label :payable_id, class: label_class %>
+            <%= form.select :payable_id, @property_payment.payable_values_array, {}, class: input_class %>
+          </span>
+        <% end %>
+      <% end %>
       </div>
 
       <div class="flex justify-between gap-3">
@@ -55,7 +70,7 @@
 
       <%= turbo_frame_tag "kinds", class:"w-1/2" do %>
         <% if @property_payment.kind.present? %>
-          <span id="kinds" >
+          <span id="kinds">
             <%= form.label "#{@property_payment.kind}_id", class: label_class %>
             <%= form.select "#{@property_payment.kind}_id", Property::Payment.kind_model_values(@property_payment.kind), {}, class: input_class %>
           </span>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :payments do
       collection do
         get :fetch_payment_kind_model_values
+        get :fetch_payables
       end
     end
     resources :expenses do

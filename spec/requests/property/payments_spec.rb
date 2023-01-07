@@ -22,12 +22,13 @@ RSpec.describe("/property/payments", type: :request) do
     valid_attributes = attributes_for(:property_payment)
     valid_attributes[:income_id] = create(:property_income).id
     valid_attributes[:client_id] = create(:customer_client).id
-    valid_attributes[:property_id] = create(:property_property).id
+    valid_attributes[:payable_id] = create(:property_sale).id
+    valid_attributes[:payable_type] = "Property::Sale"
     valid_attributes
   end
 
   let(:invalid_attributes) do
-    { name: nil, amount: "amount", }
+    { name: nil, amount: "amount" }
   end
 
   describe "GET /index" do

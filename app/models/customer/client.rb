@@ -8,6 +8,8 @@ class Customer::Client < ApplicationRecord
   has_many :rentals, class_name: "Property::Rental", dependent: :nullify
   has_many :sales, class_name: "Property::Sale", dependent: :nullify
 
+  has_many :payments, class_name: "Property::Payment", dependent: :destroy
+
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
 

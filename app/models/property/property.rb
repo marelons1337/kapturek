@@ -11,23 +11,11 @@ class Property::Property < ApplicationRecord
   validates :surface, numericality: { greater_than: 0 }
   validate :bought_at_before_sold_at, if: -> { bought_at.present? && sold_at.present? }
 
-  # before_save :set_status
-
   enum status: {
     empty: 0,
     rented: 1,
     sold: 2,
   }
-
-  # def set_status
-  #   if rentals.present? && rentals.any? { |r| r.status === 'rented' }
-  #     self.status = 'rented'
-  #   elsif sale.present? && sale.status === 'sold'
-  #     self.status = 'sold'
-  #   else
-  #     self.status = 'empty'
-  #   end
-  # end
 
   def full_address(local: true)
     "#{street} #{street_no}#{door_no.present? ? "/" + door_no : nil}, #{city}#{local ? ", " + country : nil}".strip
@@ -43,6 +31,14 @@ class Property::Property < ApplicationRecord
     else
       buy_price
     end
+  end
+
+  def payments
+    Property::Payment.where(payable_id: all_child_ids)
+  end
+
+  def all_child_ids
+    self.rental_ids + [self.sale.id]
   end
 
   private

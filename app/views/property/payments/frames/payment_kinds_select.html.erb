@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "kinds", class:"w-1/2" do %>
+  <% if values.present? %>
+    <span id="values" class="w-1/2">
+      <%= label_tag "#{kind}_id", nil, class: label_class %>
+      <%= select_tag "property_payment[#{kind}_id]", options_for_select(values), class: input_class %>
+    </span>
+  <% end %>
+<% end %>

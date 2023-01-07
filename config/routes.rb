@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     resources :properties
     resources :sales
     resources :rentals
+    resources :payments do
+      collection do
+        get :fetch_payment_kind_model_values
+      end
+    end
     resources :expenses do
       collection do
         get :fetch_expensables

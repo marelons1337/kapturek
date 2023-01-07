@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  factory :property_payment, class: "Property::Payment" do
+    date { "2023-01-06" }
+    kind { 1 }
+    amount { "MyString" }
+    currency { "MyString" }
+    description { "MyString" }
+    income { nil }
+    expense { nil }
+    client { nil }
+  end
+
   factory :property_income, class: "Property::Income" do
     name { "MyString" }
     amount { 1 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_131526) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_06_141324) do
   create_table "customer_clients", force: :cascade do |t|
     t.string "name"
     t.string "surname"
@@ -53,6 +53,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_131526) do
     t.integer "incomable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "property_payments", force: :cascade do |t|
+    t.string "name"
+    t.date "date"
+    t.integer "kind"
+    t.string "amount"
+    t.string "currency"
+    t.string "description"
+    t.integer "income_id"
+    t.integer "expense_id"
+    t.integer "client_id"
+    t.integer "property_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_property_payments_on_client_id"
+    t.index ["expense_id"], name: "index_property_payments_on_expense_id"
+    t.index ["income_id"], name: "index_property_payments_on_income_id"
+    t.index ["property_id"], name: "index_property_payments_on_property_id"
   end
 
   create_table "property_properties", force: :cascade do |t|

@@ -10,7 +10,6 @@ class Property::Expense < ApplicationRecord
   validate :received_date_before_due_date
   validates :expensable_type, inclusion: { in: EXPENSABLE_TYPES }
 
-
   def get_name(full: true)
     name
   end

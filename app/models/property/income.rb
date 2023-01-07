@@ -10,7 +10,6 @@ class Property::Income < ApplicationRecord
   validate :received_date_before_due_date
   validates :incomable_type, inclusion: { in: INCOMABLE_TYPES }
 
-
   def get_name(full: true)
     name
   end

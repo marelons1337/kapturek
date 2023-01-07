@@ -24,7 +24,12 @@ class Property::Payment < ApplicationRecord
   end
 
   def get_name(full: true)
-    name
+    if full
+      name
+    else
+      # shorten the name to 20 characters and finish with ...
+      name[0..20] + (name.length > 20 ? "..." : "")
+    end
   end
 
   def income_or_expense_presence

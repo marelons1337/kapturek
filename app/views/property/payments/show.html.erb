@@ -1,10 +1,115 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @property_payment %>
-
-<div>
-  <%= link_to "Edit this payment", edit_property_payment_path(@property_payment) %> |
-  <%= link_to "Back to payments", property_payments_path %>
-
-  <%= button_to "Destroy this payment", @property_payment, method: :delete %>
+<%# lg:ml-64 in belov div is added when navbar is shown %>
+<div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto">
+  <main>
+    <div class="pt-6 px-4">
+        <div class="w-full grid grid-cols-1 gap-4">
+          <%# card with property data %>
+          <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.name') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= @property_payment.name %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.date') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= @property_payment.date %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.amount') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= number_to_currency(@property_payment.amount) %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.currency') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= @property_payment.currency %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.kind') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= @property_payment.kind %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.description') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= @property_payment.description %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.client') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= link_to @property_payment&.client&.get_name, @property_payment&.client %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    <%= t('activerecord.attributes.property.payment.property') %>
+                  </label>
+                  <p class="text-gray-700 text-sm font-bold mb-2">
+                    <%= link_to @property_payment&.property&.get_name, @property_payment&.property %>
+                  </p>
+                </div>
+              </div>
+              <div class="w-full lg:w-1/2 px-4">
+                <div class="relative w-full mb-3">
+                  <% if @property_payment.income.present? %>
+                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                      <%= t('activerecord.attributes.property.payment.income') %>
+                    </label>
+                    <p class="text-gray-700 text-sm font-bold mb-2">
+                      <%= link_to @property_payment&.income&.get_name, @property_payment&.income %>
+                    </p>
+                  <% elsif @property_payment.expense.present? %>
+                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                      <%= t('activerecord.attributes.property.payment.expense') %>
+                    </label>
+                    <p class="text-gray-700 text-sm font-bold mb-2">
+                      <%= link_to @property_payment&.expense&.get_name, @property_payment&.expense %>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </main>
 </div>

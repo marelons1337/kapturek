@@ -6,6 +6,9 @@ class Property::PaymentsController < ApplicationController
   # GET /property/payments or /property/payments.json
   def index
     @property_payments = Property::Payment.all
+    @property_payments = @property_payments.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
+
+    @pagy, @property_payments = pagy(@property_payments)
   end
 
   # GET /property/payments/1 or /property/payments/1.json

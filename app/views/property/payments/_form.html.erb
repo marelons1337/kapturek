@@ -48,16 +48,16 @@
       <div class="flex justify-between gap-3">
         <span class="w-1/2">
           <%= form.label :kind, class: label_class %>
-          <%= form.select :kind, Property::Payment.kinds, { include_blank: true },
+          <%= form.select :kind, Property::Payment.kinds.keys, { include_blank: true },
             class: input_class, data: { controller: 'dynamic-select',
             'turbo-type': 'kinds', url: fetch_payment_kind_model_values_property_payments_path } %>
         </span>
 
       <%= turbo_frame_tag "kinds", class:"w-1/2" do %>
         <% if @property_payment.kind.present? %>
-          <span id="kinds" class="w-1/2">
+          <span id="kinds" >
             <%= form.label "#{@property_payment.kind}_id", class: label_class %>
-            <%= form.select "#{@property_payment.kind}_id", @property_payment.kind_model_values(@property_payment.kind), {}, class: input_class %>
+            <%= form.select "#{@property_payment.kind}_id", Property::Payment.kind_model_values(@property_payment.kind), {}, class: input_class %>
           </span>
         <% end %>
       <% end %>

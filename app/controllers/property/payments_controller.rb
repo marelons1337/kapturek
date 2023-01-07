@@ -64,8 +64,8 @@ class Property::PaymentsController < ApplicationController
   end
 
   def fetch_payment_kind_model_values
-    kind = Property::Payment.kinds.key(params[:type].to_i)
-    values = if params[:type].present?
+    kind = params[:type]
+    values = if kind.present?
       Property::Payment.kind_model_values(kind)
     else
       []
@@ -85,6 +85,7 @@ class Property::PaymentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def property_payment_params
     params.require(:property_payment).permit(
+      :name,
       :date,
       :kind,
       :amount,
@@ -93,6 +94,7 @@ class Property::PaymentsController < ApplicationController
       :income_id,
       :expense_id,
       :client_id,
+      :property_id,
     )
   end
 end

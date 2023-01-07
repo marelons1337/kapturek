@@ -15,9 +15,9 @@ class Property::Payment < ApplicationRecord
 
   class << self
     def kind_model_values(kind)
-      if kind == 'income'
+      if kind == "income"
         Property::Income.all.map { |i| [i.name, i.id] }
-      elsif kind == 'expense'
+      elsif kind == "expense"
         Property::Expense.all.map { |e| [e.name, e.id] }
       end
     end

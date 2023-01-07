@@ -19,11 +19,15 @@ RSpec.describe("/property/payments", type: :request) do
   # Property::Payment. As you add validations to Property::Payment, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    valid_attributes = attributes_for(:property_payment)
+    valid_attributes[:income_id] = create(:property_income).id
+    valid_attributes[:client_id] = create(:customer_client).id
+    valid_attributes[:property_id] = create(:property_property).id
+    valid_attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil, amount: "amount", }
   end
 
   describe "GET /index" do
@@ -88,14 +92,14 @@ RSpec.describe("/property/payments", type: :request) do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        { name: "new name" }
       end
 
       it "updates the requested property_payment" do
         payment = Property::Payment.create!(valid_attributes)
         patch property_payment_url(payment), params: { property_payment: new_attributes }
         payment.reload
-        skip("Add assertions for updated state")
+        expect(payment.name).to(eq("new name"))
       end
 
       it "redirects to the property_payment" do

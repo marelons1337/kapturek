@@ -2,14 +2,13 @@
 
 FactoryBot.define do
   factory :property_payment, class: "Property::Payment" do
+    name { "MyString" }
     date { "2023-01-06" }
-    kind { 1 }
-    amount { "MyString" }
+    kind { "income" }
+    amount { 1 }
     currency { "MyString" }
     description { "MyString" }
-    income { nil }
-    expense { nil }
-    client { nil }
+    property factory: :property_property
   end
 
   factory :property_income, class: "Property::Income" do

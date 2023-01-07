@@ -24,6 +24,8 @@ class Property::Payment < ApplicationRecord
   end
 
   def get_name(full: true)
+    return nil if name.blank?
+
     if full
       name
     else

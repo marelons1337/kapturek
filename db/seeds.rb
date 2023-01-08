@@ -38,6 +38,7 @@ require_relative "./db_helpers"
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     paid: [true, false].sample,
+    client: client,
     expensable_id: sale.id,
     expensable_type: "Property::Sale",
   )
@@ -51,6 +52,7 @@ require_relative "./db_helpers"
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     paid: [true, false].sample,
     expensable_id: rental.id,
+    client: client1,
     expensable_type: "Property::Rental",
   )
 
@@ -62,6 +64,7 @@ require_relative "./db_helpers"
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     paid: [true, false].sample,
+    client: client,
     incomable_id: sale.id,
     incomable_type: "Property::Sale",
   )
@@ -74,6 +77,7 @@ require_relative "./db_helpers"
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
     paid: [true, false].sample,
+    client: client1,
     incomable_id: rental.id,
     incomable_type: "Property::Rental",
   )

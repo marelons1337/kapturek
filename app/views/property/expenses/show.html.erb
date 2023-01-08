@@ -78,10 +78,22 @@
                   </p>
                 </div>
               </div>
+              <% if @property_expense.client.present? %>
+                <div class="w-full lg:w-1/2 px-4">
+                  <div class="relative w-full mb-3">
+                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                      <%= t('activerecord.attributes.property.expense.client') %>
+                    </label>
+                    <p class="text-gray-700 text-sm font-bold mb-2">
+                      <%= link_to @property_expense.client.get_name, @property_expense.client %>
+                    </p>
+                  </div>
+                </div>
+              <% end %>
               <div class="w-full lg:w-1/2 px-4">
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                    <%= t('activerecord.attributes.property.income.paid') %>
+                    <%= t('activerecord.attributes.property.expense.paid') %>
                   </label>
                   <p class="text-gray-700 text-sm font-bold mb-2">
                     <%= @property_expense.paid? %>

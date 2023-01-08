@@ -8,6 +8,10 @@ class Customer::ClientsController < ApplicationController
     @customer_clients = Customer::Client.all
     @customer_clients = @customer_clients.where(status: params[:status]) if params[:status].present?
     @customer_clients = @customer_clients.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
+    if params[:property_id]
+      property = Property::Property.find(params[:property_id])
+      @customer_clients = @customer_clients.where(id: property.clients.ids)
+    end
 
     @pagy, @customer_clients = pagy(@customer_clients)
   end

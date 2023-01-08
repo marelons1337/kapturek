@@ -11,12 +11,6 @@ Rails.application.routes.draw do
     resources :properties
     resources :sales
     resources :rentals
-    resources :payments do
-      collection do
-        get :fetch_payment_kind_model_values
-        get :fetch_payables
-      end
-    end
     resources :expenses do
       collection do
         get :fetch_expensables
@@ -27,5 +21,8 @@ Rails.application.routes.draw do
         get :fetch_incomables
       end
     end
+
+    # index for transactions controller
+    get "transactions", to: "transactions#index"
   end
 end

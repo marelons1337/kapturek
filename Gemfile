@@ -71,6 +71,8 @@ group :development do
   gem "rubocop-rspec"
   gem "rubocop-shopify", require: false
   gem "web-console"
+  gem "better_errors"
+  gem "binding_of_caller"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

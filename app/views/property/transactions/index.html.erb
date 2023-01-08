@@ -1,8 +1,8 @@
-<div id="property_payments" class="sm:px-6 w-full">
+<div id="transactions" class="sm:px-6 w-full">
   <p style="color: green"><%= notice %></p>
     <div class="px-4 md:px-10 py-4 md:py-7">
       <div class="flex items-center justify-between">
-        <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Payments</p>
+        <p tabindex="0" class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">transactions</p>
         <div class="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
           <p>Sort By:</p>
           <select data-controller="select" aria-label="select" class="focus:text-indigo-600 focus:outline-none bg-transparent ml-1">
@@ -16,12 +16,14 @@
     </div>
     <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
       <div class="sm:flex items-center justify-end">
-          <%= link_to "Add payment", new_property_payment_path, class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
+          <%= link_to "Add expense", new_property_expense_path, class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
+          <div class="w-4"></div>
+          <%= link_to "Add income", new_property_income_path, class: "text-sm font-medium leading-none text-white focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded" %>
       </div>
       <div class="mt-7 overflow-x-auto">
         <table class="w-full whitespace-nowrap">
           <tbody>
-          <% @property_payments.each do |property_payment| %>
+          <% @transactions.each do |property_transaction| %>
             <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
               <td>
                 <div class="ml-5">
@@ -39,7 +41,7 @@
                 <td class="">
                   <div data-controller="copy" class="flex items-center pl-5">
                     <p class="text-base font-medium leading-none text-gray-700 mr-2">
-                      <%= link_to property_payment.get_name(full: false), property_payment, data: { "copy-target":"source"} %>
+                      <%= link_to property_transaction.get_name, property_transaction, data: { "copy-target":"source"} %>
                     </p>
                     <div data-copy-target="icon" class="cursor-pointer">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -55,7 +57,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
 
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= property_payment.amount %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= property_transaction.amount %></p>
                   </div>
                 </td>
                 <%# bought_at %>
@@ -64,30 +66,53 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                     </svg>
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= property_payment.date %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= property_transaction.received_date %></p>
                   </div>
                 </td>
                 <%# sold_at %>
                 <td class="pl-5">
                   <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                     </svg>
-                    <p class="text-sm leading-none text-gray-600 ml-2"><%= link_to property_payment.payable.get_name, property_payment.payable %></p>
+                    <p class="text-sm leading-none text-gray-600 ml-2"><%= property_transaction.due_date %></p>
                   </div>
                 </td>
-                <% if property_payment.client.present? %>
-                  <td class="pl-5">
-                    <div class="flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                      </svg>
-                      <p class="text-sm leading-none text-gray-600 ml-2"><%= link_to property_payment.client.get_name, property_payment.client %></p>
-                    </div>
-                  </td>
+                <td class="pl-5">
+                  <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                    </svg>
+                    <% if property_transaction.is_a? Property::Expense %>
+                      <p class="text-sm leading-none text-gray-600 ml-2"><%= link_to property_transaction.expensable.get_name, property_transaction.expensable %></p>
+                    <% else %>
+                      <p class="text-sm leading-none text-gray-600 ml-2"><%= link_to property_transaction.incomable.get_name, property_transaction.incomable %></p>
+                    <% end %>
+                  </div>
+                </td>
+                <td class="pl-5">
+                <% if property_transaction.paid? %>
+                  <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 <%= success_text_color %>">
+                      <title> Paid </title>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                  </div>
+                <% else %>
+                  <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 <%= error_text_color %>">
+                      <title> Due </title>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                    </svg>
+                    <% if property_transaction.overdue? %>
+                      <p class="text-sm leading-none ml-2 <%= error_text_color %>"> Overdue </p>
+                    <% end %>
+
+                  </div>
                 <% end %>
+                </td>
                 <td class="pl-4">
-                  <%= link_to "View", property_payment, class:"focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" %>
+                  <%= link_to "View", property_transaction, class:"focus:ring-2 focus:ring-offset-2 focus:ring-red-300 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none" %>
                 </td>
                 <td>
                   <div class="relative px-5 pt-2">

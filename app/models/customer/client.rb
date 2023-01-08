@@ -7,8 +7,8 @@ class Customer::Client < ApplicationRecord
 
   has_many :rentals, class_name: "Property::Rental", dependent: :nullify
   has_many :sales, class_name: "Property::Sale", dependent: :nullify
-
-  has_many :payments, class_name: "Property::Payment", dependent: :destroy
+  has_many :expenses, class_name: "Property::Expense", dependent: :destroy
+  has_many :incomes, class_name: "Property::Income", dependent: :destroy
 
   validates :email, :rent_from, :name, presence: true
   validate :rent_from_before_rent_to
@@ -40,8 +40,8 @@ class Customer::Client < ApplicationRecord
     "#{name} <#{email}>"
   end
 
-  def total_paid
-    paid
+  def total_payments_amount
+    expenses.where(paid: true).sum(:amount) + incomes.where(paid: true).sum(:amount)
   end
 
   def total_debt

@@ -5,7 +5,7 @@ class Property::PropertiesController < ApplicationController
 
   # GET /property/properties or /property/properties.json
   def index
-    @property_properties = Property::Property.all
+    @property_properties = Property::Property.includes([:rentals, :sale]).all
     @property_properties = @property_properties.where(status: params[:status]) if params[:status].present?
     @property_properties = @property_properties.order(params[:sort]) if params[:sort].presence.in?(VIEW_SORT_METHODS)
 
@@ -71,7 +71,7 @@ class Property::PropertiesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_property_property
-    @property_property = Property::Property.find(params[:id])
+    @property_property = Property::Property.includes([:rentals, :sale]).find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

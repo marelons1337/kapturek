@@ -30,13 +30,14 @@ require_relative "./db_helpers"
     client_id: client1.id,
   )
 
-  expense = Property::Expense.find_or_create_by!(
+  Property::Expense.find_or_create_by!(
     amount: Random.new.rand(1000),
     description: Faker::Lorem.paragraph(sentence_count: 10),
     due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
     kind: ["tax", "insurance", "utilities"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    paid: [true, false].sample,
     expensable_id: sale.id,
     expensable_type: "Property::Sale",
   )
@@ -48,17 +49,19 @@ require_relative "./db_helpers"
     kind: ["tax", "insurance", "utilities"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    paid: [true, false].sample,
     expensable_id: rental.id,
     expensable_type: "Property::Rental",
   )
 
-  income = Property::Income.find_or_create_by!(
+  Property::Income.find_or_create_by!(
     amount: Random.new.rand(1000),
     description: Faker::Lorem.paragraph(sentence_count: 10),
     due_date: Faker::Date.between(from: Time.zone.today + 2.months, to: Time.zone.today + 3.months),
     kind: ["rent", "sale", "utilities", "debt"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    paid: [true, false].sample,
     incomable_id: sale.id,
     incomable_type: "Property::Sale",
   )
@@ -70,55 +73,8 @@ require_relative "./db_helpers"
     kind: ["rent", "sale", "utilities", "debt"].sample,
     name: Faker::Games::Witcher.monster,
     received_date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
+    paid: [true, false].sample,
     incomable_id: rental.id,
     incomable_type: "Property::Rental",
-  )
-
-  Property::Payment.find_or_create_by!(
-    amount: Random.new.rand(1000),
-    currency: Faker::Currency.code,
-    date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
-    description: Faker::Lorem.paragraph(sentence_count: 10),
-    kind: rand(2),
-    name: Faker::Games::Witcher.quote,
-    payable: rental,
-    client_id: client.id,
-    expense_id: expense.id,
-  )
-
-  Property::Payment.find_or_create_by!(
-    amount: Random.new.rand(1000),
-    currency: Faker::Currency.code,
-    date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
-    description: Faker::Lorem.paragraph(sentence_count: 10),
-    kind: rand(2),
-    name: Faker::Games::Witcher.quote,
-    payable: sale,
-    client_id: client.id,
-    income_id: income.id,
-  )
-
-  Property::Payment.find_or_create_by!(
-    amount: Random.new.rand(1000),
-    currency: Faker::Currency.code,
-    date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
-    description: Faker::Lorem.paragraph(sentence_count: 10),
-    kind: rand(2),
-    name: Faker::Games::Witcher.quote,
-    payable: rental,
-    client_id: client1.id,
-    expense_id: expense.id,
-  )
-
-  Property::Payment.find_or_create_by!(
-    amount: Random.new.rand(1000),
-    currency: Faker::Currency.code,
-    date: Faker::Date.between(from: 2.days.ago, to: Time.zone.today + 1.month),
-    description: Faker::Lorem.paragraph(sentence_count: 10),
-    kind: rand(2),
-    name: Faker::Games::Witcher.quote,
-    payable: sale,
-    client_id: client1.id,
-    income_id: income.id,
   )
 end

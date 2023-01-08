@@ -3,6 +3,8 @@
 class Property::Property < ApplicationRecord
   has_one :sale, dependent: :nullify
   has_many :rentals, dependent: :nullify
+  has_many :expenses, class_name: "Property::Expense", dependent: :destroy
+  has_many :incomes, class_name: "Property::Income", dependent: :destroy
 
   validates :street, :street_no, :zip, :city, :country, :surface, presence: true
   validates :rooms_amount, numericality: { only_integer: true, greater_than: 0 }, allow_blank: true
@@ -33,17 +35,55 @@ class Property::Property < ApplicationRecord
     end
   end
 
-  def payments
-    Property::Payment.where(payable_id: all_child_ids)
-  end
-
   def clients
-    ids = rentals.map(&:client_id) + [sale.client_id]
+    ids = rentals&.map(&:client_id)&.+ [sale&.client_id]
     Customer::Client.where(id: ids)
   end
 
+  def expenses
+    Property::Expense.where(expensable_id: all_child_ids)
+  end
+
+  def incomes
+    Property::Income.where(incomable_id: all_child_ids)
+  end
+
   def all_child_ids
-    self.rental_ids + [self&.sale&.id]
+    rental_ids + [self&.sale&.id]
+  end
+
+  def total_incomes
+    incomes.sum(:amount).to_f
+  end
+
+  def total_expenses
+    expenses.sum(:amount).to_f
+  end
+
+  def total_incomes_paid
+    incomes.where(paid: true).sum(:amount)
+  end
+
+  def total_expenses_paid
+    expenses.where(paid: true).sum(:amount)
+  end
+
+  def incomes_and_expenses_percentage_structure
+    # get the amount from total_incomes and total_expenses and return an array that contains the percentage of each
+    sum = total_incomes + total_expenses
+    return [0, 0] if sum == 0
+
+    incomes_percentage = (total_incomes == 0 ? 0 : total_incomes / sum) * 100
+    expenses_percentage = (total_expenses == 0 ? 0 : total_expenses / sum) * 100
+    [incomes_percentage.to_i, expenses_percentage.to_i]
+  end
+
+  def incomes_percentage
+    "#{incomes_and_expenses_percentage_structure.first}%"
+  end
+
+  def expenses_percentage
+    "#{incomes_and_expenses_percentage_structure.second}%"
   end
 
   private

@@ -3,8 +3,6 @@
 # each month based on day in rent_from we'll add debt to client, debt will have to be paid
 # upon payment, we'll add paid to client, debt and paid will have to balance each other
 class Customer::Client < ApplicationRecord
-  belongs_to :account, optional: true
-
   has_many :rentals, class_name: "Property::Rental", dependent: :nullify
   has_many :sales, class_name: "Property::Sale", dependent: :nullify
   has_many :expenses, class_name: "Property::Expense", dependent: :destroy
